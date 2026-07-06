@@ -41,20 +41,51 @@
     listaServicios.innerHTML = C.nosotros.servicios.map((s) => "<li>" + s + "</li>").join("");
   }
 
-  // Hero de portada
+  // Hero de portada: poster inmediato + video después (optimizado)
   const heroFondo = $("[data-hero-fondo]");
   if (heroFondo) {
     const img = document.createElement("img");
     img.src = C.portada.imagenFondo;
     img.alt = "";
+    img.fetchPriority = "high";
     heroFondo.prepend(img);
-    if (C.portada.videoFondo && !reducirMovimiento) {
-      const vid = document.createElement("video");
-      Object.assign(vid, { src: C.portada.videoFondo, muted: true, loop: true, playsInline: true, autoplay: true });
-      vid.setAttribute("muted", "");
-      vid.setAttribute("playsinline", "");
-      heroFondo.append(vid); // el video va encima del poster
-      vid.play().catch(() => {});
+
+    const fondo = C.portada.videoFondo;
+    if (fondo && !reducirMovimiento) {
+      // El video se inyecta hasta que la página terminó de cargar,
+      // para no competir con las miniaturas ni las fuentes.
+      const inyectarVideo = () => {
+        if (typeof fondo === "object" && fondo.tipo === "vimeo") {
+          // Player de Vimeo en modo fondo: autoplay silencioso, loop, sin controles
+          const [w, h] = (fondo.aspecto || "16x9").split(/[x:]/).map(Number);
+          const ar = w && h ? w / h : 16 / 9;
+          const iframe = document.createElement("iframe");
+          iframe.src =
+            "https://player.vimeo.com/video/" + fondo.id +
+            "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
+          iframe.allow = "autoplay; fullscreen";
+          iframe.title = "";
+          iframe.setAttribute("aria-hidden", "true");
+          iframe.tabIndex = -1;
+          // Recorte tipo "cover": el iframe siempre sobra por un lado
+          iframe.style.cssText =
+            "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" +
+            "width:max(100vw, calc(100svh * " + ar + "));" +
+            "height:max(100svh, calc(100vw / " + ar + "));" +
+            "border:0;pointer-events:none;opacity:0;transition:opacity 1s ease;";
+          iframe.addEventListener("load", () => (iframe.style.opacity = "1"));
+          heroFondo.append(iframe);
+        } else if (typeof fondo === "string" && fondo) {
+          const vid = document.createElement("video");
+          Object.assign(vid, { src: fondo, muted: true, loop: true, playsInline: true, autoplay: true });
+          vid.setAttribute("muted", "");
+          vid.setAttribute("playsinline", "");
+          heroFondo.append(vid);
+          vid.play().catch(() => {});
+        }
+      };
+      if (document.readyState === "complete") inyectarVideo();
+      else window.addEventListener("load", inyectarVideo, { once: true });
     }
   }
 

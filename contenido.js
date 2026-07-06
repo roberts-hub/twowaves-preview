@@ -18,17 +18,22 @@ window.CONTENIDO = {
   },
 
   /* ---------- PORTADA (index.html) ----------
-     Deja tituloLinea2 en "" si quieres un título de solo dos líneas. */
+     Deja tituloLinea2 en "" si quieres un título de solo dos líneas.
+
+     videoFondo acepta 3 formas:
+       ""                                        → solo imagen
+       "assets/videos/reel.mp4"                  → archivo propio o enlace .mp4
+       { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" }
+                                                 → video de Vimeo en loop silencioso
+     "aspecto" son las dimensiones del video (ancho x alto); si no lo
+     pones se asume 16:9. La imagenFondo se muestra mientras carga.  */
   portada: {
     tituloLinea1: "Narrativas visuales",
     tituloAcento: "con intención.",
     tituloLinea2: "",
     subtitulo: "Casa productora — Guadalajara, MX",
-    // Video de fondo del hero. Pon aquí el enlace .mp4 de tu reel
-    // (en Vimeo: tu video → ⚙ → "Video file links", requiere plan de pago)
-    // o una ruta local como "assets/videos/reel.mp4". Vacío = solo imagen.
-    videoFondo: "",
-    imagenFondo: "https://i.vimeocdn.com/video/2128519862-13a561d0f936cad53017e757a74a0062ac3269268ba4df012568f25335d0c6c7-d_1280?region=us",
+    videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
+    imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
 
   /* ---------- CLIENTES (marquesina) ---------- */
