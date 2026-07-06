@@ -12,27 +12,29 @@ window.CONTENIDO = {
 
   /* ---------- MARCA ---------- */
   marca: {
-    nombre: "VÉRTICE FILMS",          // Nombre de tu casa productora
-    eslogan: "Casa productora",
-    ciudad: "Ciudad de México",
+    nombre: "TWO WAVES",
+    eslogan: "Films | Production Company",
+    ciudad: "Guadalajara, México — EST. 2021",
   },
 
   /* ---------- PORTADA (index.html) ---------- */
   portada: {
-    tituloLinea1: "Historias que",
-    tituloAcento: "se sienten",        // Se muestra en cursiva serif
-    tituloLinea2: "antes de entenderse.",
-    subtitulo: "Producción audiovisual para marcas que quieren dejar huella. Comerciales, contenido y cine publicitario.",
-    // Video de fondo del hero. Puede ser una ruta local ("assets/videos/reel.mp4")
-    // o un enlace directo a un .mp4. Déjalo en "" para usar solo la imagen.
-    videoFondo: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    imagenFondo: "assets/img/poster-hero.svg",
+    tituloLinea1: "Narrativas visuales",
+    tituloAcento: "con intención",
+    tituloLinea2: "para marcas globales.",
+    subtitulo: "Two Waves es una casa productora audiovisual en Guadalajara, México. Creamos campañas y contenido comercial con claridad, intención y un estándar creativo distintivo.",
+    // Video de fondo del hero. Pon aquí el enlace .mp4 de tu reel
+    // (en Vimeo: tu video → ⚙ → "Video file links", requiere plan de pago)
+    // o una ruta local como "assets/videos/reel.mp4". Vacío = solo imagen.
+    videoFondo: "",
+    imagenFondo: "https://i.vimeocdn.com/video/2128519862-13a561d0f936cad53017e757a74a0062ac3269268ba4df012568f25335d0c6c7-d_1280?region=us",
   },
 
   /* ---------- CLIENTES (marquesina) ---------- */
   clientes: [
-    "Cliente Uno", "Marca Dos", "Estudio Tres", "Grupo Cuatro",
-    "Casa Cinco", "Firma Seis", "Agencia Siete", "Hotel Ocho",
+    "AION", "MB Motos", "Mondrian", "Beautiful Destinations",
+    "Marvel", "Kings League", "Alo Yoga", "Tequila Herradura",
+    "FICG", "Atlética", "One&Only Mandarina", "Visit Brazil",
   ],
 
   /* ---------- PROYECTOS ----------
@@ -43,7 +45,7 @@ window.CONTENIDO = {
      Campos:
        titulo      → nombre del proyecto
        cliente     → marca o cliente
-       categoria   → ej. "Comercial", "Documental", "Música"
+       categoria   → ej. "Comercial", "Turismo", "Música"
        anio        → año
        tamano      → "grande" (ancho completo) o "normal" (media columna)
        destacado   → true = también aparece en la portada
@@ -57,93 +59,172 @@ window.CONTENIDO = {
   ------------------------------------------------------ */
   proyectos: [
     {
-      titulo: "Amanecer",
-      cliente: "Marca Dos",
-      categoria: "Comercial",
+      titulo: "Bear Grylls x AION",
+      cliente: "AION",
+      categoria: "Drone show",
       anio: "2026",
       tamano: "grande",
       destacado: true,
-      miniatura: "assets/img/proyecto-01.svg",
-      videoHover: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-      video: { tipo: "archivo", ruta: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+      miniatura: "https://i.vimeocdn.com/video/2128519862-13a561d0f936cad53017e757a74a0062ac3269268ba4df012568f25335d0c6c7-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1169670961" },
     },
     {
-      titulo: "Ruta 57",
-      cliente: "Grupo Cuatro",
-      categoria: "Documental",
+      titulo: "MB Motos",
+      cliente: "MB Motos México",
+      categoria: "Comercial",
       anio: "2026",
       tamano: "normal",
       destacado: true,
-      miniatura: "assets/img/proyecto-02.svg",
+      miniatura: "https://i.vimeocdn.com/video/2121186002-e089a3ac2b0a52b386eb0a8d3f2b35ff872056e5d89e48f467a3d5b185253a8e-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "vimeo", id: "76979871" },
+      video: { tipo: "vimeo", id: "1164516769" },
     },
     {
-      titulo: "Piel de neón",
-      cliente: "Estudio Tres",
-      categoria: "Video musical",
-      anio: "2025",
+      titulo: "Grand Island",
+      cliente: "Mondrian",
+      categoria: "Hotelería",
+      anio: "2026",
       tamano: "normal",
       destacado: true,
-      miniatura: "assets/img/proyecto-03.svg",
+      miniatura: "https://i.vimeocdn.com/video/2110982172-7a16e0202a31b2cedc8f7cc93eb51bf8a1acf4b84b43330a614288ecce753496-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "youtube", id: "aqz-KE-bpKQ" },
+      video: { tipo: "vimeo", id: "1157343263" },
     },
     {
-      titulo: "La mesa larga",
-      cliente: "Casa Cinco",
-      categoria: "Contenido",
+      titulo: "Thunderbolts x Kings League",
+      cliente: "Marvel",
+      categoria: "Branded content",
+      anio: "2025",
+      tamano: "grande",
+      destacado: true,
+      miniatura: "https://i.vimeocdn.com/video/2017654325-d5c674f93c594adad492a542c5b19722d47a2828d905cbb327fbf75393eb0720-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1085979440" },
+    },
+    {
+      titulo: "Tito Double P x Cashonly",
+      cliente: "Cashonly",
+      categoria: "Música",
       anio: "2025",
       tamano: "normal",
       destacado: false,
-      miniatura: "assets/img/proyecto-04.svg",
+      miniatura: "https://i.vimeocdn.com/video/2092677014-7c3834b56c434b7e63d9cc315d1a01f27fef51436b0f1b909711fd697b393511-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "vimeo", id: "76979871" },
+      video: { tipo: "vimeo", id: "1144201735" },
     },
     {
-      titulo: "Kilómetro cero",
-      cliente: "Firma Seis",
-      categoria: "Comercial",
+      titulo: "Let's Go Brazil",
+      cliente: "Beautiful Destinations",
+      categoria: "Turismo",
       anio: "2025",
       tamano: "normal",
       destacado: false,
-      miniatura: "assets/img/proyecto-05.svg",
+      miniatura: "https://i.vimeocdn.com/video/2087626357-b97063df4dbd64b285d4ff2f7e6cfa3108cece51881f237f52d1e0e99ccad8e1-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "vimeo", id: "76979871" },
+      video: { tipo: "vimeo", id: "1140562321" },
     },
     {
-      titulo: "Habitación 214",
-      cliente: "Hotel Ocho",
-      categoria: "Branded film",
+      titulo: "Lençóis Maranhenses",
+      cliente: "Beautiful Destinations",
+      categoria: "Turismo",
+      anio: "2025",
+      tamano: "normal",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/2087621548-1733f8148ec3f287c4bfc8f90cc4865b59d44eb30d98b85d50f305502ef34181-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1140559385" },
+    },
+    {
+      titulo: "Pequeña África",
+      cliente: "Visit Brazil",
+      categoria: "Turismo",
+      anio: "2025",
+      tamano: "normal",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/2080388745-bd7b627a56866df02e94b5d4b3f806e9cb8778759433df6c445d447c0063a862-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1135148329" },
+    },
+    {
+      titulo: "Ricardo Salinas — 70 años",
+      cliente: "Ricardo Salinas",
+      categoria: "Evento",
+      anio: "2025",
+      tamano: "grande",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1135144526" },
+    },
+    {
+      titulo: "Brand Ambassador",
+      cliente: "Atlética",
+      categoria: "Deporte",
+      anio: "2025",
+      tamano: "normal",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/2080381492-60877576ddb2b7a8ea046424d1015c3326f1b72f5a89d4de9ecba3ff90108b4d-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1135143672" },
+    },
+    {
+      titulo: "Alo Yoga Retreat",
+      cliente: "One&Only Mandarina",
+      categoria: "Wellness",
+      anio: "2025",
+      tamano: "normal",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/2007514743-8e2cb9215b144f3867bc81d6f8e1d32a9c08cba017aef426ca9a28eafb801a8d-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1077478660" },
+    },
+    {
+      titulo: "Tequila Herradura x FICG",
+      cliente: "Tequila Herradura",
+      categoria: "Evento",
       anio: "2024",
-      tamano: "grande",
+      tamano: "normal",
       destacado: false,
-      miniatura: "assets/img/proyecto-06.svg",
+      miniatura: "https://i.vimeocdn.com/video/1960869647-a8ff147a97fc747da72e9cbf5e93519df21201c7577c70cfbfc2d1a3aad3e20f-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "youtube", id: "aqz-KE-bpKQ" },
+      video: { tipo: "vimeo", id: "1038640015" },
+    },
+    {
+      titulo: "Alo Yoga x Javier Hernández",
+      cliente: "Alo Yoga",
+      categoria: "Deporte",
+      anio: "2024",
+      tamano: "normal",
+      destacado: false,
+      miniatura: "https://i.vimeocdn.com/video/1960863126-ab9a83d72470d7ab16ebb0c2730b613f805c7ff9524444be080c786880b7ac3f-d_1280?region=us",
+      videoHover: "",
+      video: { tipo: "vimeo", id: "1038634019" },
     },
   ],
 
   /* ---------- NOSOTROS (about.html) ---------- */
   nosotros: {
-    titulo: "Producimos con intención.",
+    titulo: "El resultado, antes que el ruido.",
     parrafos: [
-      "Somos una casa productora independiente. Creemos que una buena idea merece una ejecución impecable: dirección, foto, arte y post bajo un mismo techo.",
-      "Trabajamos con marcas, agencias y artistas que buscan piezas con punto de vista — no contenido de relleno.",
+      "Two Waves es una casa productora audiovisual fundada en 2021 en Guadalajara, México, especializada en contenido comercial para marcas globales. Desarrollamos campañas y narrativas visuales pensadas para representar a cada cliente con claridad, intención y un estándar creativo distintivo.",
+      "Si buscas un equipo que prioriza el resultado por encima del ruido, estás en el lugar correcto. De la idea al master final: dirección, producción y post bajo un mismo techo.",
     ],
     servicios: [
       "Dirección", "Producción ejecutiva", "Cinematografía",
-      "Postproducción", "Color", "Diseño sonoro",
+      "Drones y tomas aéreas", "Postproducción", "Color",
+      "Contenido para marcas",
     ],
   },
 
   /* ---------- CONTACTO (contact.html) ---------- */
   contacto: {
-    titulo: "Hagamos algo que valga la pena ver.",
-    correo: "hola@tucasaproductora.com",
-    telefono: "+52 55 0000 0000",
-    instagram: "https://instagram.com/tucasaproductora",
-    vimeo: "https://vimeo.com/tucasaproductora",
-    direccion: "Ciudad de México, MX",
+    titulo: "Comencemos tu proyecto.",
+    // ⚠️ Escribe aquí tu correo real de contacto:
+    correo: "contacto@twowaves.mx",
+    telefono: "",
+    instagram: "https://www.instagram.com/twowaves.mx/",
+    vimeo: "https://vimeo.com/twowavesfilms",
+    direccion: "Guadalajara, México",
   },
 };

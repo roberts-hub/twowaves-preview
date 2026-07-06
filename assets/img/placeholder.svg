@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <radialGradient id="g" cx="30%" cy="25%" r="90%">
+      <stop offset="0%" stop-color="#35d0ba" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#131c20"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <text x="60" y="90" font-family="Helvetica, Arial" font-size="26" letter-spacing="6" fill="#e9f1ee" opacity="0.5">TWO WAVES</text>
+</svg>

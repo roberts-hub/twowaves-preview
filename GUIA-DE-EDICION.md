@@ -83,10 +83,16 @@ El campo `video` define qué se reproduce al hacer clic en la tarjeta:
 El campo `videoHover` es un clip **corto (5–10 s), sin audio y ligero (< 5 MB)**:
 
 1. Exporta de tu editor un clip corto en 720p, sin audio.
-2. Guárdalo en `assets/videos/`, por ejemplo `preview-audi.mp4`.
-3. Escribe: `videoHover: "assets/videos/preview-audi.mp4",`
+2. Guárdalo en `assets/videos/`, por ejemplo `preview-mbmotos.mp4`.
+3. Escribe: `videoHover: "assets/videos/preview-mbmotos.mp4",`
 
 Si lo dejas vacío (`videoHover: ""`), la tarjeta hará zoom suave a la imagen — también se ve bien.
+
+> 💡 Atajo con Vimeo (así lo hace el sitio de referencia): si tu cuenta de Vimeo
+> es de pago (Starter/Standard/Pro), abre tu video en Vimeo → pestaña
+> **Advanced** (o ⚙) → **Video file links** → copia el enlace del archivo
+> de 720p y pégalo directo en `videoHover`. Sirve también para el
+> `videoFondo` del hero de la portada con tu reel.
 
 ## 5. Cambiar las miniaturas (fotos de cada proyecto)
 
@@ -108,12 +114,17 @@ Bloque `clientes`: agrega o quita nombres entre comillas, separados por comas.
 Único caso donde tocas otro archivo: **`css/estilo.css`**, solo el primer bloque `:root`:
 
 ```css
---crema: #f4f0e6;    /* fondo claro */
---tinta: #161513;    /* texto y fondos oscuros */
---acento: #d95b29;   /* color de acento */
+--fondo: #0d1417;      /* fondo base del sitio */
+--fondo-2: #131c20;    /* paneles / secciones alternas */
+--profundo: #080c0e;   /* el negro más profundo (hero, pie) */
+--texto: #e9f1ee;      /* texto principal (claro) */
+--acento: #35d0ba;     /* aqua — color primario de acento */
+--acento-2: #ff7a4d;   /* coral — complementario del aqua */
 ```
 
 Cambia los códigos de color (puedes elegirlos en https://htmlcolorcodes.com) y guarda.
+La pareja `--acento` / `--acento-2` funciona mejor si son colores complementarios
+(opuestos en el círculo cromático), como el aqua y el coral actuales.
 
 ## 9. Errores comunes (si algo se rompe)
 

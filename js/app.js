@@ -89,7 +89,7 @@
     btn.setAttribute("aria-label", "Ver video: " + p.titulo + " — " + p.cliente);
     btn.innerHTML =
       '<div class="tarjeta_visual">' +
-      '<img src="' + p.miniatura + '" alt="' + p.titulo + '" loading="lazy">' +
+      '<img src="' + p.miniatura + '" alt="' + p.titulo + '" loading="lazy" onerror="this.onerror=null;this.src=\'assets/img/placeholder.svg\'">' +
       (p.videoHover
         ? '<video muted loop playsinline preload="none" src="' + p.videoHover + '"></video>'
         : "") +
@@ -261,7 +261,8 @@
         const r = secciones[i].getBoundingClientRect();
         if (r.top <= h && r.bottom > h) {
           const tema = secciones[i].dataset.tema;
-          nav.classList.toggle("nav--tinta", tema === "claro");
+          // El nav usa texto oscuro solo sobre secciones claras ("luz" o "acento")
+          nav.classList.toggle("nav--tinta", tema === "luz" || tema === "acento");
           return;
         }
       }
