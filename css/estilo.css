@@ -315,8 +315,8 @@ h1, h2, h3 {
 }
 .tarjeta_visual video { opacity: 0; transition: opacity 0.4s ease; }
 .tarjeta:hover .tarjeta_visual img { transform: scale(1.04); }
-.tarjeta.con-video:hover .tarjeta_visual img { opacity: 0; }
-.tarjeta.con-video:hover .tarjeta_visual video { opacity: 1; }
+.tarjeta.con-video.hover-activo .tarjeta_visual img { opacity: 0; }
+.tarjeta.con-video.hover-activo .tarjeta_visual video { opacity: 1; }
 
 .tarjeta_boton-play {
   position: absolute;

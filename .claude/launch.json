@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portafolio",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8321", "--directory", "/Users/roberts.creative/portafolio-productora"],
+      "port": 8321
+    }
+  ]
+}

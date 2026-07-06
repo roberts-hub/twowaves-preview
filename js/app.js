@@ -53,7 +53,7 @@
       Object.assign(vid, { src: C.portada.videoFondo, muted: true, loop: true, playsInline: true, autoplay: true });
       vid.setAttribute("muted", "");
       vid.setAttribute("playsinline", "");
-      heroFondo.prepend(vid);
+      heroFondo.append(vid); // el video va encima del poster
       vid.play().catch(() => {});
     }
   }
@@ -119,8 +119,12 @@
   $$(".tarjeta").forEach((tarjeta) => {
     const video = $("video", tarjeta);
     if (!video) return;
-    tarjeta.addEventListener("mouseenter", () => video.play().catch(() => {}));
+    tarjeta.addEventListener("mouseenter", () => {
+      tarjeta.classList.add("hover-activo");
+      video.play().catch(() => {});
+    });
     tarjeta.addEventListener("mouseleave", () => {
+      tarjeta.classList.remove("hover-activo");
       video.pause();
       video.currentTime = 0;
     });
