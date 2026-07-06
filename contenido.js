@@ -36,11 +36,24 @@ window.CONTENIDO = {
     imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
 
-  /* ---------- CLIENTES (marquesina) ---------- */
+  /* ---------- CLIENTES (banda de logos) ----------
+     Copia tus logos .png a assets/img/logos/ y escribe la ruta en
+     "logo". SOLO los clientes con logo aparecen en la banda; si
+     ninguno tiene logo, se muestran los nombres en texto (temporal).
+     Para dejarlos en blanco puro: python3 herramientas/logos-a-blanco.py */
   clientes: [
-    "AION", "MB Motos", "Mondrian", "Beautiful Destinations",
-    "Marvel", "Kings League", "Alo Yoga", "Tequila Herradura",
-    "FICG", "Atlética", "One&Only Mandarina", "Visit Brazil",
+    { nombre: "AION", logo: "" },
+    { nombre: "MB Motos", logo: "" },
+    { nombre: "Mondrian", logo: "" },
+    { nombre: "Beautiful Destinations", logo: "" },
+    { nombre: "Marvel", logo: "" },
+    { nombre: "Kings League", logo: "" },
+    { nombre: "Alo Yoga", logo: "" },
+    { nombre: "Tequila Herradura", logo: "" },
+    { nombre: "FICG", logo: "" },
+    { nombre: "Atlética", logo: "" },
+    { nombre: "One&Only Mandarina", logo: "" },
+    { nombre: "Visit Brazil", logo: "" },
   ],
 
   /* ---------- PROYECTOS ----------

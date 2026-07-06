@@ -123,9 +123,32 @@ videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
 Todo está en `contenido.js`, en los bloques `portada`, `nosotros` y `contacto`.
 Son textos entre comillas: cambia lo que está dentro de las comillas y guarda.
 
-## 7. Cambiar la lista de clientes (la marquesina que se desliza)
+## 7. La banda de logos de clientes
 
-Bloque `clientes`: agrega o quita nombres entre comillas, separados por comas.
+La portada muestra una banda de logos blancos (como la página de referencia).
+Para activarla:
+
+1. Copia tus logos `.png` a la carpeta **`assets/img/logos/`**
+   (solo PNG; de preferencia con fondo transparente).
+2. Conviértelos a blanco puro con un comando en Terminal:
+   ```
+   cd ~/portafolio-productora && python3 herramientas/logos-a-blanco.py
+   ```
+   (Sube sombras y luces a blanco conservando la silueta. Si te falta
+   Pillow: `python3 -m pip install pillow`. Los originales quedan
+   respaldados en `assets/img/logos/originales/`.)
+3. En `contenido.js`, bloque `clientes`, escribe la ruta de cada logo:
+   ```js
+   { nombre: "AION", logo: "assets/img/logos/aion.png" },
+   ```
+
+Reglas de la banda:
+- **Solo aparecen los clientes que tienen `logo`** con archivo válido.
+  Un cliente sin PNG simplemente no sale en la banda.
+- Mientras NINGÚN cliente tenga logo, se muestran los nombres en texto
+  (respaldo temporal).
+- El sitio además fuerza los logos a blanco en pantalla, así que aunque
+  te saltes el paso 2, un PNG transparente se verá blanco de todos modos.
 
 ## 8. Cambiar colores y tipografías de TODO el sitio
 

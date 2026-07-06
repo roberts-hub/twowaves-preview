@@ -102,13 +102,44 @@
       .join("");
   }
 
-  // Marquesina de clientes (duplicada para loop continuo)
-  const marquesina = $("[data-marquesina]");
-  if (marquesina) {
-    const items = C.clientes.map((n) => '<span class="marquesina_item">' + n + "</span>").join("");
-    marquesina.innerHTML =
-      '<div class="marquesina_pista">' + items + "</div>" +
-      '<div class="marquesina_pista" aria-hidden="true">' + items + "</div>";
+  // Banda de clientes: grid de logos blancos (como la referencia).
+  // Solo aparecen los clientes con archivo de logo; si ninguno lo
+  // tiene todavía, se muestran los nombres en texto como respaldo.
+  const contClientes = $("[data-clientes]");
+  if (contClientes) {
+    const lista = C.clientes.map((c) => (typeof c === "string" ? { nombre: c, logo: "" } : c));
+    const conLogo = lista.filter((c) => c.logo);
+    if (conLogo.length) {
+      contClientes.innerHTML =
+        '<div class="logos_grid">' +
+        conLogo
+          .map(
+            (c) =>
+              '<div class="logos_item" data-revelar>' +
+              '<img class="logos_img" src="' + c.logo + '" alt="' + c.nombre +
+              '" loading="lazy" onerror="this.closest(\'.logos_item\').remove()"></div>'
+          )
+          .join("") +
+        "</div>";
+    } else {
+      const items = lista
+        .map((c) => '<span class="marquesina_item">' + c.nombre + "</span>")
+        .join("");
+      contClientes.innerHTML =
+        '<div class="marquesina"><div class="marquesina_pista">' + items + "</div>" +
+        '<div class="marquesina_pista" aria-hidden="true">' + items + "</div></div>";
+      // Optimización: la marquesina solo se anima cuando está en pantalla
+      if ("IntersectionObserver" in window) {
+        const pistas = $$(".marquesina_pista", contClientes);
+        new IntersectionObserver(
+          (entradas) =>
+            entradas.forEach((e) =>
+              pistas.forEach((p) => (p.style.animationPlayState = e.isIntersecting ? "running" : "paused"))
+            ),
+          { rootMargin: "50px" }
+        ).observe(contClientes);
+      }
+    }
   }
 
   // Grid de proyectos (data-grid="todos" | "destacados")

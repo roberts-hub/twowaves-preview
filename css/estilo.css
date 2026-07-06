@@ -246,8 +246,37 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 
 /* ============================================================
-   MARQUESINA DE CLIENTES
+   BANDA DE CLIENTES (logos blancos en grid, como la referencia)
    ============================================================ */
+.logos_seccion {
+  padding: clamp(3rem, 7vw, 5.5rem) var(--margen);
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  justify-items: center;
+  border-block: 1px solid var(--linea);
+}
+.logos_contenedor { width: 100%; }
+.logos_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(110px, 14vw, 170px), 1fr));
+  gap: clamp(1.8rem, 3.5vw, 3.5rem) clamp(1.2rem, 2.5vw, 2.5rem);
+  align-items: center;
+  justify-items: center;
+}
+.logos_item { display: grid; place-items: center; min-height: 2.4rem; }
+.logos_img {
+  height: clamp(1.4rem, 2.4vw, 2.1rem);
+  width: auto;
+  max-width: min(140px, 100%);
+  object-fit: contain;
+  /* Refuerzo: cualquier PNG con transparencia se pinta blanco puro */
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+.logos_item:hover .logos_img { opacity: 1; }
+
+/* --- Marquesina de texto (respaldo mientras no hay logos) --- */
 .marquesina {
   padding: 2.2rem 0;
   border-block: 1px solid var(--linea);
@@ -315,13 +344,13 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   object-fit: cover;
 }
 .tarjeta_visual img {
-  /* B/N por defecto → color al hover: unifica las miniaturas de Vimeo */
-  filter: grayscale(1) contrast(1.03) brightness(0.92);
+  /* Color por defecto → B/N al hover: el video gana protagonismo */
+  filter: none;
   transition: opacity 0.4s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
               filter 0.6s ease;
 }
 .tarjeta:hover .tarjeta_visual img,
-.tarjeta.hover-activo .tarjeta_visual img { filter: none; }
+.tarjeta.hover-activo .tarjeta_visual img { filter: grayscale(1) contrast(1.03) brightness(0.9); }
 .tarjeta_visual video { opacity: 0; transition: opacity 0.4s ease; }
 .tarjeta:hover .tarjeta_visual img { transform: scale(1.04); }
 .tarjeta.con-video.hover-activo .tarjeta_visual img { opacity: 0; }
