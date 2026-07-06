@@ -114,17 +114,22 @@ Bloque `clientes`: agrega o quita nombres entre comillas, separados por comas.
 Único caso donde tocas otro archivo: **`css/estilo.css`**, solo el primer bloque `:root`:
 
 ```css
---fondo: #0d1417;      /* fondo base del sitio */
---fondo-2: #131c20;    /* paneles / secciones alternas */
---profundo: #080c0e;   /* el negro más profundo (hero, pie) */
---texto: #e9f1ee;      /* texto principal (claro) */
---acento: #35d0ba;     /* aqua — color primario de acento */
---acento-2: #ff7a4d;   /* coral — complementario del aqua */
+--fondo: #121211;      /* grafito cálido — fondo base */
+--fondo-2: #1a1a18;    /* panel apenas más claro */
+--profundo: #0b0b0a;   /* el negro más profundo (hero, pie) */
+--texto: #e7e2d6;      /* hueso / alabastro — texto principal */
+--acento: #b0a595;     /* greige muted — único acento */
+--lino: #e5e0d5;       /* lino — fondo de las secciones claras */
 ```
 
 Cambia los códigos de color (puedes elegirlos en https://htmlcolorcodes.com) y guarda.
-La pareja `--acento` / `--acento-2` funciona mejor si son colores complementarios
-(opuestos en el círculo cromático), como el aqua y el coral actuales.
+La estética actual es tonos muted: grafito + hueso + greige. Si cambias colores,
+mantenlos desaturados para conservar el look premium.
+
+> 🎞 Las miniaturas se muestran en blanco y negro y recuperan su color al pasar
+> el mouse. Es intencional: unifica thumbnails distintos y eleva el conjunto.
+> Si no lo quieres, borra en `css/estilo.css` el bloque que empieza con
+> `/* B/N por defecto → color al hover`.
 
 ## 9. Errores comunes (si algo se rompe)
 

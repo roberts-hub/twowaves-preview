@@ -61,10 +61,14 @@
   // Título del hero (3 líneas configurables)
   const heroTitulo = $("[data-hero-titulo]");
   if (heroTitulo) {
-    heroTitulo.innerHTML =
-      '<span class="hero_linea"><span>' + C.portada.tituloLinea1 + "</span></span>" +
-      '<span class="hero_linea"><span class="acento-serif">' + C.portada.tituloAcento + "</span></span>" +
-      '<span class="hero_linea"><span>' + C.portada.tituloLinea2 + "</span></span>";
+    const lineas = [
+      [C.portada.tituloLinea1, ""],
+      [C.portada.tituloAcento, "acento-serif"],
+      [C.portada.tituloLinea2, ""],
+    ].filter(([t]) => t); // ignora líneas vacías
+    heroTitulo.innerHTML = lineas
+      .map(([t, cls]) => '<span class="hero_linea"><span class="' + cls + '">' + t + "</span></span>")
+      .join("");
   }
 
   // Marquesina de clientes (duplicada para loop continuo)
@@ -98,8 +102,7 @@
       '<div class="tarjeta_info">' +
       '<span class="tarjeta_titulo">' + p.titulo + "</span>" +
       '<span class="tarjeta_meta">' +
-      '<span class="tarjeta_chip">' + p.categoria + "</span>" +
-      '<span class="etiqueta">' + p.cliente + " · " + p.anio + "</span>" +
+      '<span class="etiqueta">' + p.cliente + "</span>" +
       "</span></div>";
     return btn;
   }
@@ -118,15 +121,16 @@
      ========================================================== */
   $$(".tarjeta").forEach((tarjeta) => {
     const video = $("video", tarjeta);
-    if (!video) return;
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
-      video.play().catch(() => {});
+      if (video) video.play().catch(() => {});
     });
     tarjeta.addEventListener("mouseleave", () => {
       tarjeta.classList.remove("hover-activo");
-      video.pause();
-      video.currentTime = 0;
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
     });
   });
 

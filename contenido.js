@@ -17,12 +17,13 @@ window.CONTENIDO = {
     ciudad: "Guadalajara, México — EST. 2021",
   },
 
-  /* ---------- PORTADA (index.html) ---------- */
+  /* ---------- PORTADA (index.html) ----------
+     Deja tituloLinea2 en "" si quieres un título de solo dos líneas. */
   portada: {
     tituloLinea1: "Narrativas visuales",
-    tituloAcento: "con intención",
-    tituloLinea2: "para marcas globales.",
-    subtitulo: "Two Waves es una casa productora audiovisual en Guadalajara, México. Creamos campañas y contenido comercial con claridad, intención y un estándar creativo distintivo.",
+    tituloAcento: "con intención.",
+    tituloLinea2: "",
+    subtitulo: "Casa productora — Guadalajara, MX",
     // Video de fondo del hero. Pon aquí el enlace .mp4 de tu reel
     // (en Vimeo: tu video → ⚙ → "Video file links", requiere plan de pago)
     // o una ruta local como "assets/videos/reel.mp4". Vacío = solo imagen.
@@ -207,13 +208,11 @@ window.CONTENIDO = {
   nosotros: {
     titulo: "El resultado, antes que el ruido.",
     parrafos: [
-      "Two Waves es una casa productora audiovisual fundada en 2021 en Guadalajara, México, especializada en contenido comercial para marcas globales. Desarrollamos campañas y narrativas visuales pensadas para representar a cada cliente con claridad, intención y un estándar creativo distintivo.",
-      "Si buscas un equipo que prioriza el resultado por encima del ruido, estás en el lugar correcto. De la idea al master final: dirección, producción y post bajo un mismo techo.",
+      "Casa productora audiovisual fundada en 2021 en Guadalajara, México. Contenido comercial para marcas globales — de la idea al master final.",
     ],
     servicios: [
-      "Dirección", "Producción ejecutiva", "Cinematografía",
-      "Drones y tomas aéreas", "Postproducción", "Color",
-      "Contenido para marcas",
+      "Dirección", "Producción", "Cinematografía",
+      "Aéreos", "Postproducción", "Color",
     ],
   },
 
