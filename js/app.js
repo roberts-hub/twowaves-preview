@@ -106,15 +106,58 @@
       "</div>";
   }
 
-  // Why Two Waves (About): título + párrafos desde contenido.js
+  // Why Two Waves (About): 2 columnas + frase destacada
   const contPorque = $("[data-porque]");
   if (contPorque && C.porque) {
     contPorque.innerHTML =
       '<h2 class="titulo-seccion" data-revelar>' + C.porque.titulo + "</h2>" +
+      '<div class="porque_columnas">' +
       C.porque.parrafos
         .map((p) => '<p class="parrafo" data-revelar>' + p + "</p>")
-        .join("");
+        .join("") +
+      "</div>" +
+      (C.porque.destacado
+        ? '<p class="porque_destacado" data-revelar>' + C.porque.destacado + "</p>"
+        : "");
   }
+
+  // Headers secundarios con video de fondo (ej. About con Grand Island):
+  // <section data-video-hero="ID|WxH|inicio"> — en play desde que entras
+  $$("[data-video-hero]").forEach((sec) => {
+    if (reducirMovimiento || !window.matchMedia("(min-width: 700px)").matches) return;
+    const [id, aspecto, inicioStr] = sec.dataset.videoHero.split("|");
+    const inicio = parseFloat(inicioStr) || 1;
+    const [aw, ah] = (aspecto || "16x9").split(/[x:]/).map(Number);
+    const ar = aw && ah ? aw / ah : 16 / 9;
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      "https://player.vimeo.com/video/" + id +
+      "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1" +
+      "#t=" + inicio + "s";
+    iframe.allow = "autoplay";
+    iframe.tabIndex = -1;
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.style.cssText =
+      "position:absolute;top:50%;left:50%;" +
+      "transform:translate(-50%,-50%) scale(1.04);" +
+      "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
+      "width:auto;height:auto;border:0;pointer-events:none;" +
+      "opacity:0;transition:opacity 0.8s ease;";
+    const alMsj = (ev) => {
+      if (ev.source !== iframe.contentWindow) return;
+      let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
+      if (d.event === "playProgress" || d.event === "timeupdate") {
+        iframe.style.opacity = "1";
+        window.removeEventListener("message", alMsj);
+      }
+    };
+    window.addEventListener("message", alMsj);
+    iframe.addEventListener("load", () => {
+      iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
+      setTimeout(() => { if (document.visibilityState === "visible") iframe.style.opacity = "1"; }, 3500);
+    });
+    $(".video-hero_fondo", sec).appendChild(iframe);
+  });
 
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
   // otro hosting, abre el correo del visitante ya prellenado (mailto).

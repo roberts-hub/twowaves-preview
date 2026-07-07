@@ -110,7 +110,7 @@ window.CONTENIDO = {
       anio: "2026",
       tamano: "normal",
       destacado: true,
-      miniatura: "https://i.vimeocdn.com/video/2128519862-13a561d0f936cad53017e757a74a0062ac3269268ba4df012568f25335d0c6c7-d_960?region=us",
+      miniatura: "assets/img/bear-grylls.jpg",
       videoHover: "",
       video: { tipo: "vimeo", id: "1169670961", aspecto: "3840x1920", inicio: 2 },
     },
@@ -301,8 +301,8 @@ window.CONTENIDO = {
     etiqueta: "The founders",
     titulo: "Meet the founders",
     parrafos: [
-      "Two Waves was founded by Rogelio and Roberto, two filmmakers from Guadalajara, Jalisco, who grew up with the same instinct: to create, to film, and to build stories that felt bigger than the tools they had at the time. What started as childhood curiosity turned into a shared vision, shaping a production company capable of standing among the most respected in Mexico and, with time, the world.",
-      "Both founders have followed different paths within the industry, but their direction has always been aligned. Years of learning, experimenting, and refining their craft led them to develop a way of working that values intention, clarity, and strong visual identity. Two Waves is the result of that evolution: a studio built by two people who never questioned whether it was possible, only how far it could go.",
+      "Two Waves was founded by Rogelio and Roberto, two filmmakers from Guadalajara who grew up with the same instinct: to create, to film, and to build stories bigger than the tools they had at the time.",
+      "Different paths within the industry, one aligned direction. Years of refining their craft became a way of working that values intention, clarity, and strong visual identity: a studio built by two people who never questioned whether it was possible, only how far it could go.",
     ],
     foto: "assets/img/founders.jpg",
     nombres: [],
@@ -312,11 +312,10 @@ window.CONTENIDO = {
   porque: {
     titulo: "Why Two Waves?",
     parrafos: [
-      "Choosing Two Waves means partnering with a production company that treats every project with intention, clarity, and a strong sense of craft. We focus on building work that truly represents your brand: pieces shaped with careful planning, clean execution, and an editorial approach that gives each frame purpose.",
-      "Our value comes from how we work, not from inflated setups or unnecessary layers. We operate with a streamlined structure that keeps directors, producers, cinematographers, and editors aligned under one workflow. This allows us to move efficiently while maintaining full control over the visual direction, ensuring that the final result is consistent, cohesive, and built to last.",
-      "We're thoughtful with the ideas we develop, precise in the way we film, and meticulous in how we edit. The outcome is work that feels solid and well constructed: content that reflects your brand with intention rather than spectacle.",
-      "If you're looking for a team that prioritizes the result over the noise around it, you're in the right place.",
+      "Choosing Two Waves means partnering with a team that treats every project with intention, clarity, and a strong sense of craft: careful planning, clean execution, and an editorial approach that gives each frame purpose.",
+      "Our value comes from how we work. A streamlined structure keeps directors, producers, cinematographers, and editors under one workflow: efficient, consistent, and built to last.",
     ],
+    destacado: "If you're looking for a team that prioritizes the result over the noise, you're in the right place.",
   },
 
   /* ---------- CONTACTO (contact.html) ---------- */
