@@ -189,41 +189,53 @@
   $$(".tarjeta").forEach((tarjeta) => {
     const video = $("video", tarjeta);
     const p = C.proyectos[+tarjeta.dataset.proyecto];
-    // Sin videoHover propio, los proyectos de Vimeo generan su preview
-    // con el player en modo fondo, creado en el primer hover (lazy).
-    const usaIframe = !video && p && p.video && p.video.tipo === "vimeo";
-    let iframe = null;
-    const orden = (m) =>
-      iframe && iframe.contentWindow &&
-      iframe.contentWindow.postMessage(JSON.stringify({ method: m }), "*");
+    const esGrande = tarjeta.classList.contains("tarjeta--grande");
 
+    // Solo la tarjeta GRANDE reproduce su video de Vimeo, y lo hace sola
+    // en cuanto entra a pantalla con el scroll (no necesita hover).
+    // Fuera de pantalla se pausa para no gastar recursos.
+    if (esGrande && !video && p && p.video && p.video.tipo === "vimeo") {
+      let iframe = null;
+      const orden = (m) =>
+        iframe && iframe.contentWindow &&
+        iframe.contentWindow.postMessage(JSON.stringify({ method: m }), "*");
+      new IntersectionObserver(
+        (entradas) => {
+          entradas.forEach((e) => {
+            if (e.isIntersecting) {
+              if (!iframe) {
+                iframe = document.createElement("iframe");
+                iframe.src =
+                  "https://player.vimeo.com/video/" + p.video.id +
+                  "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
+                iframe.allow = "autoplay";
+                iframe.tabIndex = -1;
+                iframe.setAttribute("aria-hidden", "true");
+                iframe.addEventListener("load", () => iframe.classList.add("cargado"));
+                $(".tarjeta_visual", tarjeta).appendChild(iframe);
+              } else {
+                orden("play");
+              }
+            } else if (iframe) {
+              orden("pause");
+            }
+          });
+        },
+        { rootMargin: "150px" }
+      ).observe(tarjeta);
+    }
+
+    // El resto de tarjetas: hover clásico (zoom + B/N); el video solo
+    // aplica si el proyecto tiene su propio videoHover .mp4
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
-      if (video) {
-        video.play().catch(() => {});
-      } else if (usaIframe) {
-        if (!iframe) {
-          iframe = document.createElement("iframe");
-          iframe.src =
-            "https://player.vimeo.com/video/" + p.video.id +
-            "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
-          iframe.allow = "autoplay";
-          iframe.tabIndex = -1;
-          iframe.setAttribute("aria-hidden", "true");
-          iframe.addEventListener("load", () => iframe.classList.add("cargado"));
-          $(".tarjeta_visual", tarjeta).appendChild(iframe);
-        } else {
-          orden("play");
-        }
-      }
+      if (video) video.play().catch(() => {});
     });
     tarjeta.addEventListener("mouseleave", () => {
       tarjeta.classList.remove("hover-activo");
       if (video) {
         video.pause();
         video.currentTime = 0;
-      } else if (iframe) {
-        orden("pause");
       }
     });
   });

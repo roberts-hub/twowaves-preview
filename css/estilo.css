@@ -378,7 +378,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   opacity: 0;
   transition: opacity 0.45s ease;
 }
-.tarjeta.hover-activo .tarjeta_visual iframe.cargado { opacity: 1; }
+/* El video de la tarjeta grande queda visible siempre, sin hover */
+.tarjeta_visual iframe.cargado { opacity: 1; }
 .tarjeta:hover .tarjeta_visual img { transform: scale(1.04); }
 .tarjeta.con-video.hover-activo .tarjeta_visual img { opacity: 0; }
 .tarjeta.con-video.hover-activo .tarjeta_visual video { opacity: 1; }
