@@ -92,7 +92,6 @@ window.CONTENIDO = {
   proyectos: [
     {
       titulo: "Visit Jalisco",
-      logoCliente: "assets/img/logos/beautiful-destinations.png",
       descripcion: "Travel campaign with Beautiful Destinations — Jalisco from the coast to the highlands, shot at home.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
