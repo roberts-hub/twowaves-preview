@@ -184,7 +184,7 @@
         const factor =
           Math.min(1.5, Math.max(0.6, Math.sqrt(1.9 / ar))) *
           (parseFloat(img.dataset.escala) || 1);
-        img.style.height = "calc(clamp(1.9rem, 3.2vw, 2.8rem) * " + factor.toFixed(3) + ")";
+        img.style.height = "calc(clamp(2.3rem, 3.8vw, 3.4rem) * " + factor.toFixed(3) + ")";
       };
       if (img.complete && img.naturalWidth) ajustar();
       else img.addEventListener("load", ajustar, { once: true });

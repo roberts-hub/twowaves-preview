@@ -17,7 +17,8 @@
 
   /* --- Tipografías --- */
   --fuente-titulos: "Archivo", sans-serif;
-  --fuente-acento: "Instrument Serif", serif;   /* cursivas de acento */
+  --fuente-acento: "Archivo", sans-serif;       /* acentos: misma grotesca, en greige */
+  --fuente-mono: "IBM Plex Mono", monospace;    /* texto de apoyo / etiquetas */
   --fuente-texto: "Archivo", sans-serif;
 
   /* --- Métricas --- */
@@ -71,29 +72,29 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 /* ---------- Tipografía ---------- */
 h1, h2, h3 {
   font-family: var(--fuente-titulos);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-weight: 750;
+  letter-spacing: -0.028em;
+  line-height: 0.96;
   text-wrap: balance;
 }
 .titulo-gigante { font-size: clamp(2.8rem, 8.5vw, 8rem); text-transform: uppercase; }
 .titulo-seccion { font-size: clamp(2rem, 5vw, 4.2rem); text-transform: uppercase; }
 .acento-serif {
   font-family: var(--fuente-acento);
-  font-style: italic;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: -0.01em;
+  font-style: normal;
+  font-weight: inherit;
+  letter-spacing: inherit;
 }
 h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 [data-tema="acento"] h1 .acento-serif, [data-tema="acento"] h2 .acento-serif,
 [data-tema="luz"] h1 .acento-serif, [data-tema="luz"] h2 .acento-serif { color: #6e675c; }
 .parrafo { font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.55; max-width: 42ch; }
 .etiqueta {
+  font-family: var(--fuente-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-weight: 400;
   opacity: 0.75;
 }
 
@@ -124,6 +125,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   display: inline-flex;
 }
 .nav_logo span { display: inline-block; }
+.nav_logo { display: inline-flex; align-items: center; gap: 0.55rem; }
+.nav_logo_marca { height: 1.35rem; width: auto; display: block; }
 
 .nav_links {
   display: flex;
@@ -133,10 +136,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .nav_link {
   position: relative;
-  font-size: 0.85rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 550;
+  letter-spacing: 0.05em;
+  font-weight: 400;
   padding: 0.35rem 0;
   opacity: 0.85;
   transition: opacity 0.25s ease;
@@ -153,10 +157,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   border: 1px solid currentColor;
   border-radius: 99px;
   padding: 0.5rem 1.1rem;
-  font-size: 0.8rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-weight: 400;
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .nav_cta:hover { background: var(--texto); border-color: var(--texto); color: var(--profundo); }
@@ -263,9 +268,9 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
    BANDA DE CLIENTES (logos blancos en grid, como la referencia)
    ============================================================ */
 .logos_seccion {
-  padding: clamp(3rem, 7vw, 5.5rem) var(--margen);
+  padding: clamp(4.5rem, 10vw, 8rem) var(--margen);
   display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
+  gap: clamp(2.2rem, 4.5vw, 3.5rem);
   justify-items: center;
 }
 .logos_contenedor { width: 100%; }
@@ -292,9 +297,9 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   animation-duration: 45s;
 }
 .marquesina_logo {
-  height: clamp(1.9rem, 3.2vw, 2.8rem);
+  height: clamp(2.3rem, 3.8vw, 3.4rem);
   width: auto;
-  max-width: 210px;
+  max-width: 250px;
   object-fit: contain;
   /* Refuerzo: cualquier PNG con transparencia se pinta blanco puro */
   filter: brightness(0) invert(1);
@@ -306,7 +311,6 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 /* --- Marquesina (pista deslizante; con texto como respaldo) --- */
 .marquesina {
   padding: 2.2rem 0;
-  border-block: 1px solid var(--linea);
   overflow: hidden;
   white-space: nowrap;
 }
@@ -318,9 +322,10 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .marquesina:hover .marquesina_pista { animation-play-state: paused; }
 .marquesina_item {
-  font-family: var(--fuente-acento);
-  font-style: italic;
-  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-family: var(--fuente-mono);
+  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   opacity: 0.45;
 }
 @keyframes desfile { to { transform: translateX(-100%); } }
@@ -440,10 +445,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   border-radius: 0;
   background: none;
   padding: 0.3rem 0;
-  font-size: 0.8rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 550;
+  letter-spacing: 0.06em;
+  font-weight: 400;
   position: relative;
   cursor: pointer;
 }
@@ -484,7 +490,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   gap: 0.6rem;
   align-content: start;
 }
-.proceso_numero { font-size: 1.6rem; color: var(--acento); }
+.proceso_numero { font-family: var(--fuente-mono); font-size: 1.3rem; color: var(--acento); }
 .proceso_titulo {
   font-size: 1.05rem;
   font-weight: 550;
@@ -525,9 +531,10 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .formulario_gracias { color: var(--acento); opacity: 1; }
 
 .correo-grande {
-  font-family: var(--fuente-acento);
-  font-style: italic;
-  font-size: clamp(1.6rem, 5vw, 4rem);
+  font-family: var(--fuente-mono);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 3.2vw, 2.4rem);
   border-bottom: 1px solid currentColor;
   transition: color 0.3s ease;
 }
