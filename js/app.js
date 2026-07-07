@@ -155,7 +155,10 @@
     btn.setAttribute("aria-label", "Watch: " + p.titulo + " — " + p.cliente);
     btn.innerHTML =
       '<div class="tarjeta_visual">' +
-      '<img src="' + p.miniatura + '" alt="' + p.titulo + '" loading="lazy" onerror="this.onerror=null;this.src=\'assets/img/placeholder.svg\'">' +
+      // La primera tarjeta (grande) carga con prioridad; el resto en diferido
+      '<img src="' + p.miniatura + '" alt="' + p.titulo + '" decoding="async" ' +
+      (p.tamano === "grande" ? 'fetchpriority="high"' : 'loading="lazy"') +
+      ' onerror="this.onerror=null;this.src=\'assets/img/placeholder.svg\'">' +
       (p.videoHover
         ? '<video muted loop playsinline preload="none" src="' + p.videoHover + '"></video>'
         : "") +
