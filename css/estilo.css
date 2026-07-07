@@ -17,7 +17,7 @@
 
   /* --- Tipografías --- */
   --fuente-titulos: "Archivo", sans-serif;
-  --fuente-acento: "Instrument Serif", serif;   /* cursivas de acento */
+  --fuente-acento: "Bodoni Moda", serif;   /* cursivas de acento (didona editorial) */
   --fuente-texto: "Archivo", sans-serif;
 
   /* --- Métricas --- */
@@ -379,16 +379,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .tarjeta:hover .tarjeta_visual img,
 .tarjeta.hover-activo .tarjeta_visual img { filter: grayscale(1) contrast(1.03) brightness(0.9); }
 .tarjeta_visual video { opacity: 0; transition: opacity 0.4s ease; }
-/* Preview con player de Vimeo: recorte cover 16:9, sin interacción */
+/* Player de la tarjeta grande (el tamaño lo calcula JS con el aspecto real) */
 .tarjeta_visual iframe {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  height: 100.5%;
-  min-width: 100.5%;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  pointer-events: none;
   opacity: 0;
   transition: opacity 0.45s ease;
 }
@@ -439,25 +431,43 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   transition: border-color 0.3s ease, color 0.3s ease;
 }
 .lista-servicios li:hover { border-color: currentColor; }
+/* Botón minimal: sin burbuja — texto en rodillo + subrayado que crece */
 .boton {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  border: 1px solid var(--linea);
-  border-radius: 99px;
-  padding: 0.75rem 1.6rem;
-  font-size: 0.78rem;
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: 0.3rem 0;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   font-weight: 550;
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  cursor: pointer;
 }
-[data-tema="acento"] .boton, [data-tema="luz"] .boton { border-color: rgba(20, 20, 18, 0.25); }
-[data-tema="base"] .boton:hover,
-[data-tema="panel"] .boton:hover,
-[data-tema="profundo"] .boton:hover { background: var(--texto); border-color: var(--texto); color: var(--profundo); }
-[data-tema="acento"] .boton:hover,
-[data-tema="luz"] .boton:hover { background: #141412; border-color: #141412; color: var(--lino); }
+.boton::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.32);
+  transform-origin: left;
+  opacity: 0.4;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+.boton:hover::after { transform: scaleX(1); opacity: 1; }
+.boton_rodillo { display: inline-grid; overflow: hidden; }
+.boton_cara {
+  grid-area: 1 / 1;
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.boton_cara:nth-child(2) { transform: translateY(115%); }
+.boton:hover .boton_cara:nth-child(1) { transform: translateY(-115%); }
+.boton:hover .boton_cara:nth-child(2) { transform: translateY(0); }
 
 /* --- Proceso de trabajo (About) --- */
 .proceso {

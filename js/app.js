@@ -174,6 +174,19 @@
     contClientes.innerHTML =
       '<div class="marquesina' + claseExtra + '"><div class="marquesina_pista">' + items + "</div>" +
       '<div class="marquesina_pista" aria-hidden="true">' + items + "</div></div>";
+    // Normalización óptica: iguala el "peso visual" de cada logo según
+    // sus píxeles reales (los anchos tipo wordmark bajan de altura, los
+    // cuadrados suben), no según el tamaño del PNG.
+    $$(".marquesina_logo", contClientes).forEach((img) => {
+      const ajustar = () => {
+        const ar = img.naturalWidth / img.naturalHeight || 1.9;
+        const factor = Math.min(1.5, Math.max(0.6, Math.sqrt(1.9 / ar)));
+        img.style.height = "calc(clamp(1.5rem, 2.5vw, 2.2rem) * " + factor.toFixed(3) + ")";
+      };
+      if (img.complete && img.naturalWidth) ajustar();
+      else img.addEventListener("load", ajustar, { once: true });
+    });
+
     // Optimización: el slider solo se anima cuando está en pantalla
     if ("IntersectionObserver" in window) {
       const pistas = $$(".marquesina_pista", contClientes);
@@ -221,6 +234,16 @@
     lista.forEach((p) => grid.appendChild(crearTarjeta(p, C.proyectos.indexOf(p))));
   });
 
+  // Botones: duplica el texto para la animación de "rodillo" al hover
+  $$(".boton").forEach((b) => {
+    if (b.querySelector(".boton_rodillo")) return;
+    const texto = b.textContent.trim();
+    b.innerHTML =
+      '<span class="boton_rodillo"><span class="boton_cara">' + texto +
+      '</span><span class="boton_cara" aria-hidden="true">' + texto +
+      "</span></span>";
+  });
+
   /* ==========================================================
      2. HOVER DE TARJETAS: reproduce el video de preview
      (patrón: crossfade imagen→video en mouseenter)
@@ -250,6 +273,15 @@
                 iframe.allow = "autoplay";
                 iframe.tabIndex = -1;
                 iframe.setAttribute("aria-hidden", "true");
+                // Recorte cover con el aspecto REAL del video (campo
+                // video.aspecto) + push-in ligero: sin franjas negras
+                const [aw, ah] = (p.video.aspecto || "16x9").split(/[x:]/).map(Number);
+                const ar = aw && ah ? aw / ah : 16 / 9;
+                iframe.style.cssText =
+                  "position:absolute;top:50%;left:50%;" +
+                  "transform:translate(-50%,-50%) scale(1.04);" +
+                  "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
+                  "width:auto;height:auto;border:0;pointer-events:none;";
                 iframe.addEventListener("load", () => iframe.classList.add("cargado"));
                 $(".tarjeta_visual", tarjeta).appendChild(iframe);
               } else {
