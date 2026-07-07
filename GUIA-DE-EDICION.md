@@ -191,6 +191,12 @@ mantenlos desaturados para conservar el look premium.
 
 ## 9. Errores comunes (si algo se rompe)
 
+- **No se ve un cambio que acabas de hacer** → recarga forzada:
+  ⌘ + Shift + R (salta el caché del navegador). Si editas los estilos
+  para tu sitio ya publicado, sube el número de `?v=` en los enlaces
+  de los 4 HTML (busca "estilo.css?v=") para que los visitantes
+  también reciban la versión nueva.
+
 - **La página se ve en blanco** → casi siempre es una coma o comilla faltante en `contenido.js`. Deshaz tu último cambio (⌘ + Z), guarda y recarga.
 - **Un video no carga** → revisa que el `id` o la `ruta` estén bien escritos y que el video en Vimeo/YouTube sea público o "no listado" (no privado).
 - **El hover no reproduce video** → verifica que `videoHover` apunte a un `.mp4` real dentro de `assets/videos/`.

@@ -142,6 +142,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Grand Island",
+      logoCliente: "assets/img/logos/mondrian.png",
       descripcion: "Lifestyle film for Grand Island by Mondrian — a day on the water, shot from above.",
       cliente: "Mondrian",
       categoria: "Hospitality",
