@@ -260,9 +260,16 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .marquesina--logos {
   border-block: none;
   padding: 0.5rem 0;
-  /* Desvanecido en los extremos: los logos entran y salen en fade */
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  /* Desvanecido en los extremos: los logos entran y salen en fade.
+     Ancho en píxeles con tope (no porcentaje): en un celular ocupa
+     ~28-40px por lado y en desktop hasta 140px. */
+  --fade-logos: clamp(28px, 7vw, 140px);
+  mask-image: linear-gradient(to right,
+    transparent, #000 var(--fade-logos),
+    #000 calc(100% - var(--fade-logos)), transparent);
+  -webkit-mask-image: linear-gradient(to right,
+    transparent, #000 var(--fade-logos),
+    #000 calc(100% - var(--fade-logos)), transparent);
 }
 .marquesina--logos .marquesina_pista {
   align-items: center;
