@@ -301,10 +301,12 @@
   // Crea el player de Vimeo de una tarjeta (aparece hasta que el video
   // realmente reproduce, para que nunca se vea el arranque negro)
   function montarPlayer(tarjeta, p) {
+    const inicio = (p.video && p.video.inicio) || 0;
     const iframe = document.createElement("iframe");
     iframe.src =
       "https://player.vimeo.com/video/" + p.video.id +
-      "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
+      "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1" +
+      (inicio ? "#t=" + inicio + "s" : "");
     iframe.allow = "autoplay";
     iframe.tabIndex = -1;
     iframe.setAttribute("aria-hidden", "true");
@@ -320,7 +322,14 @@
       let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
       if (d.event === "playProgress" || d.event === "timeupdate") {
         iframe.classList.add("cargado");
-        window.removeEventListener("message", alMensaje);
+        // Con "inicio" definido, cada vuelta del loop salta el arranque
+        // negro; sin él, el listener ya no hace falta.
+        const seg = d.data && d.data.seconds;
+        if (inicio && typeof seg === "number" && seg < inicio - 0.4) {
+          iframe.contentWindow.postMessage(JSON.stringify({ method: "setCurrentTime", value: inicio }), "*");
+        } else if (!inicio) {
+          window.removeEventListener("message", alMensaje);
+        }
       }
     };
     window.addEventListener("message", alMensaje);
@@ -367,18 +376,12 @@
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
       if (video) video.play().catch(() => {});
-      else if (esVimeo && !esGrande) {
-        if (!iframe) iframe = montarPlayer(tarjeta, p);
-        else orden("play");
-      }
     });
     tarjeta.addEventListener("mouseleave", () => {
       tarjeta.classList.remove("hover-activo");
       if (video) {
         video.pause();
         video.currentTime = 0;
-      } else if (!esGrande && iframe) {
-        orden("pause");
       }
     });
   });

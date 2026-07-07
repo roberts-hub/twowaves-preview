@@ -84,6 +84,8 @@ window.CONTENIDO = {
                      (déjalo en "" si no tienes preview)
        video       → el video completo que abre el reproductor:
                        { tipo: "vimeo",   id: "123456789" }
+                       ("inicio: 2" opcional = arranca en ese segundo,
+                        útil si el video abre en negro)
                        { tipo: "youtube", id: "AbCdEfGhIjK" }
                        { tipo: "archivo", ruta: "assets/videos/mi-video.mp4" }
   ------------------------------------------------------ */
@@ -99,7 +101,7 @@ window.CONTENIDO = {
       destacado: true,
       miniatura: "https://i.vimeocdn.com/video/2176700800-1ee2efadcb1d1380d45a1cbaa4988beae76afdb2118d4e42e25d53bd19a2944b-d_1280?region=us",
       videoHover: "",
-      video: { tipo: "vimeo", id: "1207583391", aspecto: "3840x2076" },
+      video: { tipo: "vimeo", id: "1207583391", aspecto: "3840x2076", inicio: 2 },
     },
     {
       titulo: "Bear Grylls x AION",
