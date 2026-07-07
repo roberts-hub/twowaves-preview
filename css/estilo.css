@@ -365,6 +365,20 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .tarjeta:hover .tarjeta_visual img,
 .tarjeta.hover-activo .tarjeta_visual img { filter: grayscale(1) contrast(1.03) brightness(0.9); }
 .tarjeta_visual video { opacity: 0; transition: opacity 0.4s ease; }
+/* Preview con player de Vimeo: recorte cover 16:9, sin interacción */
+.tarjeta_visual iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100.5%;
+  min-width: 100.5%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.tarjeta.hover-activo .tarjeta_visual iframe.cargado { opacity: 1; }
 .tarjeta:hover .tarjeta_visual img { transform: scale(1.04); }
 .tarjeta.con-video.hover-activo .tarjeta_visual img { opacity: 0; }
 .tarjeta.con-video.hover-activo .tarjeta_visual video { opacity: 1; }

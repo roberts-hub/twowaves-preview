@@ -81,7 +81,13 @@ El campo `video` define qué se reproduce al hacer clic en la tarjeta:
 
 ## 4. El video que se reproduce al pasar el mouse (hover)
 
-El campo `videoHover` es un clip **corto (5–10 s), sin audio y ligero (< 5 MB)**:
+**Ya funciona solo**: los proyectos con video de Vimeo reproducen su preview
+automáticamente al pasar el mouse (usando el player de Vimeo en modo fondo).
+No tienes que hacer nada.
+
+Si quieres previews aún más instantáneos, puedes darle a un proyecto su
+propio clip con el campo `videoHover` — un **.mp4 corto (5–10 s), sin audio
+y ligero (< 5 MB)** que toma prioridad sobre el automático:
 
 1. Exporta de tu editor un clip corto en 720p, sin audio.
 2. Guárdalo en `assets/videos/`, por ejemplo `preview-mbmotos.mp4`.
