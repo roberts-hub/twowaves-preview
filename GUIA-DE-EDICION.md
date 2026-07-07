@@ -179,6 +179,16 @@ mantenlos desaturados para conservar el look premium.
 > Si no lo quieres, borra en `css/estilo.css` el bloque que empieza con
 > `/* B/N por defecto → color al hover`.
 
+## 8b. El formulario de contacto
+
+- **Publicado en Netlify**: los mensajes llegan solos al panel de Netlify
+  (Forms → contacto) y puedes configurar ahí que te lleguen por correo.
+  No hay que programar nada.
+- **En local o en otro hosting**: al enviar, se abre la app de correo del
+  visitante con el mensaje ya escrito, dirigido a tu `contacto.correo`.
+- Las 3 fases del proceso que se ven en About se editan en `contenido.js`
+  → `nosotros.proceso` (paso, título y texto de cada una).
+
 ## 9. Errores comunes (si algo se rompe)
 
 - **La página se ve en blanco** → casi siempre es una coma o comilla faltante en `contenido.js`. Deshaz tu último cambio (⌘ + Z), guarda y recarga.

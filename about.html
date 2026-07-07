@@ -6,6 +6,11 @@
   <meta name="theme-color" content="#0b0b0a">
   <title>{{marca}} — About</title>
   <meta name="description" content="About the production company.">
+  <meta property="og:title" content="TWO WAVES — About">
+  <meta property="og:description" content="The result over the noise. Production company founded in 2021 in Guadalajara, México.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +21,8 @@
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
+
+  <a class="saltar-contenido" href="#contenido">Skip to content</a>
 
   <header class="nav">
     <a href="index.html" class="nav_logo"><span data-marca>—</span></a>
@@ -36,7 +43,7 @@
     <a href="contact.html"><span>Contact</span></a>
   </div>
 
-  <main>
+  <main id="contenido">
     <section class="seccion" data-tema="panel" style="min-height: 72svh; display: grid; align-content: end;">
       <div class="bloque">
         <span class="etiqueta">About</span>
@@ -49,6 +56,8 @@
         <p class="parrafo" data-revelar data-texto="nosotros.parrafos.0"></p>
         <ul class="lista-servicios" data-servicios></ul>
       </div>
+      <!-- Proceso de trabajo (3 fases, editable en contenido.js) -->
+      <div class="proceso" data-proceso></div>
     </section>
 
     <section class="seccion" data-tema="acento">

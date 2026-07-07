@@ -41,6 +41,45 @@
     listaServicios.innerHTML = C.nosotros.servicios.map((s) => "<li>" + s + "</li>").join("");
   }
 
+  // Proceso de trabajo (About): 3 fases desde contenido.js
+  const contProceso = $("[data-proceso]");
+  if (contProceso && C.nosotros.proceso) {
+    contProceso.innerHTML = C.nosotros.proceso
+      .map(
+        (f) =>
+          '<div class="proceso_fase" data-revelar>' +
+          '<span class="proceso_numero acento-serif">' + f.paso + "</span>" +
+          '<h3 class="proceso_titulo">' + f.titulo + "</h3>" +
+          '<p class="proceso_texto">' + f.texto + "</p></div>"
+      )
+      .join("");
+  }
+
+  // Formulario de contacto: en Netlify el POST llega solo; en local o en
+  // otro hosting, abre el correo del visitante ya prellenado (mailto).
+  const formulario = $("[data-formulario]");
+  if (formulario) {
+    if (new URLSearchParams(location.search).get("enviado") === "1") {
+      $(".formulario_gracias", formulario).hidden = false;
+      formulario.querySelectorAll("input:not([type=hidden]), textarea, button").forEach((e) => (e.style.display = "none"));
+    }
+    const enNetlify = /\.netlify\.app$|\.netlify\.com$/.test(location.hostname);
+    if (enNetlify) {
+      formulario.action = "/contact.html?enviado=1";
+    } else {
+      formulario.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const d = new FormData(formulario);
+        const cuerpo = "Name: " + d.get("nombre") + "\nEmail: " + d.get("correo") + "\n\n" + d.get("mensaje");
+        location.href =
+          "mailto:" + C.contacto.correo +
+          "?subject=" + encodeURIComponent("Project inquiry — " + d.get("nombre")) +
+          "&body=" + encodeURIComponent(cuerpo);
+        $(".formulario_gracias", formulario).hidden = false;
+      });
+    }
+  }
+
   // Hero de portada: poster inmediato + video después (optimizado)
   const heroFondo = $("[data-hero-fondo]");
   if (heroFondo) {
@@ -255,8 +294,17 @@
     return null;
   }
 
+  // Pausa/reanuda los players de las tarjetas grandes (evita que sigan
+  // reproduciendo detrás del reproductor abierto)
+  function playersTarjetas(metodo) {
+    $$(".tarjeta_visual iframe").forEach((f) => {
+      if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: metodo }), "*");
+    });
+  }
+
   function abrirModal(p) {
     if (!modal) return;
+    playersTarjetas("pause");
     // Panel de información (como la referencia: Client / Project + descripción)
     $(".modal-video_cliente", modal).textContent = p.cliente;
     $(".modal-video_proyecto", modal).textContent = p.titulo;
@@ -285,6 +333,7 @@
     modal.close();
     if (window.lenis) window.lenis.start();
     document.body.style.overflow = "";
+    playersTarjetas("play"); // reanuda el video de la tarjeta grande
   }
 
   if (modal) {
@@ -429,6 +478,10 @@
       delay: 0.3,
     });
   }
+
+  /* --- Optimización: recalcula posiciones de scroll cuando terminan
+         de cargar las imágenes (evita reveals desfasados) --- */
+  window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
 
   /* --- Reveals al hacer scroll (fade + subida, en lotes) --- */
   const revelables = $$("[data-revelar]");

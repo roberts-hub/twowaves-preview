@@ -254,6 +254,12 @@ window.CONTENIDO = {
       "Direction", "Production", "Cinematography",
       "Aerials", "Post-production", "Color",
     ],
+    /* Las 3 fases de trabajo que se muestran en About */
+    proceso: [
+      { paso: "01", titulo: "Concept & Direction", texto: "We listen, define the idea and set the creative direction with you." },
+      { paso: "02", titulo: "Production", texto: "On set or on location — direction, cinematography and aerials under one roof." },
+      { paso: "03", titulo: "Post & Delivery", texto: "Edit, color and sound design, down to the final master." },
+    ],
   },
 
   /* ---------- CONTACTO (contact.html) ---------- */
