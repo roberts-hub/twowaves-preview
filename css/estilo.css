@@ -292,9 +292,9 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   animation-duration: 45s;
 }
 .marquesina_logo {
-  height: clamp(1.5rem, 2.5vw, 2.2rem);
+  height: clamp(1.9rem, 3.2vw, 2.8rem);
   width: auto;
-  max-width: 170px;
+  max-width: 210px;
   object-fit: contain;
   /* Refuerzo: cualquier PNG con transparencia se pinta blanco puro */
   filter: brightness(0) invert(1);

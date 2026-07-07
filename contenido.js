@@ -40,12 +40,14 @@ window.CONTENIDO = {
      Copia tus logos .png a assets/img/logos/ y escribe la ruta en
      "logo". SOLO los clientes con logo aparecen en la banda; si
      ninguno tiene logo, se muestran los nombres en texto (temporal).
-     Para dejarlos en blanco puro: python3 herramientas/logos-a-blanco.py */
+     Para dejarlos en blanco puro: python3 herramientas/logos-a-blanco.py
+     "escala" (opcional) agranda o encoge un logo puntual: 0.7 = 30% más
+     chico, 1.2 = 20% más grande. */
   clientes: [
     { nombre: "Ford", logo: "assets/img/logos/ford.png" },
     { nombre: "Cupra", logo: "assets/img/logos/cupra.png" },
     { nombre: "Lamborghini", logo: "assets/img/logos/lamborghini.png" },
-    { nombre: "Porsche", logo: "assets/img/logos/porsche.png" },
+    { nombre: "Porsche", logo: "assets/img/logos/porsche.png", escala: 0.72 },
     { nombre: "Lexus", logo: "assets/img/logos/lexus.png" },
     { nombre: "Red Bull", logo: "assets/img/logos/red-bull.png" },
     { nombre: "FIFA", logo: "assets/img/logos/fifa.png" },
@@ -53,15 +55,12 @@ window.CONTENIDO = {
     { nombre: "Oakley", logo: "assets/img/logos/oakley.png" },
     { nombre: "Skechers", logo: "assets/img/logos/skechers.png" },
     { nombre: "Atlética", logo: "assets/img/logos/atletica.png" },
-    { nombre: "Lancôme", logo: "assets/img/logos/lancome.png" },
     { nombre: "Kérastase", logo: "assets/img/logos/kerastase.png" },
     { nombre: "Longines", logo: "assets/img/logos/longines.png" },
     { nombre: "Amazon Business", logo: "assets/img/logos/amazon-business.png" },
     { nombre: "Televisa", logo: "assets/img/logos/televisa.png" },
     { nombre: "TV Azteca", logo: "assets/img/logos/tv-azteca.png" },
-    { nombre: "Grand Velas", logo: "assets/img/logos/grand-velas.png" },
     { nombre: "Beautiful Destinations", logo: "assets/img/logos/beautiful-destinations.png" },
-    { nombre: "The Classified", logo: "assets/img/logos/the-classified.png" },
   ],
 
   /* ---------- PROYECTOS ----------
