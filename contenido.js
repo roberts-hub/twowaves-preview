@@ -305,7 +305,10 @@ window.CONTENIDO = {
       "Different paths within the industry, one aligned direction. Years of refining their craft became a way of working that values intention, clarity, and strong visual identity: a studio built by two people who never questioned whether it was possible, only how far it could go.",
     ],
     foto: "assets/img/founders.jpg",
-    nombres: [],
+    nombres: [
+      { nombre: "Roberto", rol: "Co-founder", usuario: "@robert.arre", instagram: "https://www.instagram.com/robert.arre/" },
+      { nombre: "Rogelio", rol: "Co-founder", usuario: "@roger.rpgfpv", instagram: "https://www.instagram.com/roger.rpgfpv/" },
+    ],
   },
 
   /* ---------- WHY TWO WAVES (about.html) ---------- */

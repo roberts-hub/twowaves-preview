@@ -34,7 +34,9 @@
       };
       const inicio = performance.now();
       const intentar = () => {
-        if (estadoHero.listo && performance.now() - inicio >= 2400) quitar();
+        // 700ms extra tras confirmar reproducción: el fundido del video
+        // termina detrás de la precarga y el poster nunca se asoma
+        if (estadoHero.listo && performance.now() - inicio >= 2400) setTimeout(quitar, 700);
       };
       estadoHero.avisar = intentar;
       setTimeout(intentar, 2450);
@@ -101,8 +103,12 @@
     const nombres = (f.nombres || [])
       .map(
         (n) =>
-          '<div class="fundadores_nombre"><span>' + n.nombre +
-          '</span><span class="etiqueta">' + n.rol + "</span></div>"
+          '<a class="fundadores_nombre"' +
+          (n.instagram ? ' href="' + n.instagram + '" target="_blank" rel="noopener"' : "") +
+          '><span class="fundadores_nombre_txt">' + n.nombre +
+          '</span><span class="etiqueta">' + n.rol + "</span>" +
+          (n.usuario ? '<span class="fundadores_ig">' + n.usuario + ' ↗</span>' : "") +
+          "</a>"
       )
       .join("");
     const parrafosF = (f.parrafos || (f.texto ? [f.texto] : []))

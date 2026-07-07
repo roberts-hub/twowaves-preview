@@ -638,13 +638,28 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   flex-wrap: wrap;
   margin-top: 0.5rem;
 }
-.fundadores_nombre { display: grid; gap: 0.3rem; }
-.fundadores_nombre > span:first-child {
+.fundadores_nombre {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+  min-width: 11rem;
+  transition: border-color 0.35s ease;
+}
+.fundadores_nombre:hover { border-top-color: var(--acento); }
+.fundadores_nombre_txt {
   font-weight: 650;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
+.fundadores_ig {
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
+  color: var(--acento);
+  transition: color 0.3s ease;
+}
+.fundadores_nombre:hover .fundadores_ig { color: var(--texto); }
 
 /* --- Proceso de trabajo (About) --- */
 .proceso {
