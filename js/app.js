@@ -29,10 +29,10 @@
       };
       const inicio = performance.now();
       window.addEventListener("load", () => {
-        const espera = Math.max(0, 1100 - (performance.now() - inicio));
+        const espera = Math.max(0, 2400 - (performance.now() - inicio));
         setTimeout(quitar, espera);
       }, { once: true });
-      setTimeout(quitar, 4000); // respaldo si 'load' tarda demasiado
+      setTimeout(quitar, 5200); // respaldo si 'load' tarda demasiado
     }
   }
 
@@ -282,16 +282,6 @@
         ? C.proyectos.filter((p) => p.destacado)
         : C.proyectos;
     lista.forEach((p) => grid.appendChild(crearTarjeta(p, C.proyectos.indexOf(p))));
-  });
-
-  // Botones: duplica el texto para la animación de "rodillo" al hover
-  $$(".boton").forEach((b) => {
-    if (b.querySelector(".boton_rodillo")) return;
-    const texto = b.textContent.trim();
-    b.innerHTML =
-      '<span class="boton_rodillo"><span class="boton_cara">' + texto +
-      '</span><span class="boton_cara" aria-hidden="true">' + texto +
-      "</span></span>";
   });
 
   /* ==========================================================

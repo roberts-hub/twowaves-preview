@@ -72,21 +72,29 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 .precarga.fuera { opacity: 0; visibility: hidden; }
-.precarga_logo {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  font-family: var(--fuente-titulos);
-  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
-  font-weight: 750;
-  letter-spacing: -0.02em;
+.precarga_logo { display: grid; justify-items: center; gap: 1.2rem; }
+.precarga_t {
+  width: clamp(64px, 9vw, 104px);
+  height: auto;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: precarga-entra 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+.precarga_t circle { transform-origin: 90% 11%; animation: precarga-punto 1.6s ease-in-out 0.9s infinite; }
+.precarga_texto {
+  font-family: var(--fuente-mono);
+  font-size: 0.7rem;
   text-transform: uppercase;
+  letter-spacing: 0.35em;
   color: var(--texto);
   opacity: 0;
-  animation: precarga-entra 0.7s ease 0.15s forwards;
+  animation: precarga-entra 0.9s ease 0.55s forwards;
 }
-.precarga_films { font-weight: 400; }
-@keyframes precarga-entra { to { opacity: 1; } }
+@keyframes precarga-entra { to { opacity: 1; transform: translateY(0); } }
+@keyframes precarga-punto {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.45); opacity: 0.55; }
+}
 @media (prefers-reduced-motion: reduce) { .precarga { display: none; } }
 
 /* ---------- Temas por sección ---------- */
@@ -232,7 +240,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   position: relative;
   min-height: 100svh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   padding: calc(var(--alto-nav) + 2rem) var(--margen) var(--margen);
   border-radius: 0 0 var(--radio) var(--radio);
   overflow: hidden;
@@ -248,16 +257,25 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(5, 8, 9, 0.82), rgba(5, 8, 9, 0.18) 55%);
 }
-.hero_contenido { position: relative; z-index: 2; width: 100%; }
-.hero_titulo { margin-bottom: 1.2rem; }
+.hero_contenido {
+  /* Como la referencia: título a la izquierda, centrado verticalmente */
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: left;
+  display: grid;
+  justify-items: start;
+  gap: 1.4rem;
+}
+.hero_titulo { margin-bottom: 0; }
 .hero_linea { display: block; overflow: hidden; }
 .hero_linea > span { display: block; }
-.hero_pie {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 2rem;
-  flex-wrap: wrap;
+.hero_pie { display: contents; }
+.hero_scroll {
+  position: absolute;
+  right: var(--margen);
+  bottom: 1.5rem;
+  z-index: 2;
 }
 .hero_scroll {
   font-size: 0.72rem;
@@ -523,15 +541,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 .boton:hover::after { transform: scaleX(1); opacity: 1; }
-.boton_rodillo { display: inline-grid; overflow: hidden; }
-.boton_cara {
-  grid-area: 1 / 1;
-  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
-  will-change: transform;
-}
-.boton_cara:nth-child(2) { transform: translateY(115%); }
-.boton:hover .boton_cara:nth-child(1) { transform: translateY(-115%); }
-.boton:hover .boton_cara:nth-child(2) { transform: translateY(0); }
+.boton { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.boton:hover { transform: scale(1.05); }
 
 /* --- Fundadores (About) --- */
 .fundadores {
@@ -622,6 +633,25 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .formulario_enviar { justify-self: start; }
 .formulario_gracias { color: var(--acento); opacity: 1; }
 
+/* Botón grande del CTA (pill sólida sobre lino) */
+.cta-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #141412;
+  color: var(--lino);
+  border-radius: 99px;
+  padding: 1.1rem 2.4rem;
+  font-family: var(--fuente-mono);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, color 0.3s ease;
+}
+.cta-boton::after { content: "→"; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.cta-boton:hover { transform: scale(1.04); }
+.cta-boton:hover::after { transform: translateX(0.35rem); }
+
 .correo-grande {
   font-family: var(--fuente-mono);
   font-style: normal;
@@ -630,6 +660,25 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   border-bottom: 1px solid currentColor;
   transition: color 0.3s ease;
 }
+/* Botón grande del CTA (pill sólida sobre lino) */
+.cta-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #141412;
+  color: var(--lino);
+  border-radius: 99px;
+  padding: 1.1rem 2.4rem;
+  font-family: var(--fuente-mono);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, color 0.3s ease;
+}
+.cta-boton::after { content: "→"; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.cta-boton:hover { transform: scale(1.04); }
+.cta-boton:hover::after { transform: translateX(0.35rem); }
+
 .correo-grande { border-bottom-width: 1px; }
 .correo-grande:hover { color: var(--acento); }
 [data-tema="acento"] .correo-grande:hover, [data-tema="luz"] .correo-grande:hover { color: #6e675c; }
