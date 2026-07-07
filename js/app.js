@@ -51,7 +51,10 @@
     heroFondo.prepend(img);
 
     const fondo = C.portada.videoFondo;
-    if (fondo && !reducirMovimiento) {
+    // En pantallas chicas (celular) no se descarga el video de fondo:
+    // se queda el poster. Ahorra datos y acelera la carga móvil.
+    const pantallaConVideo = window.matchMedia("(min-width: 700px)").matches;
+    if (fondo && !reducirMovimiento && pantallaConVideo) {
       // El video se inyecta hasta que la página terminó de cargar,
       // para no competir con las miniaturas ni las fuentes.
       const inyectarVideo = () => {
