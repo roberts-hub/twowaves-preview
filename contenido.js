@@ -287,6 +287,19 @@ window.CONTENIDO = {
     ],
   },
 
+  /* ---------- FUNDADORES (about.html) ---------- */
+  fundadores: {
+    etiqueta: "Meet the founders",
+    titulo: "Why Two Waves?",
+    texto: "If you're looking for a team that prioritizes the result over the noise around it, you're in the right place.",
+    foto: "assets/img/founders.jpg",
+    // ⚠️ Escribe aquí los nombres y roles reales (se muestran bajo la foto):
+    nombres: [
+      // { nombre: "Roberto Arechederra", rol: "Co-founder" },
+      // { nombre: "Nombre Apellido", rol: "Co-founder" },
+    ],
+  },
+
   /* ---------- CONTACTO (contact.html) ---------- */
   contacto: {
     titulo: "Let's start your project.",

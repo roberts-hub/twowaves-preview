@@ -55,6 +55,28 @@
       .join("");
   }
 
+  // Fundadores (About): foto + texto desde contenido.js
+  const contFundadores = $("[data-fundadores]");
+  if (contFundadores && C.fundadores) {
+    const f = C.fundadores;
+    const nombres = (f.nombres || [])
+      .map(
+        (n) =>
+          '<div class="fundadores_nombre"><span>' + n.nombre +
+          '</span><span class="etiqueta">' + n.rol + "</span></div>"
+      )
+      .join("");
+    contFundadores.innerHTML =
+      '<figure class="fundadores_foto" data-revelar><img src="' + f.foto +
+      '" alt="' + (f.etiqueta || "Founders") + '" loading="lazy" decoding="async"></figure>' +
+      '<div class="fundadores_texto">' +
+      '<span class="etiqueta" data-revelar>' + f.etiqueta + "</span>" +
+      '<h2 class="titulo-seccion" data-revelar>' + f.titulo + "</h2>" +
+      '<p class="parrafo" data-revelar>' + f.texto + "</p>" +
+      (nombres ? '<div class="fundadores_nombres" data-revelar>' + nombres + "</div>" : "") +
+      "</div>";
+  }
+
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
   // otro hosting, abre el correo del visitante ya prellenado (mailto).
   const formulario = $("[data-formulario]");
