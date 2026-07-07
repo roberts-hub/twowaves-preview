@@ -16,23 +16,29 @@
      1. RENDERIZADO DE CONTENIDO desde contenido.js
      ========================================================== */
 
-  // Precarga: pausa breve con el logo; solo la primera visita de la sesión
+  // Precarga: se mantiene hasta que el video del hero YA reproduce
+  // (mínimo 2.4s, tope 5.6s). Así nunca se ve el thumbnail estático.
+  const estadoHero = { listo: false, avisar: () => {} };
   const precarga = $(".precarga");
   if (precarga) {
     if (sessionStorage.getItem("intro-vista")) {
       precarga.remove();
     } else {
+      let quitada = false;
       const quitar = () => {
+        if (quitada) return;
+        quitada = true;
         precarga.classList.add("fuera");
         sessionStorage.setItem("intro-vista", "1");
         setTimeout(() => precarga.remove(), 700);
       };
       const inicio = performance.now();
-      window.addEventListener("load", () => {
-        const espera = Math.max(0, 2400 - (performance.now() - inicio));
-        setTimeout(quitar, espera);
-      }, { once: true });
-      setTimeout(quitar, 5200); // respaldo si 'load' tarda demasiado
+      const intentar = () => {
+        if (estadoHero.listo && performance.now() - inicio >= 2400) quitar();
+      };
+      estadoHero.avisar = intentar;
+      setTimeout(intentar, 2450);
+      setTimeout(quitar, 5600); // tope duro
     }
   }
 
@@ -154,9 +160,13 @@
     // En pantallas chicas (celular) no se descarga el video de fondo:
     // se queda el poster. Ahorra datos y acelera la carga móvil.
     const pantallaConVideo = window.matchMedia("(min-width: 700px)").matches;
+    if (!(fondo && !reducirMovimiento && pantallaConVideo)) {
+      // Sin video de fondo: la precarga no espera nada
+      estadoHero.listo = true;
+      estadoHero.avisar();
+    }
     if (fondo && !reducirMovimiento && pantallaConVideo) {
-      // El video se inyecta hasta que la página terminó de cargar,
-      // para no competir con las miniaturas ni las fuentes.
+      // Se inyecta DE INMEDIATO para que cargue durante la precarga
       const inyectarVideo = () => {
         if (typeof fondo === "object" && fondo.tipo === "vimeo") {
           // Player de Vimeo en modo fondo: autoplay silencioso, loop, sin controles
@@ -176,7 +186,27 @@
             "width:max(100vw, calc(100svh * " + ar + "));" +
             "height:max(100svh, calc(100vw / " + ar + "));" +
             "border:0;pointer-events:none;opacity:0;transition:opacity 1s ease;";
-          iframe.addEventListener("load", () => (iframe.style.opacity = "1"));
+          // Aparece (y libera la precarga) cuando YA está reproduciendo
+          const alMensajeHero = (ev) => {
+            if (ev.source !== iframe.contentWindow) return;
+            let dd; try { dd = JSON.parse(ev.data); } catch (_) { return; }
+            if (dd.event === "playProgress" || dd.event === "timeupdate") {
+              iframe.style.opacity = "1";
+              estadoHero.listo = true;
+              estadoHero.avisar();
+              window.removeEventListener("message", alMensajeHero);
+            }
+          };
+          window.addEventListener("message", alMensajeHero);
+          iframe.addEventListener("load", () => {
+            iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
+            // Respaldo: si los eventos no llegan, revela a los 4s visibles
+            setTimeout(() => {
+              if (document.visibilityState === "visible") iframe.style.opacity = "1";
+              estadoHero.listo = true;
+              estadoHero.avisar();
+            }, 4000);
+          });
           heroFondo.append(iframe);
         } else if (typeof fondo === "string" && fondo) {
           const vid = document.createElement("video");
@@ -184,11 +214,11 @@
           vid.setAttribute("muted", "");
           vid.setAttribute("playsinline", "");
           heroFondo.append(vid);
+          vid.addEventListener("playing", () => { estadoHero.listo = true; estadoHero.avisar(); }, { once: true });
           vid.play().catch(() => {});
         }
       };
-      if (document.readyState === "complete") inyectarVideo();
-      else window.addEventListener("load", inyectarVideo, { once: true });
+      inyectarVideo(); // sin esperar 'load': carga durante la precarga
     }
   }
 
