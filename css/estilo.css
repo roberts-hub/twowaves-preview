@@ -17,7 +17,7 @@
 
   /* --- Tipografías --- */
   --fuente-titulos: "Archivo", sans-serif;
-  --fuente-acento: "Bodoni Moda", serif;   /* cursivas de acento (didona editorial) */
+  --fuente-acento: "Fraunces", serif;   /* serif de acento (old-style con carácter) */
   --fuente-texto: "Archivo", sans-serif;
 
   /* --- Métricas --- */
@@ -80,10 +80,10 @@ h1, h2, h3 {
 .titulo-seccion { font-size: clamp(2rem, 5vw, 4.2rem); text-transform: uppercase; }
 .acento-serif {
   font-family: var(--fuente-acento);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   text-transform: none;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 [data-tema="acento"] h1 .acento-serif, [data-tema="acento"] h2 .acento-serif,
@@ -319,7 +319,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .marquesina:hover .marquesina_pista { animation-play-state: paused; }
 .marquesina_item {
   font-family: var(--fuente-acento);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1.2rem, 2.2vw, 1.8rem);
   opacity: 0.45;
 }
@@ -526,7 +526,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 
 .correo-grande {
   font-family: var(--fuente-acento);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(1.6rem, 5vw, 4rem);
   border-bottom: 1px solid currentColor;
   transition: color 0.3s ease;

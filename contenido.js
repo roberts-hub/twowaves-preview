@@ -106,9 +106,9 @@ window.CONTENIDO = {
       anio: "2024",
       tamano: "normal",
       destacado: true,
-      miniatura: "https://i.vimeocdn.com/video/1816996765-e68be24c0c09031ccb5a84c42182f09264f819b4326f5b79e066ccee6f02-d_960?region=us",
+      miniatura: "https://i.vimeocdn.com/video/1816992186-4633eafa8290fdf1fb70c300642694162bc84d62a1301db9b35de5e2bb70e14b-d_960?region=us",
       videoHover: "",
-      video: { tipo: "vimeo", id: "924256906" },
+      video: { tipo: "vimeo", id: "924254132" },
     },
     {
       titulo: "Let's Go Brazil",
