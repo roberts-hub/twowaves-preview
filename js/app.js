@@ -70,6 +70,13 @@
   // Año dinámico
   $$("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
+  // Widget de WhatsApp: visible solo si hay número en contenido.js
+  $$("[data-whatsapp]").forEach((el) => {
+    const num = (C.contacto.whatsapp || "").replace(/[^\d]/g, "");
+    if (num) el.href = "https://wa.me/" + num;
+    else el.style.display = "none";
+  });
+
   // Teléfono de contacto: visible solo si está definido en contenido.js
   $$("[data-telefono]").forEach((el) => {
     const tel = (C.contacto.telefono || "").trim();
@@ -305,6 +312,14 @@
         }
       };
       inyectarVideo(); // sin esperar 'load': carga durante la precarga
+      // Al volver desde otra página (bfcache) el player queda congelado y
+      // el "play" no siempre lo revive: se reconstruye desde cero.
+      window.addEventListener("pageshow", (e) => {
+        if (e.persisted) {
+          heroFondo.querySelectorAll("iframe, video").forEach((x) => x.remove());
+          inyectarVideo();
+        }
+      });
     }
   }
 
