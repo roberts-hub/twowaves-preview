@@ -269,7 +269,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .titulo-hero {
   /* Proporción medida de la referencia: 59px a 1200 de ancho ≈ 4.9vw */
-  font-size: clamp(2rem, 4.9vw, 4.6rem);
+  font-size: clamp(2.2rem, 5.5vw, 5.1rem);
   text-transform: uppercase;
   max-width: 20ch; /* 2 líneas: "Visual narratives" / "With intention." */
 }
@@ -279,11 +279,12 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .hero_cta {
   border: 1px solid rgba(231, 226, 214, 0.7);
   border-radius: 99px;
-  padding: 0.75rem 1.6rem;
+  padding: 0.55rem 1.15rem;
   font-family: var(--fuente-mono);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 .hero_cta:hover { background: var(--texto); border-color: var(--texto); color: var(--profundo); }
