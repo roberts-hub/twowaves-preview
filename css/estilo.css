@@ -271,7 +271,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   /* Proporción medida de la referencia: 59px a 1200 de ancho ≈ 4.9vw */
   font-size: clamp(2rem, 4.9vw, 4.6rem);
   text-transform: uppercase;
-  max-width: 14ch;
+  max-width: 20ch; /* 2 líneas: "Visual narratives" / "With intention." */
 }
 .hero_titulo { margin-bottom: 0; }
 
