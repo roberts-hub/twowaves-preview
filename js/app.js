@@ -143,9 +143,6 @@
   }
 
   // Grid de proyectos (data-grid="todos" | "destacados")
-  const iconoPlay =
-    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 3.5v17l14-8.5z"/></svg>';
-
   function crearTarjeta(p, i) {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -159,7 +156,6 @@
       (p.videoHover
         ? '<video muted loop playsinline preload="none" src="' + p.videoHover + '"></video>'
         : "") +
-      '<span class="tarjeta_boton-play">' + iconoPlay + "</span>" +
       "</div>" +
       '<div class="tarjeta_info">' +
       '<span class="tarjeta_titulo">' + p.titulo + "</span>" +
@@ -201,7 +197,6 @@
      ========================================================== */
   const modal = $(".modal-video");
   const marco = $(".modal-video_marco");
-  const tituloModal = $(".modal-video_titulo");
   let tlModal = null;
 
   function urlEmbed(video) {
@@ -214,7 +209,12 @@
 
   function abrirModal(p) {
     if (!modal) return;
-    tituloModal.textContent = p.titulo + " — " + p.cliente;
+    // Panel de información (como la referencia: Client / Project + descripción)
+    $(".modal-video_cliente", modal).textContent = p.cliente;
+    $(".modal-video_proyecto", modal).textContent = p.titulo;
+    const desc = $(".modal-video_descripcion", modal);
+    desc.textContent = p.descripcion || "";
+    desc.style.display = p.descripcion ? "" : "none";
     const url = urlEmbed(p.video);
     if (url) {
       marco.innerHTML = '<iframe src="' + url + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="' + p.titulo + '"></iframe>';
@@ -273,7 +273,7 @@
     tlModal = gsap.timeline({ paused: true, onReverseComplete: alCerrar });
     tlModal
       .fromTo(".modal-video_fondo", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" })
-      .fromTo(".modal-video_marco", { opacity: 0, y: "6rem" }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, "<0.05");
+      .fromTo(".modal-video_caja", { opacity: 0, y: "6rem" }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, "<0.05");
   }
 
   /* --- Nav: subrayado que viaja entre enlaces (FLIP) --- */

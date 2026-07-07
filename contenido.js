@@ -71,6 +71,7 @@ window.CONTENIDO = {
 
      Campos:
        titulo      → nombre del proyecto
+       descripcion → texto corto que aparece en el reproductor (editable)
        cliente     → marca o cliente
        categoria   → ej. "Comercial", "Turismo", "Música"
        anio        → año
@@ -87,6 +88,7 @@ window.CONTENIDO = {
   proyectos: [
     {
       titulo: "Bear Grylls x AION",
+      descripcion: "Not every production is a shoot — some are an expedition. Seven days off the grid on Calivigny, a private island in Grenada, closing with a 1,000-drone show, the first of its kind in this part of the world.",
       cliente: "AION",
       categoria: "Drone show",
       anio: "2026",
@@ -98,6 +100,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "MB Motos",
+      descripcion: "Commercial for MB Motos México — two wheels, open road, and the feeling of the ride.",
       cliente: "MB Motos México",
       categoria: "Commercial",
       anio: "2026",
@@ -109,6 +112,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Grand Island",
+      descripcion: "Lifestyle film for Grand Island by Mondrian — a day on the water, shot from above.",
       cliente: "Mondrian",
       categoria: "Hospitality",
       anio: "2026",
@@ -120,6 +124,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Thunderbolts x Kings League",
+      descripcion: "Marvel's Thunderbolts meet the Kings League pitch — director's cut. Agency: Diablo.",
       cliente: "Marvel",
       categoria: "Branded content",
       anio: "2025",
@@ -131,6 +136,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Tito Double P x Cashonly",
+      descripcion: "Night energy and fast cuts — on set with Tito Double P for Cashonly.",
       cliente: "Cashonly",
       categoria: "Music video",
       anio: "2025",
@@ -142,6 +148,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Let's Go Brazil",
+      descripcion: "Travel campaign with Beautiful Destinations — Brazil in motion, coast to coast.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
       anio: "2025",
@@ -153,6 +160,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Lençóis Maranhenses",
+      descripcion: "Beautiful Destinations in Lençóis Maranhenses — dunes, lagoons and light.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
       anio: "2025",
@@ -164,6 +172,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Pequeña África",
+      descripcion: "For Visit Brazil — the story of Rio's Pequeña África, told through its streets and people.",
       cliente: "Visit Brazil",
       categoria: "Travel",
       anio: "2025",
@@ -175,6 +184,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Ricardo Salinas — 70 años",
+      descripcion: "Event film for Ricardo Salinas' 70th anniversary — one night, told in two minutes.",
       cliente: "Ricardo Salinas",
       categoria: "Event",
       anio: "2025",
@@ -186,6 +196,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Brand Ambassador",
+      descripcion: "Sports campaign for Atlética — training, sweat and their new brand ambassador.",
       cliente: "Atlética",
       categoria: "Sports",
       anio: "2025",
@@ -197,6 +208,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga Retreat",
+      descripcion: "Wellness retreat with Alo Yoga at One&Only Mandarina — slow mornings, ocean light.",
       cliente: "One&Only Mandarina",
       categoria: "Wellness",
       anio: "2025",
@@ -208,6 +220,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Tequila Herradura x FICG",
+      descripcion: "Tequila Herradura at FICG — an event piece with cinema at its center.",
       cliente: "Tequila Herradura",
       categoria: "Event",
       anio: "2024",
@@ -219,6 +232,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga x Javier Hernández",
+      descripcion: "Alo Yoga with Javier 'Chicharito' Hernández — movement as daily practice.",
       cliente: "Alo Yoga",
       categoria: "Sports",
       anio: "2024",

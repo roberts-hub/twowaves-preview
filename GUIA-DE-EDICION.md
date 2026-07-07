@@ -47,6 +47,7 @@ En `contenido.js`, dentro de `proyectos: [ ... ]`, copia un bloque completo
 ```js
 {
   titulo: "Nombre del proyecto",
+  descripcion: "Texto corto que aparece bajo el video en el reproductor.",
   cliente: "Nombre del cliente",
   categoria: "Comercial",          // Comercial, Documental, Música, etc.
   anio: "2026",
