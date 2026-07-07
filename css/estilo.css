@@ -333,22 +333,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   justify-items: center;
 }
 .logos_contenedor { width: 100%; min-width: 0; }
-.logos_titulo {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  opacity: 0.85;
-}
-.logos_titulo::before, .logos_titulo::after {
-  content: "";
-  width: 2.2rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.35;
-}
+.logos_titulo { justify-self: start; }
 
 /* --- Slider horizontal de logos (derecha → izquierda) --- */
 .marquesina--logos {
