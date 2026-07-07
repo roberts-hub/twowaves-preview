@@ -84,8 +84,8 @@ window.CONTENIDO = {
                      (déjalo en "" si no tienes preview)
        video       → el video completo que abre el reproductor:
                        { tipo: "vimeo",   id: "123456789" }
-                       ("inicio: 2" opcional = arranca en ese segundo,
-                        útil si el video abre en negro)
+                       ("inicio: 2" opcional = arranca en ese segundo;
+                        por default todos arrancan en el segundo 1)
                        { tipo: "youtube", id: "AbCdEfGhIjK" }
                        { tipo: "archivo", ruta: "assets/videos/mi-video.mp4" }
   ------------------------------------------------------ */

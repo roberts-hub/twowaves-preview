@@ -429,9 +429,9 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   top: 50%; left: 50%;
   translate: -50% -50%;
   z-index: 3;
-  height: clamp(2rem, 3.6vw, 3.2rem);
+  height: clamp(2.8rem, 5vw, 4.4rem);
   width: auto;
-  max-width: 42%;
+  max-width: 52%;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: 0.95;

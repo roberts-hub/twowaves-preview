@@ -301,7 +301,7 @@
   // Crea el player de Vimeo de una tarjeta (aparece hasta que el video
   // realmente reproduce, para que nunca se vea el arranque negro)
   function montarPlayer(tarjeta, p) {
-    const inicio = (p.video && p.video.inicio) || 0;
+    const inicio = (p.video && p.video.inicio) || 1; // salta el primer segundo
     const iframe = document.createElement("iframe");
     iframe.src =
       "https://player.vimeo.com/video/" + p.video.id +
@@ -376,12 +376,18 @@
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
       if (video) video.play().catch(() => {});
+      else if (esVimeo && !esGrande) {
+        if (!iframe) iframe = montarPlayer(tarjeta, p);
+        else orden("play");
+      }
     });
     tarjeta.addEventListener("mouseleave", () => {
       tarjeta.classList.remove("hover-activo");
       if (video) {
         video.pause();
         video.currentTime = 0;
+      } else if (!esGrande && iframe) {
+        orden("pause");
       }
     });
   });
