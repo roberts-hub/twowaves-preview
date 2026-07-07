@@ -118,6 +118,7 @@ window.CONTENIDO = {
     {
       titulo: "Cupra Formentor",
       logoCliente: "assets/img/logos/cupra.png",
+      logoEscala: 1.3,
       descripcion: "CUPRA Formentor — performance and design, shot for the road.",
       posicion: "82% 50%",
       cliente: "Cupra",

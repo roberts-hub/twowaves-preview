@@ -351,10 +351,10 @@
   }
 
   // Grid de proyectos (data-grid="todos" | "destacados")
-  function crearTarjeta(p, i) {
+  function crearTarjeta(p, i, uniforme) {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "tarjeta" + (p.tamano === "grande" ? " tarjeta--grande" : "") + (p.videoHover ? " con-video" : "");
+    btn.className = "tarjeta" + (p.tamano === "grande" && !uniforme ? " tarjeta--grande" : "") + (p.videoHover ? " con-video" : "");
     btn.dataset.proyecto = i;
     btn.dataset.revelar = "";
     btn.setAttribute("aria-label", "Watch: " + p.titulo + " — " + p.cliente);
@@ -370,7 +370,8 @@
         : "") +
       '<span class="tarjeta_velo"></span>' +
       (p.logoCliente
-        ? '<img class="tarjeta_logo" src="' + p.logoCliente + '" alt="" loading="lazy">'
+        ? '<img class="tarjeta_logo" src="' + p.logoCliente + '" alt="" loading="lazy"' +
+          (p.logoEscala ? ' style="height:calc(clamp(2.8rem, 5vw, 4.4rem) * ' + p.logoEscala + ')"' : "") + ">"
         : "") +
       "</div>" +
       '<div class="tarjeta_info">' +
@@ -382,11 +383,12 @@
   }
 
   $$("[data-grid]").forEach((grid) => {
+    const uniforme = grid.dataset.grid === "todos"; // Work: todos iguales
     const lista =
       grid.dataset.grid === "destacados"
         ? C.proyectos.filter((p) => p.destacado)
         : C.proyectos;
-    lista.forEach((p) => grid.appendChild(crearTarjeta(p, C.proyectos.indexOf(p))));
+    lista.forEach((p) => grid.appendChild(crearTarjeta(p, C.proyectos.indexOf(p), uniforme)));
   });
 
   /* ==========================================================
