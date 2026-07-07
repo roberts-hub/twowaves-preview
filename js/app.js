@@ -16,6 +16,26 @@
      1. RENDERIZADO DE CONTENIDO desde contenido.js
      ========================================================== */
 
+  // Precarga: pausa breve con el logo; solo la primera visita de la sesión
+  const precarga = $(".precarga");
+  if (precarga) {
+    if (sessionStorage.getItem("intro-vista")) {
+      precarga.remove();
+    } else {
+      const quitar = () => {
+        precarga.classList.add("fuera");
+        sessionStorage.setItem("intro-vista", "1");
+        setTimeout(() => precarga.remove(), 700);
+      };
+      const inicio = performance.now();
+      window.addEventListener("load", () => {
+        const espera = Math.max(0, 1100 - (performance.now() - inicio));
+        setTimeout(quitar, espera);
+      }, { once: true });
+      setTimeout(quitar, 4000); // respaldo si 'load' tarda demasiado
+    }
+  }
+
   // Marca (logo, título de pestaña, pie)
   $$("[data-marca]").forEach((el) => (el.textContent = C.marca.nombre));
   document.title = document.title.replace("{{marca}}", C.marca.nombre);
@@ -308,7 +328,24 @@
                   "transform:translate(-50%,-50%) scale(1.04);" +
                   "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
                   "width:auto;height:auto;border:0;pointer-events:none;";
-                iframe.addEventListener("load", () => iframe.classList.add("cargado"));
+                // Aparece hasta que el video ya corre (evita el arranque negro)
+                const alMensaje = (ev) => {
+                  if (ev.source !== iframe.contentWindow) return;
+                  let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
+                  if (d.event === "playProgress" || d.event === "timeupdate") {
+                    iframe.classList.add("cargado");
+                    window.removeEventListener("message", alMensaje);
+                  }
+                };
+                window.addEventListener("message", alMensaje);
+                iframe.addEventListener("load", () => {
+                  iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
+                  // Respaldo: solo con la pestaña visible (oculta, el video
+                  // no arranca y se vería el player en negro)
+                  setTimeout(() => {
+                    if (document.visibilityState === "visible") iframe.classList.add("cargado");
+                  }, 2800);
+                });
                 $(".tarjeta_visual", tarjeta).appendChild(iframe);
               } else {
                 orden("play");
