@@ -53,7 +53,7 @@ window.CONTENIDO = {
     { nombre: "FIFA", logo: "assets/img/logos/fifa.png" },
     { nombre: "Alo Yoga", logo: "assets/img/logos/alo-yoga.png" },
     { nombre: "Oakley", logo: "assets/img/logos/oakley.png" },
-    { nombre: "Skechers", logo: "assets/img/logos/skechers.png" },
+    { nombre: "Skechers", logo: "assets/img/logos/skechers.png", escala: 0.82 },
     { nombre: "Kérastase", logo: "assets/img/logos/kerastase.png" },
     { nombre: "Longines", logo: "assets/img/logos/longines.png" },
     { nombre: "Amazon Business", logo: "assets/img/logos/amazon-business.png" },

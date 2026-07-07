@@ -224,9 +224,9 @@
         const ar = img.naturalWidth / img.naturalHeight || 1.9;
         // factor óptico según proporción + escala manual del cliente
         const factor =
-          Math.min(1.5, Math.max(0.6, Math.sqrt(1.9 / ar))) *
+          Math.min(1.5, Math.max(0.42, Math.sqrt(1.9 / ar))) *
           (parseFloat(img.dataset.escala) || 1);
-        img.style.height = "calc(clamp(2.3rem, 3.8vw, 3.4rem) * " + factor.toFixed(3) + ")";
+        img.style.height = "calc(clamp(2.7rem, 4.4vw, 4rem) * " + factor.toFixed(3) + ")";
       };
       if (img.complete && img.naturalWidth) ajustar();
       else img.addEventListener("load", ajustar, { once: true });
@@ -400,9 +400,11 @@
   function abrirModal(p) {
     if (!modal) return;
     playersTarjetas("pause");
-    // Panel de información (como la referencia: Client / Project + descripción)
+    // Panel de información (como el detalle de la referencia)
+    $(".modal-video_titulo", modal).textContent = p.titulo;
     $(".modal-video_cliente", modal).textContent = p.cliente;
-    $(".modal-video_proyecto", modal).textContent = p.titulo;
+    $(".modal-video_categoria", modal).textContent = p.categoria || "—";
+    $(".modal-video_anio", modal).textContent = p.anio || "—";
     const desc = $(".modal-video_descripcion", modal);
     desc.textContent = p.descripcion || "";
     desc.style.display = p.descripcion ? "" : "none";
