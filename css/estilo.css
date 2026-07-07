@@ -327,10 +327,12 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .logos_seccion {
   padding: clamp(4.5rem, 10vw, 8rem) var(--margen);
   display: grid;
+  /* minmax(0,1fr): evita que la pista nowrap de logos infle la columna */
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2.2rem, 4.5vw, 3.5rem);
   justify-items: center;
 }
-.logos_contenedor { width: 100%; }
+.logos_contenedor { width: 100%; min-width: 0; }
 .logos_titulo {
   display: inline-flex;
   align-items: center;
