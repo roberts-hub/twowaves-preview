@@ -845,8 +845,12 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   display: grid;
   place-items: center;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease, translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  translate: 0 16px;
+  pointer-events: none;
 }
+.whatsapp--visible { opacity: 1; translate: 0 0; pointer-events: auto; }
 .whatsapp:hover { transform: scale(1.07); }
 .whatsapp svg { width: 32px; height: 32px; }
 .whatsapp_tip {

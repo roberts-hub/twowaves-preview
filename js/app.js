@@ -74,11 +74,28 @@
   // Año dinámico
   $$("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
-  // Widget de WhatsApp: visible solo si hay número en contenido.js
+  // Widget de WhatsApp: visible solo si hay número en contenido.js.
+  // Aparece tras 60 s acumulados de navegación (cuenta entre páginas,
+  // solo mientras la pestaña está visible) con mensaje prellenado.
   $$("[data-whatsapp]").forEach((el) => {
     const num = (C.contacto.whatsapp || "").replace(/[^\d]/g, "");
-    if (num) el.href = "https://wa.me/" + num;
-    else el.style.display = "none";
+    if (!num) { el.style.display = "none"; return; }
+    const msj = C.contacto.whatsappMensaje || "";
+    el.href = "https://wa.me/" + num + (msj ? "?text=" + encodeURIComponent(msj) : "");
+
+    const ESPERA = 60; // segundos de navegación antes de mostrarlo
+    const CLAVE = "tw_nav_segundos";
+    let acumulado = parseInt(sessionStorage.getItem(CLAVE) || "0", 10);
+    if (acumulado >= ESPERA) { el.classList.add("whatsapp--visible"); return; }
+    const reloj = setInterval(() => {
+      if (document.hidden) return;
+      acumulado += 1;
+      sessionStorage.setItem(CLAVE, String(acumulado));
+      if (acumulado >= ESPERA) {
+        clearInterval(reloj);
+        el.classList.add("whatsapp--visible");
+      }
+    }, 1000);
   });
 
   // Teléfono de contacto: visible solo si está definido en contenido.js
