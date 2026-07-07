@@ -14,7 +14,7 @@ window.CONTENIDO = {
   marca: {
     nombre: "TWO WAVES",
     eslogan: "Films | Production Company",
-    ciudad: "Guadalajara, MX — EST. 2021",
+    ciudad: "Guadalajara, MX · EST. 2021",
   },
 
   /* ---------- PORTADA (index.html) ----------
@@ -31,7 +31,7 @@ window.CONTENIDO = {
     tituloLinea1: "Visual narratives",
     tituloAcento: "with intention.",
     tituloLinea2: "",
-    subtitulo: "Based in Mexico — Available worldwide",
+    subtitulo: "Based in Mexico, available worldwide",
     videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
     imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
@@ -92,7 +92,7 @@ window.CONTENIDO = {
   proyectos: [
     {
       titulo: "Visit Jalisco",
-      descripcion: "Travel campaign with Beautiful Destinations — Jalisco from the coast to the highlands, shot at home.",
+      descripcion: "Travel campaign with Beautiful Destinations: Jalisco from the coast to the highlands, shot at home.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
       anio: "2026",
@@ -105,7 +105,7 @@ window.CONTENIDO = {
     {
       titulo: "Grand Island",
       logoCliente: "assets/img/logos/mondrian.png",
-      descripcion: "Lifestyle film for Grand Island by Mondrian — a day on the water, shot from above.",
+      descripcion: "Lifestyle film for Grand Island by Mondrian: a day on the water, shot from above.",
       cliente: "Mondrian",
       categoria: "Hospitality",
       anio: "2026",
@@ -119,7 +119,7 @@ window.CONTENIDO = {
       titulo: "Cupra Formentor",
       logoCliente: "assets/img/logos/cupra.png",
       logoEscala: 1.3,
-      descripcion: "CUPRA Formentor — performance and design, shot for the road.",
+      descripcion: "CUPRA Formentor: performance and design, shot for the road.",
       posicion: "82% 50%",
       cliente: "Cupra",
       categoria: "Commercial",
@@ -132,7 +132,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Let's Go Brazil",
-      descripcion: "Travel campaign with Beautiful Destinations — Brazil in motion, coast to coast.",
+      descripcion: "Travel campaign with Beautiful Destinations: Brazil in motion, coast to coast.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
       anio: "2025",
@@ -144,7 +144,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga Retreat",
-      descripcion: "Wellness retreat with Alo Yoga at One&Only Mandarina — slow mornings, ocean light.",
+      descripcion: "Wellness retreat with Alo Yoga at One&Only Mandarina: slow mornings, ocean light.",
       cliente: "One&Only Mandarina",
       categoria: "Wellness",
       anio: "2025",
@@ -156,7 +156,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Bear Grylls x AION",
-      descripcion: "Not every production is a shoot — some are an expedition. Seven days off the grid on Calivigny, a private island in Grenada, closing with a 1,000-drone show, the first of its kind in this part of the world.",
+      descripcion: "Not every production is a shoot. Some are an expedition. Seven days off the grid on Calivigny, a private island in Grenada, closing with a 1,000-drone show, the first of its kind in this part of the world.",
       cliente: "AION",
       categoria: "Drone show",
       anio: "2026",
@@ -168,7 +168,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "MB Motos",
-      descripcion: "Commercial for MB Motos México — two wheels, open road, and the feeling of the ride.",
+      descripcion: "Commercial for MB Motos México: two wheels, open road, and the feeling of the ride.",
       cliente: "MB Motos México",
       categoria: "Commercial",
       anio: "2026",
@@ -180,7 +180,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Tito Double P x Cashonly",
-      descripcion: "Night energy and fast cuts — on set with Tito Double P for Cashonly.",
+      descripcion: "Night energy and fast cuts, on set with Tito Double P for Cashonly.",
       cliente: "Cashonly",
       categoria: "Music video",
       anio: "2025",
@@ -192,7 +192,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Lençóis Maranhenses",
-      descripcion: "Beautiful Destinations in Lençóis Maranhenses — dunes, lagoons and light.",
+      descripcion: "Beautiful Destinations in Lençóis Maranhenses: dunes, lagoons and light.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
       anio: "2025",
@@ -205,7 +205,7 @@ window.CONTENIDO = {
     {
       titulo: "Pequeña África",
       logoCliente: "assets/img/logos/beautiful-destinations.png",
-      descripcion: "For Visit Brazil — the story of Rio's Pequeña África, told through its streets and people.",
+      descripcion: "For Visit Brazil: the story of Rio's Pequeña África, told through its streets and people.",
       cliente: "Visit Brazil",
       categoria: "Travel",
       anio: "2025",
@@ -216,8 +216,8 @@ window.CONTENIDO = {
       video: { tipo: "vimeo", id: "1135148329", aspecto: "3840x2160" },
     },
     {
-      titulo: "Ricardo Salinas — 70 años",
-      descripcion: "Event film for Ricardo Salinas' 70th anniversary — one night, told in two minutes.",
+      titulo: "Ricardo Salinas: 70 años",
+      descripcion: "Event film for Ricardo Salinas' 70th anniversary: one night, told in two minutes.",
       cliente: "Ricardo Salinas",
       categoria: "Event",
       anio: "2025",
@@ -229,7 +229,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Brand Ambassador",
-      descripcion: "Sports campaign for Atlética — training, sweat and their new brand ambassador.",
+      descripcion: "Sports campaign for Atlética: training, sweat and their new brand ambassador.",
       cliente: "Atlética",
       categoria: "Sports",
       anio: "2025",
@@ -241,7 +241,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Tequila Herradura x FICG",
-      descripcion: "Tequila Herradura at FICG — an event piece with cinema at its center.",
+      descripcion: "Tequila Herradura at FICG: an event piece with cinema at its center.",
       cliente: "Tequila Herradura",
       categoria: "Event",
       anio: "2024",
@@ -254,7 +254,7 @@ window.CONTENIDO = {
     {
       titulo: "Alo Yoga x Javier Hernández",
       logoCliente: "assets/img/logos/alo-yoga.png",
-      descripcion: "Alo Yoga with Javier 'Chicharito' Hernández — movement as daily practice.",
+      descripcion: "Alo Yoga with Javier 'Chicharito' Hernández: movement as daily practice.",
       cliente: "Alo Yoga",
       categoria: "Sports",
       anio: "2024",
@@ -266,7 +266,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Thunderbolts x Kings League",
-      descripcion: "Marvel's Thunderbolts meet the Kings League pitch — director's cut. Agency: Diablo.",
+      descripcion: "Marvel's Thunderbolts meet the Kings League pitch, director's cut. Agency: Diablo.",
       cliente: "Marvel",
       categoria: "Branded content",
       anio: "2025",
@@ -282,7 +282,7 @@ window.CONTENIDO = {
   nosotros: {
     titulo: "The result over the noise.",
     parrafos: [
-      "Two Waves is a production company founded in 2021 in Guadalajara, México. Commercial content for global brands — built with clarity, intention and a distinctive creative standard, from idea to final master.",
+      "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final master.",
     ],
     servicios: [
       "Direction", "Production", "Cinematography",
@@ -291,7 +291,7 @@ window.CONTENIDO = {
     /* Las 3 fases de trabajo que se muestran en About */
     proceso: [
       { paso: "01", titulo: "Concept & Direction", texto: "We listen, define the idea and set the creative direction with you." },
-      { paso: "02", titulo: "Production", texto: "On set or on location — direction, cinematography and aerials under one roof." },
+      { paso: "02", titulo: "Production", texto: "On set or on location: direction, cinematography and aerials under one roof." },
       { paso: "03", titulo: "Post & Delivery", texto: "Edit, color and sound design, down to the final master." },
     ],
   },
