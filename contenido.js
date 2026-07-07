@@ -311,7 +311,7 @@ window.CONTENIDO = {
 
   /* ---------- CONTACTO (contact.html) ---------- */
   contacto: {
-    titulo: "Let's start your project.",
+    titulo: "Let's create something remarkable.",
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
     telefono: "",

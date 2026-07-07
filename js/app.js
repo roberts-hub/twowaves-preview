@@ -100,24 +100,43 @@
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
   // otro hosting, abre el correo del visitante ya prellenado (mailto).
   const formulario = $("[data-formulario]");
+  const modalGracias = $(".modal-gracias");
+  function mostrarGracias() {
+    if (!modalGracias) return;
+    modalGracias.showModal();
+    if (window.lenis) window.lenis.stop();
+  }
+  if (modalGracias) {
+    const cerrar = () => {
+      modalGracias.close();
+      if (window.lenis) window.lenis.start();
+    };
+    modalGracias.addEventListener("cancel", (e) => { e.preventDefault(); cerrar(); });
+    modalGracias.addEventListener("click", (e) => {
+      if (e.target === modalGracias || e.target.closest("[data-cerrar-gracias]")) cerrar();
+    });
+  }
   if (formulario) {
-    if (new URLSearchParams(location.search).get("enviado") === "1") {
-      $(".formulario_gracias", formulario).hidden = false;
-      formulario.querySelectorAll("input:not([type=hidden]), textarea, button").forEach((e) => (e.style.display = "none"));
-    }
+    if (new URLSearchParams(location.search).get("enviado") === "1") mostrarGracias();
     const enNetlify = /\.netlify\.app$|\.netlify\.com$/.test(location.hostname);
     if (enNetlify) {
       formulario.action = "/contact.html?enviado=1";
     } else {
       formulario.addEventListener("submit", (e) => {
         e.preventDefault();
+        if (!formulario.reportValidity()) return;
         const d = new FormData(formulario);
-        const cuerpo = "Name: " + d.get("nombre") + "\nEmail: " + d.get("correo") + "\n\n" + d.get("mensaje");
+        const cuerpo =
+          "Name: " + d.get("nombre") +
+          "\nEmail: " + d.get("correo") +
+          "\nPhone: " + d.get("telefono") +
+          "\n\n" + d.get("mensaje");
         location.href =
           "mailto:" + C.contacto.correo +
           "?subject=" + encodeURIComponent("Project inquiry — " + d.get("nombre")) +
           "&body=" + encodeURIComponent(cuerpo);
-        $(".formulario_gracias", formulario).hidden = false;
+        formulario.reset();
+        mostrarGracias();
       });
     }
   }

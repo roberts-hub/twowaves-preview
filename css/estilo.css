@@ -750,6 +750,41 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 
 /* ============================================================
+   MODAL DE AGRADECIMIENTO (formulario enviado)
+   ============================================================ */
+.modal-gracias {
+  border: none;
+  padding: 0;
+  background: transparent;
+  outline: none;
+  margin: auto;
+}
+.modal-gracias::backdrop {
+  background: rgba(4, 6, 7, 0.82);
+  backdrop-filter: blur(8px);
+}
+.modal-gracias_caja {
+  background: var(--fondo-2);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 5vw, 3.5rem);
+  width: min(480px, 90vw);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 1.1rem;
+  color: var(--texto);
+  animation: gracias-entra 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes gracias-entra {
+  from { opacity: 0; transform: translateY(1.5rem); }
+}
+.modal-gracias_t { width: 44px; height: auto; margin-bottom: 0.4rem; }
+.modal-gracias_t circle { transform-origin: 90% 11%; animation: precarga-punto 1.6s ease-in-out 0.4s infinite; }
+.modal-gracias_titulo { font-size: 1.6rem; text-transform: uppercase; }
+.modal-gracias_texto { font-size: 0.95rem; line-height: 1.55; opacity: 0.8; max-width: 34ch; }
+
+/* ============================================================
    MODAL DE VIDEO (reproductor)
    ============================================================ */
 .modal-video {
