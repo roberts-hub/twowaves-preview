@@ -436,6 +436,7 @@
     const lista =
       grid.dataset.grid === "destacados"
         ? C.proyectos.filter((p) => p.destacado)
+            .sort((x, y) => (x.ordenPortada || 99) - (y.ordenPortada || 99))
         : C.proyectos;
     lista.forEach((p) => grid.appendChild(crearTarjeta(p, C.proyectos.indexOf(p), uniforme)));
   });
