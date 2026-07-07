@@ -92,15 +92,28 @@
           '</span><span class="etiqueta">' + n.rol + "</span></div>"
       )
       .join("");
+    const parrafosF = (f.parrafos || (f.texto ? [f.texto] : []))
+      .map((p) => '<p class="parrafo" data-revelar>' + p + "</p>")
+      .join("");
     contFundadores.innerHTML =
       '<figure class="fundadores_foto" data-revelar><img src="' + f.foto +
       '" alt="' + (f.etiqueta || "Founders") + '" loading="lazy" decoding="async"></figure>' +
       '<div class="fundadores_texto">' +
       '<span class="etiqueta" data-revelar>' + f.etiqueta + "</span>" +
       '<h2 class="titulo-seccion" data-revelar>' + f.titulo + "</h2>" +
-      '<p class="parrafo" data-revelar>' + f.texto + "</p>" +
+      parrafosF +
       (nombres ? '<div class="fundadores_nombres" data-revelar>' + nombres + "</div>" : "") +
       "</div>";
+  }
+
+  // Why Two Waves (About): título + párrafos desde contenido.js
+  const contPorque = $("[data-porque]");
+  if (contPorque && C.porque) {
+    contPorque.innerHTML =
+      '<h2 class="titulo-seccion" data-revelar>' + C.porque.titulo + "</h2>" +
+      C.porque.parrafos
+        .map((p) => '<p class="parrafo" data-revelar>' + p + "</p>")
+        .join("");
   }
 
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
