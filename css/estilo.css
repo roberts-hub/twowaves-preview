@@ -80,7 +80,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   filter: blur(18px);
   animation:
     precarga-revela 2.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards,
-    precarga-respira 2.6s ease-in-out 2.3s infinite;
+    precarga-respira 2.3s ease-in-out 2.3s infinite;
 }
 /* El punto pulsa como luz de grabación: la señal de que sigue cargando */
 .precarga_t circle {
@@ -91,7 +91,8 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
 }
 @keyframes precarga-respira {
   0%, 100% { opacity: 1; filter: brightness(1); }
-  50% { opacity: 0.82; filter: brightness(1.25); }
+  40% { opacity: 0.8; filter: brightness(0.72); }
+  72% { opacity: 1; filter: brightness(1.32); }
 }
 @keyframes precarga-punto {
   0%, 100% { opacity: 1; }

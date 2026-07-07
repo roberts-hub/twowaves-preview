@@ -21,7 +21,11 @@
   const estadoHero = { listo: false, avisar: () => {} };
   const precarga = $(".precarga");
   if (precarga) {
-    if (sessionStorage.getItem("intro-vista")) {
+    // En páginas con video de header (Home, About) la precarga sale
+    // SIEMPRE: cubre la carga del video incluso en refresh. En las demás,
+    // solo la primera visita de la sesión.
+    const paginaConVideo = !!($(".hero_fondo") || $("[data-video-hero]"));
+    if (!paginaConVideo && sessionStorage.getItem("intro-vista")) {
       precarga.remove();
     } else {
       let quitada = false;
