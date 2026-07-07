@@ -76,6 +76,8 @@ window.CONTENIDO = {
        tamano      → "grande" (ancho completo) o "normal" (media columna)
        destacado   → true = también aparece en la portada
        miniatura   → imagen que se ve antes del hover
+       logoCliente → (opcional) logo blanco del cliente centrado sobre el
+                     video, como la referencia (ruta a un .png de logos/)
        posicion    → (opcional) encuadre de la miniatura, ej. "82% 50%"
                      (izquierda–derecha % y arriba–abajo %)
        videoHover  → .mp4 corto y silencioso que se reproduce al pasar el mouse
@@ -88,6 +90,7 @@ window.CONTENIDO = {
   proyectos: [
     {
       titulo: "Visit Jalisco",
+      logoCliente: "assets/img/logos/beautiful-destinations.png",
       descripcion: "Travel campaign with Beautiful Destinations — Jalisco from the coast to the highlands, shot at home.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
@@ -112,6 +115,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Cupra Formentor",
+      logoCliente: "assets/img/logos/cupra.png",
       descripcion: "CUPRA Formentor — performance and design, shot for the road.",
       posicion: "82% 50%",
       cliente: "Cupra",
@@ -149,6 +153,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga Retreat",
+      logoCliente: "assets/img/logos/alo-yoga.png",
       descripcion: "Wellness retreat with Alo Yoga at One&Only Mandarina — slow mornings, ocean light.",
       cliente: "One&Only Mandarina",
       categoria: "Wellness",
@@ -197,6 +202,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Pequeña África",
+      logoCliente: "assets/img/logos/beautiful-destinations.png",
       descripcion: "For Visit Brazil — the story of Rio's Pequeña África, told through its streets and people.",
       cliente: "Visit Brazil",
       categoria: "Travel",
@@ -245,6 +251,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga x Javier Hernández",
+      logoCliente: "assets/img/logos/alo-yoga.png",
       descripcion: "Alo Yoga with Javier 'Chicharito' Hernández — movement as daily practice.",
       cliente: "Alo Yoga",
       categoria: "Sports",

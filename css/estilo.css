@@ -181,22 +181,8 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   background: currentColor;
   pointer-events: none;
 }
-.nav_cta {
-  background: var(--lino);
-  color: #141412;
-  border: 1px solid var(--lino);
-  border-radius: 99px;
-  padding: 0.6rem 1.3rem;
-  font-family: var(--fuente-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-}
-.nav_cta:hover { background: transparent; color: inherit; border-color: currentColor; }
-.nav--tinta .nav_cta { background: #141412; border-color: #141412; color: var(--lino); }
-.nav--tinta .nav_cta:hover { background: transparent; color: #141412; }
+/* CTA del nav: texto con rodillo + subrayado (hereda .boton) */
+.nav_cta { font-size: 0.8rem; }
 
 /* Menú móvil */
 .nav_hamburguesa { display: none; }
@@ -305,6 +291,20 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   justify-items: center;
 }
 .logos_contenedor { width: 100%; }
+.logos_titulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1rem;
+  letter-spacing: 0.32em;
+  opacity: 0.55;
+}
+.logos_titulo::before, .logos_titulo::after {
+  content: "";
+  width: 2.2rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
 
 /* --- Slider horizontal de logos (derecha → izquierda) --- */
 .marquesina--logos {
@@ -407,23 +407,50 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   object-fit: cover;
 }
 .tarjeta_visual img {
-  /* Color por defecto → B/N al hover: el video gana protagonismo */
-  filter: none;
-  transition: opacity 0.4s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 0.6s ease;
+  transition: opacity 0.4s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.tarjeta:hover .tarjeta_visual img,
-.tarjeta.hover-activo .tarjeta_visual img { filter: grayscale(1) contrast(1.03) brightness(0.9); }
+
+/* Tinta súper ligera para que el logo del cliente resalte */
+.tarjeta_velo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(8, 8, 7, 0.24);
+  transition: background 0.6s ease;
+  pointer-events: none;
+}
+.tarjeta:hover .tarjeta_velo,
+.tarjeta.hover-activo .tarjeta_velo { background: rgba(8, 8, 7, 0.12); }
+
+/* Logo del cliente centrado sobre el video (como la referencia) */
+.tarjeta_visual img.tarjeta_logo {
+  position: absolute;
+  inset: auto;
+  top: 50%; left: 50%;
+  translate: -50% -50%;
+  z-index: 3;
+  height: clamp(2rem, 3.6vw, 3.2rem);
+  width: auto;
+  max-width: 42%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.tarjeta:hover .tarjeta_visual img.tarjeta_logo,
+.tarjeta.hover-activo .tarjeta_visual img.tarjeta_logo { transform: scale(1.06); filter: brightness(0) invert(1); }
 .tarjeta_visual video { opacity: 0; transition: opacity 0.4s ease; }
 /* Player de la tarjeta grande (el tamaño lo calcula JS con el aspecto real) */
 .tarjeta_visual iframe {
   opacity: 0;
   transition: opacity 0.45s ease;
 }
-/* El video de la tarjeta grande queda visible siempre, sin hover */
-.tarjeta_visual iframe.cargado { opacity: 1; }
-.tarjeta:hover .tarjeta_visual img { transform: scale(1.04); }
-.tarjeta.con-video.hover-activo .tarjeta_visual img { opacity: 0; }
+/* Grande: visible al cargar; normales: solo durante el hover */
+.tarjeta--grande .tarjeta_visual iframe.cargado { opacity: 1; }
+.tarjeta.hover-activo .tarjeta_visual iframe.cargado { opacity: 1; }
+.tarjeta:hover .tarjeta_visual img:not(.tarjeta_logo) { transform: scale(1.04); }
+.tarjeta.con-video.hover-activo .tarjeta_visual img:not(.tarjeta_logo) { opacity: 0; }
 .tarjeta.con-video.hover-activo .tarjeta_visual video { opacity: 1; }
 
 .tarjeta_info {

@@ -263,6 +263,10 @@
       (p.videoHover
         ? '<video muted loop playsinline preload="none" src="' + p.videoHover + '"></video>'
         : "") +
+      '<span class="tarjeta_velo"></span>' +
+      (p.logoCliente
+        ? '<img class="tarjeta_logo" src="' + p.logoCliente + '" alt="" loading="lazy">'
+        : "") +
       "</div>" +
       '<div class="tarjeta_info">' +
       '<span class="tarjeta_titulo">' + p.titulo + "</span>" +
@@ -294,62 +298,61 @@
      2. HOVER DE TARJETAS: reproduce el video de preview
      (patrón: crossfade imagen→video en mouseenter)
      ========================================================== */
+  // Crea el player de Vimeo de una tarjeta (aparece hasta que el video
+  // realmente reproduce, para que nunca se vea el arranque negro)
+  function montarPlayer(tarjeta, p) {
+    const iframe = document.createElement("iframe");
+    iframe.src =
+      "https://player.vimeo.com/video/" + p.video.id +
+      "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
+    iframe.allow = "autoplay";
+    iframe.tabIndex = -1;
+    iframe.setAttribute("aria-hidden", "true");
+    const [aw, ah] = (p.video.aspecto || "16x9").split(/[x:]/).map(Number);
+    const ar = aw && ah ? aw / ah : 16 / 9;
+    iframe.style.cssText =
+      "position:absolute;top:50%;left:50%;" +
+      "transform:translate(-50%,-50%) scale(1.04);" +
+      "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
+      "width:auto;height:auto;border:0;pointer-events:none;";
+    const alMensaje = (ev) => {
+      if (ev.source !== iframe.contentWindow) return;
+      let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
+      if (d.event === "playProgress" || d.event === "timeupdate") {
+        iframe.classList.add("cargado");
+        window.removeEventListener("message", alMensaje);
+      }
+    };
+    window.addEventListener("message", alMensaje);
+    iframe.addEventListener("load", () => {
+      iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
+      setTimeout(() => {
+        if (document.visibilityState === "visible") iframe.classList.add("cargado");
+      }, 2800);
+    });
+    $(".tarjeta_visual", tarjeta).appendChild(iframe);
+    return iframe;
+  }
+
   $$(".tarjeta").forEach((tarjeta) => {
     const video = $("video", tarjeta);
     const p = C.proyectos[+tarjeta.dataset.proyecto];
     const esGrande = tarjeta.classList.contains("tarjeta--grande");
+    const esVimeo = !video && p && p.video && p.video.tipo === "vimeo";
+    let iframe = null;
+    const orden = (m) =>
+      iframe && iframe.contentWindow &&
+      iframe.contentWindow.postMessage(JSON.stringify({ method: m }), "*");
 
-    // Solo la tarjeta GRANDE reproduce su video de Vimeo, y lo hace sola
-    // en cuanto entra a pantalla con el scroll (no necesita hover).
-    // Fuera de pantalla se pausa para no gastar recursos.
-    if (esGrande && !video && p && p.video && p.video.tipo === "vimeo") {
-      let iframe = null;
-      const orden = (m) =>
-        iframe && iframe.contentWindow &&
-        iframe.contentWindow.postMessage(JSON.stringify({ method: m }), "*");
+    // La tarjeta GRANDE reproduce sola en cuanto entra a pantalla;
+    // fuera de pantalla se pausa.
+    if (esGrande && esVimeo) {
       new IntersectionObserver(
         (entradas) => {
           entradas.forEach((e) => {
             if (e.isIntersecting) {
-              if (!iframe) {
-                iframe = document.createElement("iframe");
-                iframe.src =
-                  "https://player.vimeo.com/video/" + p.video.id +
-                  "?background=1&autoplay=1&muted=1&loop=1&autopause=0&playsinline=1&dnt=1";
-                iframe.allow = "autoplay";
-                iframe.tabIndex = -1;
-                iframe.setAttribute("aria-hidden", "true");
-                // Recorte cover con el aspecto REAL del video (campo
-                // video.aspecto) + push-in ligero: sin franjas negras
-                const [aw, ah] = (p.video.aspecto || "16x9").split(/[x:]/).map(Number);
-                const ar = aw && ah ? aw / ah : 16 / 9;
-                iframe.style.cssText =
-                  "position:absolute;top:50%;left:50%;" +
-                  "transform:translate(-50%,-50%) scale(1.04);" +
-                  "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
-                  "width:auto;height:auto;border:0;pointer-events:none;";
-                // Aparece hasta que el video ya corre (evita el arranque negro)
-                const alMensaje = (ev) => {
-                  if (ev.source !== iframe.contentWindow) return;
-                  let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
-                  if (d.event === "playProgress" || d.event === "timeupdate") {
-                    iframe.classList.add("cargado");
-                    window.removeEventListener("message", alMensaje);
-                  }
-                };
-                window.addEventListener("message", alMensaje);
-                iframe.addEventListener("load", () => {
-                  iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
-                  // Respaldo: solo con la pestaña visible (oculta, el video
-                  // no arranca y se vería el player en negro)
-                  setTimeout(() => {
-                    if (document.visibilityState === "visible") iframe.classList.add("cargado");
-                  }, 2800);
-                });
-                $(".tarjeta_visual", tarjeta).appendChild(iframe);
-              } else {
-                orden("play");
-              }
+              if (!iframe) iframe = montarPlayer(tarjeta, p);
+              else orden("play");
             } else if (iframe) {
               orden("pause");
             }
@@ -359,17 +362,23 @@
       ).observe(tarjeta);
     }
 
-    // El resto de tarjetas: hover clásico (zoom + B/N); el video solo
-    // aplica si el proyecto tiene su propio videoHover .mp4
+    // Hover (como la referencia): el video del proyecto se reproduce
+    // seamless dentro de la tarjeta; al salir, se pausa y regresa la imagen.
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
       if (video) video.play().catch(() => {});
+      else if (esVimeo && !esGrande) {
+        if (!iframe) iframe = montarPlayer(tarjeta, p);
+        else orden("play");
+      }
     });
     tarjeta.addEventListener("mouseleave", () => {
       tarjeta.classList.remove("hover-activo");
       if (video) {
         video.pause();
         video.currentTime = 0;
+      } else if (!esGrande && iframe) {
+        orden("pause");
       }
     });
   });
