@@ -42,6 +42,19 @@
     }
   }
 
+  // Al volver a la página (caché de retroceso del navegador) o al
+  // re-enfocar la pestaña, los players de Vimeo quedan congelados:
+  // se les reenvía play para que el video inicial nunca se vea trabado.
+  function reanudarPlayers() {
+    $$(".hero_fondo iframe, .tarjeta--grande .tarjeta_visual iframe, .video-hero iframe").forEach((f) => {
+      if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
+    });
+  }
+  window.addEventListener("pageshow", (e) => { if (e.persisted) reanudarPlayers(); });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") reanudarPlayers();
+  });
+
   // Marca (logo, título de pestaña, pie)
   $$("[data-marca]").forEach((el) => (el.textContent = C.marca.nombre));
   document.title = document.title.replace("{{marca}}", C.marca.nombre);
