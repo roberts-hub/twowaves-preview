@@ -152,7 +152,7 @@
     btn.className = "tarjeta" + (p.tamano === "grande" ? " tarjeta--grande" : "") + (p.videoHover ? " con-video" : "");
     btn.dataset.proyecto = i;
     btn.dataset.revelar = "";
-    btn.setAttribute("aria-label", "Ver video: " + p.titulo + " — " + p.cliente);
+    btn.setAttribute("aria-label", "Watch: " + p.titulo + " — " + p.cliente);
     btn.innerHTML =
       '<div class="tarjeta_visual">' +
       '<img src="' + p.miniatura + '" alt="' + p.titulo + '" loading="lazy" onerror="this.onerror=null;this.src=\'assets/img/placeholder.svg\'">' +

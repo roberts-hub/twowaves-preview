@@ -14,7 +14,7 @@ window.CONTENIDO = {
   marca: {
     nombre: "TWO WAVES",
     eslogan: "Films | Production Company",
-    ciudad: "Guadalajara, México — EST. 2021",
+    ciudad: "Guadalajara, MX — EST. 2021",
   },
 
   /* ---------- PORTADA (index.html) ----------
@@ -28,10 +28,10 @@ window.CONTENIDO = {
      "aspecto" son las dimensiones del video (ancho x alto); si no lo
      pones se asume 16:9. La imagenFondo se muestra mientras carga.  */
   portada: {
-    tituloLinea1: "Narrativas visuales",
-    tituloAcento: "con intención.",
+    tituloLinea1: "Visual narratives",
+    tituloAcento: "with intention.",
     tituloLinea2: "",
-    subtitulo: "Casa productora — Guadalajara, MX",
+    subtitulo: "Production company — Guadalajara, MX",
     videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
     imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
@@ -91,7 +91,7 @@ window.CONTENIDO = {
     {
       titulo: "MB Motos",
       cliente: "MB Motos México",
-      categoria: "Comercial",
+      categoria: "Commercial",
       anio: "2026",
       tamano: "normal",
       destacado: true,
@@ -102,7 +102,7 @@ window.CONTENIDO = {
     {
       titulo: "Grand Island",
       cliente: "Mondrian",
-      categoria: "Hotelería",
+      categoria: "Hospitality",
       anio: "2026",
       tamano: "normal",
       destacado: true,
@@ -124,7 +124,7 @@ window.CONTENIDO = {
     {
       titulo: "Tito Double P x Cashonly",
       cliente: "Cashonly",
-      categoria: "Música",
+      categoria: "Music video",
       anio: "2025",
       tamano: "normal",
       destacado: false,
@@ -135,7 +135,7 @@ window.CONTENIDO = {
     {
       titulo: "Let's Go Brazil",
       cliente: "Beautiful Destinations",
-      categoria: "Turismo",
+      categoria: "Travel",
       anio: "2025",
       tamano: "normal",
       destacado: false,
@@ -146,7 +146,7 @@ window.CONTENIDO = {
     {
       titulo: "Lençóis Maranhenses",
       cliente: "Beautiful Destinations",
-      categoria: "Turismo",
+      categoria: "Travel",
       anio: "2025",
       tamano: "normal",
       destacado: false,
@@ -157,7 +157,7 @@ window.CONTENIDO = {
     {
       titulo: "Pequeña África",
       cliente: "Visit Brazil",
-      categoria: "Turismo",
+      categoria: "Travel",
       anio: "2025",
       tamano: "normal",
       destacado: false,
@@ -168,7 +168,7 @@ window.CONTENIDO = {
     {
       titulo: "Ricardo Salinas — 70 años",
       cliente: "Ricardo Salinas",
-      categoria: "Evento",
+      categoria: "Event",
       anio: "2025",
       tamano: "grande",
       destacado: false,
@@ -179,7 +179,7 @@ window.CONTENIDO = {
     {
       titulo: "Brand Ambassador",
       cliente: "Atlética",
-      categoria: "Deporte",
+      categoria: "Sports",
       anio: "2025",
       tamano: "normal",
       destacado: false,
@@ -201,7 +201,7 @@ window.CONTENIDO = {
     {
       titulo: "Tequila Herradura x FICG",
       cliente: "Tequila Herradura",
-      categoria: "Evento",
+      categoria: "Event",
       anio: "2024",
       tamano: "normal",
       destacado: false,
@@ -212,7 +212,7 @@ window.CONTENIDO = {
     {
       titulo: "Alo Yoga x Javier Hernández",
       cliente: "Alo Yoga",
-      categoria: "Deporte",
+      categoria: "Sports",
       anio: "2024",
       tamano: "normal",
       destacado: false,
@@ -224,24 +224,24 @@ window.CONTENIDO = {
 
   /* ---------- NOSOTROS (about.html) ---------- */
   nosotros: {
-    titulo: "El resultado, antes que el ruido.",
+    titulo: "The result over the noise.",
     parrafos: [
-      "Casa productora audiovisual fundada en 2021 en Guadalajara, México. Contenido comercial para marcas globales — de la idea al master final.",
+      "Two Waves is a production company founded in 2021 in Guadalajara, México. Commercial content for global brands — built with clarity, intention and a distinctive creative standard, from idea to final master.",
     ],
     servicios: [
-      "Dirección", "Producción", "Cinematografía",
-      "Aéreos", "Postproducción", "Color",
+      "Direction", "Production", "Cinematography",
+      "Aerials", "Post-production", "Color",
     ],
   },
 
   /* ---------- CONTACTO (contact.html) ---------- */
   contacto: {
-    titulo: "Comencemos tu proyecto.",
+    titulo: "Let's start your project.",
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
     telefono: "",
     instagram: "https://www.instagram.com/twowaves.mx/",
     vimeo: "https://vimeo.com/twowavesfilms",
-    direccion: "Guadalajara, México",
+    direccion: "Guadalajara, MX",
   },
 };
