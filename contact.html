@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link rel="preconnect" href="https://f.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=26">
+  <link rel="stylesheet" href="css/estilo.css?v=27">
 </head>
 <body>
 
@@ -55,7 +55,6 @@
       <div class="bloque bloque--centrado">
         <span class="etiqueta">Contact</span>
         <h1 class="titulo-seccion" data-texto="contacto.titulo"></h1>
-        <a class="correo-grande" data-correo href="#" data-texto="contacto.correo"></a>
         <p class="etiqueta" style="text-align:center;" data-texto="contacto.direccion"></p>
 
         <!-- Formulario: en Netlify llega solo; en local abre tu correo -->
@@ -85,6 +84,15 @@
         <div style="display:flex; gap:1rem;">
           <a class="boton" data-red="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
           <a class="boton" data-red="vimeo" href="#" target="_blank" rel="noopener">Vimeo</a>
+        </div>
+
+        <!-- Firma: isotipo + datos de contacto -->
+        <div class="contacto-pie">
+          <svg class="contacto-pie_t" viewBox="0 0 41 34" aria-hidden="true"><g fill="#e7e2d6"><rect x="0" y="0.8" width="29" height="6.2"/><rect x="10.7" y="0.8" width="7.6" height="33"/><circle cx="36.9" cy="3.9" r="3.9"/></g></svg>
+          <div class="contacto-pie_datos">
+            <a class="contacto-pie_dato" data-correo href="#" data-texto="contacto.correo"></a>
+            <a class="contacto-pie_dato" data-telefono href="#"></a>
+          </div>
         </div>
       </div>
     </section>
@@ -161,7 +169,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="contenido.js?v=26"></script>
-  <script src="js/app.js?v=26"></script>
+  <script src="contenido.js?v=27"></script>
+  <script src="js/app.js?v=27"></script>
 </body>
 </html>

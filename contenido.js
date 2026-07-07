@@ -326,7 +326,7 @@ window.CONTENIDO = {
     titulo: "Let's create something remarkable.",
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
-    telefono: "",
+    telefono: "", // ⚠️ Escribe aquí tu número (ej. "+52 33 1234 5678") y aparecerá en Contact
     instagram: "https://www.instagram.com/twowaves.mx/",
     vimeo: "https://vimeo.com/twowavesfilms",
     direccion: "Guadalajara, MX",

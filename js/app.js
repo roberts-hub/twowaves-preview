@@ -70,6 +70,17 @@
   // Año dinámico
   $$("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
+  // Teléfono de contacto: visible solo si está definido en contenido.js
+  $$("[data-telefono]").forEach((el) => {
+    const tel = (C.contacto.telefono || "").trim();
+    if (tel) {
+      el.textContent = tel;
+      el.href = "tel:" + tel.replace(/[^+\d]/g, "");
+    } else {
+      el.style.display = "none";
+    }
+  });
+
   // Correo (mailto), redes sociales y lista de servicios
   $$("[data-correo]").forEach((el) => (el.href = "mailto:" + C.contacto.correo));
   $$("[data-red]").forEach((el) => {

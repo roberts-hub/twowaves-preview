@@ -808,6 +808,29 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   flex-wrap: wrap;
 }
 
+/* --- Firma del final de Contact: isotipo + datos --- */
+.contacto-pie {
+  display: grid;
+  justify-items: center;
+  gap: 1.1rem;
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+.contacto-pie_t { width: 34px; height: auto; opacity: 0.9; }
+.contacto-pie_datos {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.contacto-pie_dato {
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.contacto-pie_dato:hover { opacity: 1; color: var(--acento); }
+
 /* ============================================================
    MODAL DE AGRADECIMIENTO (formulario enviado)
    ============================================================ */
