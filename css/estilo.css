@@ -256,27 +256,28 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   border-block: 1px solid var(--linea);
 }
 .logos_contenedor { width: 100%; }
-.logos_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(110px, 14vw, 170px), 1fr));
-  gap: clamp(1.8rem, 3.5vw, 3.5rem) clamp(1.2rem, 2.5vw, 2.5rem);
+
+/* --- Slider horizontal de logos (derecha → izquierda) --- */
+.marquesina--logos { border-block: none; padding: 0.5rem 0; }
+.marquesina--logos .marquesina_pista {
   align-items: center;
-  justify-items: center;
+  gap: clamp(3.5rem, 7vw, 6.5rem);
+  padding-right: clamp(3.5rem, 7vw, 6.5rem);
+  animation-duration: 45s;
 }
-.logos_item { display: grid; place-items: center; min-height: 2.4rem; }
-.logos_img {
-  height: clamp(1.4rem, 2.4vw, 2.1rem);
+.marquesina_logo {
+  height: clamp(1.5rem, 2.5vw, 2.2rem);
   width: auto;
-  max-width: min(140px, 100%);
+  max-width: 170px;
   object-fit: contain;
   /* Refuerzo: cualquier PNG con transparencia se pinta blanco puro */
   filter: brightness(0) invert(1);
-  opacity: 0.75;
+  opacity: 0.8;
   transition: opacity 0.3s ease;
 }
-.logos_item:hover .logos_img { opacity: 1; }
+.marquesina_logo:hover { opacity: 1; }
 
-/* --- Marquesina de texto (respaldo mientras no hay logos) --- */
+/* --- Marquesina (pista deslizante; con texto como respaldo) --- */
 .marquesina {
   padding: 2.2rem 0;
   border-block: 1px solid var(--linea);
