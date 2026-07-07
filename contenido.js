@@ -282,7 +282,7 @@ window.CONTENIDO = {
   nosotros: {
     titulo: "The result over the noise.",
     parrafos: [
-      "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final master.",
+      "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final product.",
     ],
     servicios: [
       "Direction", "Production", "Cinematography",
