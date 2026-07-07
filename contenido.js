@@ -31,7 +31,7 @@ window.CONTENIDO = {
     tituloLinea1: "Visual narratives",
     tituloAcento: "with intention.",
     tituloLinea2: "",
-    subtitulo: "Production company — Guadalajara, MX",
+    subtitulo: "Based in Mexico — Available worldwide",
     videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
     imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
