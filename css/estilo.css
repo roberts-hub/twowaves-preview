@@ -7,8 +7,8 @@
 
 :root {
   /* --- Paleta (grafito + hueso + greige muted) --- */
-  --fondo: #121211;        /* grafito cálido — fondo base */
-  --fondo-2: #1a1a18;      /* panel apenas más claro */
+  --fondo: #0e0e0d;        /* grafito cálido — fondo base */
+  --fondo-2: #151514;      /* panel apenas más claro */
   --profundo: #0b0b0a;     /* el negro más profundo (hero, pie) */
   --texto: #e7e2d6;        /* hueso / alabastro — texto principal */
   --acento: #b0a595;       /* greige muted — único acento, usado poco */
