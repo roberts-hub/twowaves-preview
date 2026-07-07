@@ -253,12 +253,17 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   display: grid;
   gap: clamp(2rem, 4vw, 3rem);
   justify-items: center;
-  border-block: 1px solid var(--linea);
 }
 .logos_contenedor { width: 100%; }
 
 /* --- Slider horizontal de logos (derecha → izquierda) --- */
-.marquesina--logos { border-block: none; padding: 0.5rem 0; }
+.marquesina--logos {
+  border-block: none;
+  padding: 0.5rem 0;
+  /* Desvanecido en los extremos: los logos entran y salen en fade */
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
 .marquesina--logos .marquesina_pista {
   align-items: center;
   gap: clamp(3.5rem, 7vw, 6.5rem);
