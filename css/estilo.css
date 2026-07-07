@@ -69,18 +69,28 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   background: var(--profundo);
   display: grid;
   place-items: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  /* La salida es en dos tiempos: primero se disuelve el logo (abajo),
+     y con un pequeño retraso se funde el fondo — nada corta en seco */
+  transition: opacity 1s cubic-bezier(0.45, 0, 0.15, 1) 0.4s, visibility 1s ease 0.4s;
 }
 .precarga.fuera { opacity: 0; visibility: hidden; }
 .precarga_logo { display: grid; justify-items: center; }
 .precarga_t {
-  width: clamp(76px, 10vw, 118px);
+  width: clamp(64px, 8vw, 96px);
   height: auto;
   opacity: 0;
   filter: blur(18px);
   animation:
     precarga-revela 2.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards,
     precarga-respira 2.3s ease-in-out 2.3s infinite;
+  transition: opacity 0.65s ease, filter 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* El logo se despide igual que llegó: se difumina y crece apenas */
+.precarga.fuera .precarga_t {
+  animation: none;
+  opacity: 0;
+  filter: blur(14px);
+  transform: scale(1.12);
 }
 /* El punto pulsa como luz de grabación: la señal de que sigue cargando */
 .precarga_t circle {

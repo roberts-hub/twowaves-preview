@@ -34,7 +34,7 @@
         quitada = true;
         precarga.classList.add("fuera");
         sessionStorage.setItem("intro-vista", "1");
-        setTimeout(() => precarga.remove(), 700);
+        setTimeout(() => precarga.remove(), 1500);
       };
       const inicio = performance.now();
       const intentar = () => {
