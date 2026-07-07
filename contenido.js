@@ -78,6 +78,8 @@ window.CONTENIDO = {
        tamano      → "grande" (ancho completo) o "normal" (media columna)
        destacado   → true = también aparece en la portada
        miniatura   → imagen que se ve antes del hover
+       posicion    → (opcional) encuadre de la miniatura, ej. "82% 50%"
+                     (izquierda–derecha % y arriba–abajo %)
        videoHover  → .mp4 corto y silencioso que se reproduce al pasar el mouse
                      (déjalo en "" si no tienes preview)
        video       → el video completo que abre el reproductor:
@@ -101,6 +103,7 @@ window.CONTENIDO = {
     {
       titulo: "Cupra Formentor",
       descripcion: "CUPRA Formentor — performance and design, shot for the road.",
+      posicion: "82% 50%",
       cliente: "Cupra",
       categoria: "Commercial",
       anio: "2024",

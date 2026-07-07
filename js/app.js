@@ -213,6 +213,7 @@
       // La primera tarjeta (grande) carga con prioridad; el resto en diferido
       '<img src="' + p.miniatura + '" alt="' + p.titulo + '" decoding="async" ' +
       (p.tamano === "grande" ? 'fetchpriority="high"' : 'loading="lazy"') +
+      (p.posicion ? ' style="object-position:' + p.posicion + '"' : "") +
       ' onerror="this.onerror=null;this.src=\'assets/img/placeholder.svg\'">' +
       (p.videoHover
         ? '<video muted loop playsinline preload="none" src="' + p.videoHover + '"></video>'

@@ -17,7 +17,7 @@
 
   /* --- Tipografías --- */
   --fuente-titulos: "Archivo", sans-serif;
-  --fuente-acento: "Fraunces", serif;   /* serif de acento (old-style con carácter) */
+  --fuente-acento: "Archivo", sans-serif;   /* acentos: misma grotesca, en contorno */
   --fuente-texto: "Archivo", sans-serif;
 
   /* --- Métricas --- */
@@ -78,16 +78,20 @@ h1, h2, h3 {
 }
 .titulo-gigante { font-size: clamp(2.8rem, 8.5vw, 8rem); text-transform: uppercase; }
 .titulo-seccion { font-size: clamp(2rem, 5vw, 4.2rem); text-transform: uppercase; }
+/* Palabras de acento: la misma grotesca pero EN CONTORNO (outline).
+   Mantiene una sola familia tipográfica en todo el sitio. */
 .acento-serif {
   font-family: var(--fuente-acento);
   font-style: normal;
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: -0.015em;
+  font-weight: 480;
+  letter-spacing: -0.01em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+  paint-order: stroke fill;
 }
-h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
+h1 .acento-serif, h2 .acento-serif { color: var(--texto); }
 [data-tema="acento"] h1 .acento-serif, [data-tema="acento"] h2 .acento-serif,
-[data-tema="luz"] h1 .acento-serif, [data-tema="luz"] h2 .acento-serif { color: #6e675c; }
+[data-tema="luz"] h1 .acento-serif, [data-tema="luz"] h2 .acento-serif { color: #141412; }
 .parrafo { font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.55; max-width: 42ch; }
 .etiqueta {
   font-size: 0.72rem;
@@ -318,9 +322,10 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .marquesina:hover .marquesina_pista { animation-play-state: paused; }
 .marquesina_item {
-  font-family: var(--fuente-acento);
-  font-style: normal;
-  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   opacity: 0.45;
 }
 @keyframes desfile { to { transform: translateX(-100%); } }
@@ -525,9 +530,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .formulario_gracias { color: var(--acento); opacity: 1; }
 
 .correo-grande {
-  font-family: var(--fuente-acento);
+  font-family: var(--fuente-titulos);
   font-style: normal;
-  font-size: clamp(1.6rem, 5vw, 4rem);
+  font-weight: 480;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.5rem, 4.5vw, 3.6rem);
   border-bottom: 1px solid currentColor;
   transition: color 0.3s ease;
 }
