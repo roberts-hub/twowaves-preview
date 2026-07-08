@@ -255,6 +255,48 @@
       if (e.target === modalGracias || e.target.closest("[data-cerrar-gracias]")) cerrar();
     });
   }
+  // Selector de lada con banderas + campo de teléfono solo numérico
+  const selectLada = $("[data-lada]");
+  if (selectLada) {
+    const paises = [
+      ["🇲🇽 México", "+52"], ["🇺🇸 United States", "+1"], ["🇨🇦 Canada", "+1"],
+      ["🇦🇷 Argentina", "+54"], ["🇧🇴 Bolivia", "+591"], ["🇧🇷 Brasil", "+55"],
+      ["🇨🇱 Chile", "+56"], ["🇨🇴 Colombia", "+57"], ["🇨🇷 Costa Rica", "+506"],
+      ["🇨🇺 Cuba", "+53"], ["🇩🇴 Rep. Dominicana", "+1809"], ["🇪🇨 Ecuador", "+593"],
+      ["🇸🇻 El Salvador", "+503"], ["🇬🇹 Guatemala", "+502"], ["🇭🇳 Honduras", "+504"],
+      ["🇳🇮 Nicaragua", "+505"], ["🇵🇦 Panamá", "+507"], ["🇵🇾 Paraguay", "+595"],
+      ["🇵🇪 Perú", "+51"], ["🇵🇷 Puerto Rico", "+1787"], ["🇺🇾 Uruguay", "+598"],
+      ["🇻🇪 Venezuela", "+58"], ["🇪🇸 España", "+34"], ["🇬🇧 United Kingdom", "+44"],
+      ["🇫🇷 France", "+33"], ["🇩🇪 Germany", "+49"], ["🇮🇹 Italy", "+39"],
+      ["🇵🇹 Portugal", "+351"], ["🇳🇱 Netherlands", "+31"], ["🇨🇭 Switzerland", "+41"],
+      ["🇸🇪 Sweden", "+46"], ["🇦🇺 Australia", "+61"], ["🇳🇿 New Zealand", "+64"],
+      ["🇯🇵 Japan", "+81"], ["🇰🇷 South Korea", "+82"], ["🇨🇳 China", "+86"],
+      ["🇮🇳 India", "+91"], ["🇦🇪 U.A.E.", "+971"], ["🇸🇦 Saudi Arabia", "+966"],
+      ["🇿🇦 South Africa", "+27"],
+    ];
+    selectLada.innerHTML = paises
+      .map(([nombre, lada]) => {
+        const bandera = nombre.split(" ")[0];
+        return '<option value="' + lada + '" data-bandera="' + bandera + '">' + nombre + " (" + lada + ")</option>";
+      })
+      .join("");
+    selectLada.value = "+52"; // México por defecto
+    // Cerrado muestra solo bandera + lada (visor); la lista completa al abrir
+    const visor = selectLada.closest(".telefono_lada_caja").querySelector(".telefono_lada_visor");
+    const pintarVisor = () => {
+      const op = selectLada.selectedOptions[0];
+      visor.textContent = op.dataset.bandera + " " + op.value + " ▾";
+    };
+    selectLada.addEventListener("change", pintarVisor);
+    pintarVisor();
+  }
+  $$("[data-solo-numeros]").forEach((campo) => {
+    campo.addEventListener("input", () => {
+      const limpio = campo.value.replace(/\D/g, "");
+      if (campo.value !== limpio) campo.value = limpio;
+    });
+  });
+
   if (formulario) {
     // Los mensajes llegan directo al correo (contacto.correoFormulario)
     // vía FormSubmit, con formato de tabla. El visitante nunca sale del sitio.
@@ -273,7 +315,7 @@
           body: JSON.stringify({
             Name: d.get("nombre"),
             Email: d.get("correo"),
-            Phone: d.get("telefono"),
+            Phone: ((d.get("lada") || "") + " " + d.get("telefono")).trim(),
             Message: d.get("mensaje"),
             _subject: "Project inquiry — " + d.get("nombre"),
             _template: "table",
@@ -289,7 +331,7 @@
         const cuerpo =
           "Name: " + d.get("nombre") +
           "\nEmail: " + d.get("correo") +
-          "\nPhone: " + d.get("telefono") +
+          "\nPhone: " + ((d.get("lada") || "") + " " + d.get("telefono")).trim() +
           "\n\n" + d.get("mensaje");
         location.href =
           "mailto:" + destino +

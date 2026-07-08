@@ -728,6 +728,32 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   resize: vertical;
 }
 .formulario input:focus, .formulario textarea:focus { border-color: var(--texto); }
+/* Teléfono: selector de lada con bandera + número solo dígitos */
+.telefono_grupo { display: flex; gap: 0.9rem; align-items: end; }
+.telefono_grupo input { flex: 1; min-width: 0; }
+.telefono_lada_caja {
+  position: relative;
+  border-bottom: 1px solid var(--linea);
+  transition: border-color 0.3s ease;
+}
+.telefono_lada_caja:focus-within { border-color: var(--texto); }
+.telefono_lada_visor {
+  display: inline-block;
+  padding: 0.55rem 0.1rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.telefono_lada {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font: inherit;
+}
 .formulario_enviar { justify-self: start; }
 .formulario_gracias { color: var(--acento); opacity: 1; }
 
