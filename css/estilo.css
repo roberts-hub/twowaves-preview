@@ -317,7 +317,16 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   background: currentColor;
   opacity: 0.65;
 }
-@media (max-width: 640px) { .hero_ubicacion { gap: 0.6rem; } .hero_ubicacion_linea { width: clamp(1.2rem, 6vw, 2.5rem); } }
+/* En móvil se apila en dos líneas con la rayita como separador */
+@media (max-width: 640px) {
+  .hero_ubicacion {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    white-space: normal;
+  }
+  .hero_ubicacion_linea { width: 1.6rem; }
+}
 .hero_base {
   position: absolute;
   left: var(--margen); right: var(--margen);
