@@ -345,7 +345,7 @@ window.CONTENIDO = {
 
   /* ---------- CONTACTO (contact.html) ---------- */
   contacto: {
-    titulo: "Let's create something remarkable.",
+    titulo: "Let's create something\nremarkable.",
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
     whatsapp: "523331290485", // botón flotante de WhatsApp

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link rel="preconnect" href="https://f.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=38">
+  <link rel="stylesheet" href="css/estilo.css?v=39">
 </head>
 <body>
 
@@ -53,9 +53,7 @@
   <main id="contenido">
     <section class="seccion" data-tema="profundo" style="min-height: 100svh; display: grid; align-content: center;">
       <div class="bloque bloque--centrado">
-        <span class="etiqueta">Contact</span>
         <h1 class="titulo-seccion" data-texto="contacto.titulo"></h1>
-        <p class="etiqueta" style="text-align:center;" data-texto="contacto.direccion"></p>
 
         <!-- Formulario: en Netlify llega solo; en local abre tu correo -->
         <form class="formulario" name="contacto" method="POST" data-netlify="true" data-formulario>
@@ -81,17 +79,22 @@
           <button class="boton formulario_enviar" type="submit">Send</button>
         </form>
 
-        <div style="display:flex; gap:1rem;">
-          <a class="boton" data-red="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
-          <a class="boton" data-red="vimeo" href="#" target="_blank" rel="noopener">Vimeo</a>
-        </div>
-
-        <!-- Firma: isotipo + datos de contacto -->
+        <!-- Firma: isotipo + datos de contacto con iconos -->
         <div class="contacto-pie">
           <svg class="contacto-pie_t" viewBox="0 0 41 34" aria-hidden="true"><g fill="#e7e2d6"><rect x="0" y="0.8" width="29" height="6.2"/><rect x="10.7" y="0.8" width="7.6" height="33"/><circle cx="36.9" cy="3.9" r="3.9"/></g></svg>
           <div class="contacto-pie_datos">
-            <a class="contacto-pie_dato" data-correo href="#" data-texto="contacto.correo"></a>
-            <a class="contacto-pie_dato" data-telefono href="#"></a>
+            <a class="contacto-pie_dato" data-correo href="#">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>
+              <span data-texto="contacto.correo"></span>
+            </a>
+            <a class="contacto-pie_dato" data-telefono href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02l-2.2 2.2Z"/></svg>
+              <span data-telefono-texto></span>
+            </a>
+            <a class="contacto-pie_dato" data-red="instagram" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>
+              <span>@twowaves.mx</span>
+            </a>
           </div>
         </div>
       </div>
@@ -175,7 +178,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="contenido.js?v=38"></script>
-  <script src="js/app.js?v=38"></script>
+  <script src="contenido.js?v=39"></script>
+  <script src="js/app.js?v=39"></script>
 </body>
 </html>

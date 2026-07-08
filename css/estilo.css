@@ -838,12 +838,16 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   justify-content: center;
 }
 .contacto-pie_dato {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--fuente-mono);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   opacity: 0.75;
   transition: opacity 0.3s ease, color 0.3s ease;
 }
+.contacto-pie_dato svg { width: 17px; height: 17px; flex: none; opacity: 0.9; }
 .contacto-pie_dato:hover { opacity: 1; color: var(--acento); }
 
 /* --- Botón flotante de WhatsApp --- */

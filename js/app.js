@@ -76,7 +76,17 @@
   // Textos sueltos: <span data-texto="portada.subtitulo"></span>
   $$("[data-texto]").forEach((el) => {
     const valor = el.dataset.texto.split(".").reduce((o, k) => (o ? o[k] : ""), C);
-    if (valor) el.textContent = valor;
+    if (valor) {
+      // Un salto de línea (\n) en contenido.js parte el texto en dos líneas
+      if (typeof valor === "string" && valor.includes("\n")) {
+        el.innerHTML = valor
+          .split("\n")
+          .map((t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"))
+          .join("<br>");
+      } else {
+        el.textContent = valor;
+      }
+    }
   });
 
   // Año dinámico
@@ -110,7 +120,8 @@
   $$("[data-telefono]").forEach((el) => {
     const tel = (C.contacto.telefono || "").trim();
     if (tel) {
-      el.textContent = tel;
+      // Si el enlace trae icono, el número va en su span interno
+      (el.querySelector("[data-telefono-texto]") || el).textContent = tel;
       el.href = "tel:" + tel.replace(/[^+\d]/g, "");
     } else {
       el.style.display = "none";
