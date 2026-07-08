@@ -306,19 +306,34 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .hero_titulo { margin-bottom: 0; }
 
-/* Botón outlined del hero (como la referencia) */
+/* CTA del hero: sin borde, tipografía como los nav links (Home) y
+   subrayado animado como el "Get in touch" de arriba */
 .hero_cta {
-  border: 1px solid rgba(231, 226, 214, 0.7);
-  border-radius: 99px;
-  padding: 0.55rem 1.15rem;
-  font-family: var(--fuente-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
+  position: relative;
+  display: inline-flex;
+  justify-self: start;
+  font-family: var(--fuente-titulos);
+  font-size: 1rem;
+  font-weight: 650;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+  letter-spacing: -0.01em;
+  padding: 0.35rem 0;
+  opacity: 0.9;
+  transition: opacity 0.25s ease;
 }
-.hero_cta:hover { background: var(--texto); border-color: var(--texto); color: var(--profundo); }
+.hero_cta::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.32);
+  transform-origin: left;
+  opacity: 0.4;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+.hero_cta:hover { opacity: 1; }
+.hero_cta:hover::after { transform: scaleX(1); opacity: 1; }
 
 /* Línea inferior del header: ubicación a la izquierda, Scroll a la derecha */
 .hero_base .etiqueta { font-weight: 600; opacity: 0.9; font-size: 0.85rem; }
