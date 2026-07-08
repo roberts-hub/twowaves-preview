@@ -335,8 +335,24 @@
       const boton = formulario.querySelector("[type=submit]");
       const d = new FormData(formulario);
       const destino = C.contacto.correoFormulario || C.contacto.correo;
+      const telCompleto = ((d.get("lada") || "") + " " + d.get("telefono")).trim();
       boton.disabled = true;
       boton.textContent = "Sending…";
+
+      // Además del correo, guardamos cada envío en una Google Sheet (base de
+      // datos de prospectos). Fire-and-forget: si falla, no afecta el correo.
+      if (C.contacto.hojaCalculo) {
+        fetch(C.contacto.hojaCalculo, {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams({
+            nombre: d.get("nombre") || "",
+            correo: d.get("correo") || "",
+            telefono: telCompleto,
+            mensaje: d.get("mensaje") || "",
+          }),
+        }).catch(() => {});
+      }
       try {
         const resp = await fetch("https://formsubmit.co/ajax/" + destino, {
           method: "POST",

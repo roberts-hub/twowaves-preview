@@ -352,6 +352,9 @@ window.CONTENIDO = {
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
     correoFormulario: "info@twowaves.mx", // aquí llegan los mensajes del formulario
+    // Base de datos de prospectos: pega aquí la URL del Web App de Google
+    // Apps Script (termina en /exec). Si lo dejas en "", solo llega por correo.
+    hojaCalculo: "",
     whatsapp: "523331290485", // botón flotante de WhatsApp
     whatsappMensaje: "Hola! Me gustaría cotizar un proyecto.", // mensaje prellenado al abrir el chat
     telefono: "+52 33 3129 0485",
