@@ -7,6 +7,12 @@
 
 (function () {
   "use strict";
+  // Limpia ".html" de la barra de direcciones si alguien entra por una URL
+  // con extensión (ej. bookmark viejo o /index.html). Solo cosmético, sin recarga.
+  if (/\.html$/.test(location.pathname)) {
+    const limpio = location.pathname.replace(/index\.html$/, "").replace(/\.html$/, "") || "/";
+    try { history.replaceState(null, "", limpio + location.search + location.hash); } catch (_) {}
+  }
   const C = window.CONTENIDO;
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
