@@ -801,17 +801,16 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .pie_columna { display: grid; gap: 0.5rem; align-content: start; }
 .pie_columna a { opacity: 0.75; transition: opacity 0.25s ease, color 0.25s ease; font-size: 0.95rem; }
 .pie_columna a:hover { opacity: 1; }
-.pie_marca {
+/* Títulos de columna del pie: misma tipografía ancha de los headings */
+.pie_titulo {
   font-family: var(--fuente-titulos);
-  font-size: clamp(3rem, 12vw, 10rem);
   font-weight: 750;
-  letter-spacing: -0.03em;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  line-height: 0.9;
-  user-select: none;
-  color: var(--texto);
-  opacity: 0.92;
+  margin-bottom: 0.5rem;
 }
+.pie_nota { font-size: 0.75rem; opacity: 0.55; margin-top: 0.3rem; }
 .pie_legal {
   display: flex;
   justify-content: space-between;
@@ -827,7 +826,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .contacto-pie {
   display: grid;
   justify-items: center;
-  gap: clamp(1.8rem, 4vw, 2.8rem);
+  gap: clamp(2.4rem, 5.5vw, 3.8rem);
   margin-top: clamp(3.5rem, 9vw, 6.5rem);
 }
 .contacto-pie_t { width: 34px; height: auto; opacity: 0.9; }
