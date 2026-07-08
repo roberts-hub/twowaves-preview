@@ -354,7 +354,7 @@ window.CONTENIDO = {
     correoFormulario: "info@twowaves.mx", // aquí llegan los mensajes del formulario
     // Base de datos de prospectos: pega aquí la URL del Web App de Google
     // Apps Script (termina en /exec). Si lo dejas en "", solo llega por correo.
-    hojaCalculo: "",
+    hojaCalculo: "https://script.google.com/macros/s/AKfycbyXAKcElWQCcNp4DMMqn5rDeuxBtIxe0OpNH32Cci8SeDLMuu0ytUkBM_5jKqdbYYn9tA/exec",
     whatsapp: "523331290485", // botón flotante de WhatsApp
     whatsappMensaje: "Hola! Me gustaría cotizar un proyecto.", // mensaje prellenado al abrir el chat
     telefono: "+52 33 3129 0485",
