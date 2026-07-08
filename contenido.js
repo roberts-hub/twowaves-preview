@@ -59,7 +59,6 @@ window.CONTENIDO = {
     { nombre: "Longines", logo: "assets/img/logos/longines.png" },
     { nombre: "Amazon Business", logo: "assets/img/logos/amazon-business.png" },
     { nombre: "Chase", logo: "assets/img/logos/chase.png" },
-    { nombre: "982", logo: "assets/img/logos/982.png" },
     { nombre: "Televisa", logo: "assets/img/logos/televisa.png" },
     { nombre: "TV Azteca", logo: "assets/img/logos/tv-azteca.png" },
     { nombre: "Beautiful Destinations", logo: "assets/img/logos/beautiful-destinations.png" },
@@ -150,6 +149,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Unlocking 982",
+      logoCliente: "assets/img/logos/982.png",
       descripcion: "Unlocking 982: supercars in black and white, engineering as visual language.",
       cliente: "982",
       categoria: "Automotive",

@@ -827,13 +827,13 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .contacto-pie {
   display: grid;
   justify-items: center;
-  gap: 1.1rem;
-  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  gap: clamp(1.8rem, 4vw, 2.8rem);
+  margin-top: clamp(3.5rem, 9vw, 6.5rem);
 }
 .contacto-pie_t { width: 34px; height: auto; opacity: 0.9; }
 .contacto-pie_datos {
   display: flex;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: clamp(2rem, 6vw, 4.5rem);
   flex-wrap: wrap;
   justify-content: center;
 }
