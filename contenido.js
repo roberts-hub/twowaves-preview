@@ -45,6 +45,7 @@ window.CONTENIDO = {
      chico, 1.2 = 20% más grande. */
   clientes: [
     { nombre: "Ford", logo: "assets/img/logos/ford.png" },
+    { nombre: "Audi", logo: "assets/img/logos/audi.png" },
     { nombre: "Cupra", logo: "assets/img/logos/cupra.png" },
     { nombre: "Lamborghini", logo: "assets/img/logos/lamborghini.png" },
     { nombre: "Porsche", logo: "assets/img/logos/porsche.png", escala: 0.5 },
@@ -57,6 +58,8 @@ window.CONTENIDO = {
     { nombre: "Kérastase", logo: "assets/img/logos/kerastase.png" },
     { nombre: "Longines", logo: "assets/img/logos/longines.png" },
     { nombre: "Amazon Business", logo: "assets/img/logos/amazon-business.png" },
+    { nombre: "Chase", logo: "assets/img/logos/chase.png" },
+    { nombre: "982", logo: "assets/img/logos/982.png" },
     { nombre: "Televisa", logo: "assets/img/logos/televisa.png" },
     { nombre: "TV Azteca", logo: "assets/img/logos/tv-azteca.png" },
     { nombre: "Beautiful Destinations", logo: "assets/img/logos/beautiful-destinations.png" },
