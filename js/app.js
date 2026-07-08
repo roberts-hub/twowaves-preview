@@ -29,13 +29,19 @@
     if (!paginaConVideo && yaVista) {
       precarga.remove();
     } else {
-      // Si la intro ya se vio en esta sesión, no repetimos la T: queda un
-      // velo negro sin logo que se suelta apenas el video ya reproduce.
-      const rapida = paginaConVideo && yaVista;
+      // Si la intro ya se vio en esta sesión, en HOME no repetimos la T:
+      // queda un velo negro sin logo que se suelta apenas el video reproduce.
+      // En About (video de encabezado más pesado) SIEMPRE mostramos la T,
+      // así el arranque en negro no se ve como un bug.
+      const esHome = !!$(".hero_fondo");
+      const rapida = esHome && yaVista;   // Home ya visto: velo negro sin T
+      const breve = !esHome && yaVista;   // About ya visto: T rápida, no la larga
       if (rapida) precarga.classList.add("precarga--rapida");
-      const MINIMO = rapida ? 0 : 2400;   // tiempo mínimo en pantalla
-      const COLCHON = rapida ? 150 : 700; // margen tras confirmar reproducción
-      const TOPE = rapida ? 2600 : 5600;  // tope duro
+      if (breve) precarga.classList.add("precarga--breve");
+      // Tiempos: rápida (velo) < breve (T corta) < completa (T con respiración)
+      const MINIMO = rapida ? 0 : breve ? 650 : 2400;   // tiempo mínimo en pantalla
+      const COLCHON = rapida ? 150 : breve ? 400 : 700; // margen tras confirmar reproducción
+      const TOPE = rapida ? 2600 : breve ? 4200 : 5600; // tope duro
       let quitada = false;
       const quitar = () => {
         if (quitada) return;
@@ -209,7 +215,11 @@
   // Headers secundarios con video de fondo (ej. About con Grand Island):
   // <section data-video-hero="ID|WxH|inicio"> — en play desde que entras
   $$("[data-video-hero]").forEach((sec) => {
-    if (reducirMovimiento || !window.matchMedia("(min-width: 700px)").matches) return;
+    if (reducirMovimiento || !window.matchMedia("(min-width: 700px)").matches) {
+      // Sin video (móvil / movimiento reducido): no hacemos esperar a la precarga
+      estadoHero.listo = true; estadoHero.avisar();
+      return;
+    }
     const [id, aspecto, inicioStr] = sec.dataset.videoHero.split("|");
     const inicio = parseFloat(inicioStr) || 1;
     const [aw, ah] = (aspecto || "16x9").split(/[x:]/).map(Number);
@@ -233,13 +243,18 @@
       let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
       if (d.event === "playProgress" || d.event === "timeupdate") {
         iframe.style.opacity = "1";
+        estadoHero.listo = true; estadoHero.avisar();
         window.removeEventListener("message", alMsj);
       }
     };
     window.addEventListener("message", alMsj);
     iframe.addEventListener("load", () => {
       iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
-      setTimeout(() => { if (document.visibilityState === "visible") iframe.style.opacity = "1"; }, 3500);
+      // Respaldo: si los eventos no llegan, revela y libera la precarga a los 3.5s
+      setTimeout(() => {
+        if (document.visibilityState === "visible") iframe.style.opacity = "1";
+        estadoHero.listo = true; estadoHero.avisar();
+      }, 3500);
     });
     $(".video-hero_fondo", sec).appendChild(iframe);
   });
