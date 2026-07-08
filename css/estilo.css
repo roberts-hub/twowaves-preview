@@ -141,7 +141,7 @@ h1, h2, h3 {
   line-height: 0.96;
   text-wrap: balance;
 }
-.titulo-gigante { font-size: clamp(2.8rem, 8.5vw, 8rem); text-transform: uppercase; }
+.titulo-gigante { font-size: clamp(2.2rem, 5.5vw, 5.1rem); text-transform: uppercase; }
 .titulo-seccion { font-size: clamp(2rem, 5vw, 4.2rem); text-transform: uppercase; }
 .acento-serif {
   font-family: var(--fuente-acento);
