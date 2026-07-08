@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0a">
+  <title>TWO WAVES — Mastermind</title>
+  <meta name="description" content="Mastermind presencial para filmmakers y creadores en Guadalajara. Un día intensivo con los fundadores de Two Waves. Cupo limitado a 20. Por aplicación.">
+  <meta property="og:title" content="TWO WAVES — Mastermind">
+  <meta property="og:description" content="Un día intensivo en Guadalajara con los fundadores de Two Waves. Negocio, técnica y los secretos de trabajar con marcas globales. Solo 20 lugares. Por aplicación.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://www.twowaves.mx/mastermind">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+
+  <!-- ============================================================
+       Estilos propios de la página Mastermind.
+       Reusa las variables y clases de estilo.css; aquí solo van
+       las piezas nuevas (datos del hero, agenda, FAQ, tarjetas).
+       ============================================================ -->
+  <style>
+    /* --- Fila de datos duros del hero --- */
+    .mm-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.6rem;
+      align-items: center;
+      font-family: var(--fuente-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .mm-datos span { display: inline-flex; align-items: center; gap: 0.9rem; }
+    .mm-datos span::after {
+      content: "";
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--acento);
+      opacity: 0.8;
+    }
+    .mm-datos span:last-child::after { display: none; }
+    .mm-nota-aplica {
+      font-family: var(--fuente-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      margin-top: 0.4rem;
+    }
+    /* CTA sólido reutilizable sobre fondo oscuro */
+    .mm-cta-solido {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: var(--texto); color: var(--profundo);
+      border-radius: 99px;
+      padding: 1rem 2.1rem;
+      font-family: var(--fuente-mono);
+      font-size: clamp(0.82rem, 1.3vw, 1rem);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), background 0.3s ease;
+    }
+    .mm-cta-solido::after { content: "→"; transition: transform 0.45s cubic-bezier(0.22,1,0.36,1); }
+    .mm-cta-solido:hover { transform: scale(1.04); }
+    .mm-cta-solido:hover::after { transform: translateX(0.35rem); }
+
+    /* --- Tarjetas "Qué te vas a llevar" (4) --- */
+    .mm-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1.2rem, 2.5vw, 2.4rem);
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
+    @media (max-width: 900px) { .mm-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .mm-cards { grid-template-columns: 1fr; } }
+    .mm-card {
+      border-top: 1px solid var(--linea);
+      padding-top: 1.2rem;
+      display: grid; gap: 0.7rem; align-content: start;
+    }
+    .mm-card_n { font-family: var(--fuente-mono); font-size: 1.2rem; color: var(--acento); }
+    .mm-card_t { font-size: 1.1rem; font-weight: 650; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.15; }
+    .mm-card_p { font-size: 0.92rem; line-height: 1.55; opacity: 0.75; }
+
+    /* --- Agenda "El día" --- */
+    .mm-agenda { display: grid; gap: 0; margin-top: clamp(2rem, 4vw, 3rem); }
+    .mm-agenda_item {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: clamp(1rem, 3vw, 2.5rem);
+      align-items: baseline;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--linea);
+    }
+    .mm-agenda_item:last-child { border-bottom: 1px solid var(--linea); }
+    .mm-agenda_n { font-family: var(--fuente-mono); font-size: 0.9rem; color: var(--acento); }
+    .mm-agenda_txt { display: grid; gap: 0.25rem; }
+    .mm-agenda_t { font-size: clamp(1.05rem, 1.6vw, 1.35rem); font-weight: 600; text-transform: uppercase; letter-spacing: 0.01em; }
+    .mm-agenda_d { font-size: 0.9rem; line-height: 1.5; opacity: 0.7; max-width: 52ch; }
+    .mm-agenda_t .mm-sorpresa { color: var(--acento); }
+
+    /* --- Banda de logos estática --- */
+    .mm-logos {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+      gap: clamp(2rem, 5vw, 4rem);
+      margin-top: clamp(2rem, 4vw, 3rem);
+    }
+    .mm-logos img {
+      height: clamp(1.8rem, 3vw, 2.7rem); width: auto; max-width: 150px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .mm-logos img:hover { opacity: 1; }
+
+    /* --- FAQ (acordeón) --- */
+    .mm-faq { margin-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--linea); }
+    .mm-faq_item { border-bottom: 1px solid var(--linea); }
+    .mm-faq_q {
+      width: 100%; text-align: left;
+      display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+      padding: 1.4rem 0.2rem;
+      font-family: var(--fuente-titulos);
+      font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+      font-weight: 600; text-transform: uppercase; letter-spacing: -0.01em;
+      color: inherit;
+    }
+    .mm-faq_signo { font-family: var(--fuente-mono); font-size: 1.4rem; color: var(--acento); flex: none; transition: transform 0.35s ease; }
+    .mm-faq_item.abierto .mm-faq_signo { transform: rotate(45deg); }
+    .mm-faq_a {
+      overflow: hidden; max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .mm-faq_a p {
+      padding: 0 0.2rem 1.5rem;
+      font-size: 0.98rem; line-height: 1.6; opacity: 0.78; max-width: 60ch;
+    }
+
+    /* --- Hosts: dos personas --- */
+    .mm-hosts_nombres { grid-template-columns: 1fr; }
+    .mm-host_bio { font-size: 0.92rem; line-height: 1.55; opacity: 0.75; max-width: 44ch; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+  <!-- ================= NAVEGACIÓN ================= -->
+  <header class="nav">
+    <a href="index.html" class="nav_logo">
+      <span>TWO WAVES</span>
+      <span class="nav_logo_films">Mastermind</span>
+    </a>
+    <nav class="nav_links" aria-label="Navegación">
+      <a class="nav_link" href="#el-dia">El día</a>
+      <a class="nav_link" href="#hosts">Hosts</a>
+      <a class="nav_link" href="#faq">FAQ</a>
+      <span class="nav_borde"></span>
+    </nav>
+    <a class="nav_cta boton" href="https://wa.me/523331290485?text=Hola!%20Quiero%20aplicar%20al%20Mastermind%20de%20Two%20Waves." data-aplicar>Aplica por tu lugar</a>
+    <button class="nav_hamburguesa" aria-label="Abrir menú"><i></i><i></i><i></i></button>
+  </header>
+
+  <div class="menu-movil">
+    <a href="#el-dia"><span>El día</span></a>
+    <a href="#hosts"><span>Hosts</span></a>
+    <a href="#faq"><span>FAQ</span></a>
+    <a href="https://wa.me/523331290485?text=Hola!%20Quiero%20aplicar%20al%20Mastermind%20de%20Two%20Waves." data-aplicar><span>Aplicar</span></a>
+  </div>
+
+  <main id="contenido">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero seccion" data-tema="profundo">
+      <div class="hero_fondo">
+        <img src="assets/img/bear-grylls-heli.jpg" alt="" aria-hidden="true">
+      </div>
+      <div class="hero_contenido">
+        <span class="etiqueta">TWO WAVES · MASTERMIND</span>
+        <h1 class="titulo-hero hero_titulo">Lleva tu casa productora al <span class="acento-serif">siguiente nivel.</span></h1>
+        <p class="parrafo" style="max-width: 52ch;">Un día intensivo en Guadalajara con los fundadores de Two Waves. Negocio, técnica y los secretos de trabajar con marcas globales. Para filmmakers y creadores que van en serio.</p>
+        <a class="mm-cta-solido" href="https://wa.me/523331290485?text=Hola!%20Quiero%20aplicar%20al%20Mastermind%20de%20Two%20Waves." data-aplicar>Aplica por tu lugar</a>
+        <span class="mm-nota-aplica">2 min de aplicación · Cada solicitud se revisa personalmente</span>
+      </div>
+      <div class="hero_base">
+        <span class="mm-datos">
+          <span>Guadalajara, MX</span>
+          <span>18 Ago 2026 · tentativo</span>
+          <span>20 lugares</span>
+          <span>Por aplicación</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- ================= PARA QUIÉN / TESIS ================= -->
+    <section class="seccion" data-tema="base">
+      <div class="bloque intro-nosotros">
+        <p class="parrafo intro-nosotros_texto" data-revelar>Construido para participar, no para ver. Un grupo reducido de filmmakers y creadores que quieren convertir su talento en un negocio que escale: una casa productora con dirección, clientes y estructura.</p>
+        <ul class="lista-servicios" data-revelar>
+          <li>Escalar</li>
+          <li>Monetizar</li>
+          <li>Técnica</li>
+          <li>Marcas</li>
+          <li>Mentoría</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= QUÉ TE VAS A LLEVAR ================= -->
+    <section class="seccion" data-tema="panel">
+      <div class="bloque" style="padding-bottom: clamp(3.5rem, 8vw, 7rem);">
+        <span class="etiqueta" data-revelar>Lo que te llevas</span>
+        <h2 class="titulo-seccion" data-revelar style="margin-top: 0.6rem;">Un día, todo lo que <span class="acento-serif">nadie te cuenta.</span></h2>
+        <div class="mm-cards">
+          <div class="mm-card" data-revelar>
+            <span class="mm-card_n">01</span>
+            <span class="mm-card_t">Escalar el negocio</span>
+            <p class="mm-card_p">Cómo crecer y estructurar tu casa productora: precios, procesos y equipo para dejar de improvisar.</p>
+          </div>
+          <div class="mm-card" data-revelar>
+            <span class="mm-card_n">02</span>
+            <span class="mm-card_t">Técnica y secretos</span>
+            <p class="mm-card_p">Lo que no se enseña en un curso: decisiones de dirección, cámara y post que se ganan con años en set.</p>
+          </div>
+          <div class="mm-card" data-revelar>
+            <span class="mm-card_n">03</span>
+            <span class="mm-card_t">Marcas globales</span>
+            <p class="mm-card_p">Cómo llegamos a clientes de marca y turismo de estado, y cómo posicionarte para trabajar en esa liga.</p>
+          </div>
+          <div class="mm-card" data-revelar>
+            <span class="mm-card_n">04</span>
+            <span class="mm-card_t">Acceso y mentoría</span>
+            <p class="mm-card_p">Tiempo directo con nosotros para tus preguntas, tu portafolio y tu siguiente paso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOSTS ================= -->
+    <section class="seccion" id="hosts" data-tema="profundo">
+      <div class="fundadores">
+        <div class="fundadores_foto">
+          <img src="assets/img/founders.jpg" alt="Roberto y Rogelio, fundadores de Two Waves">
+        </div>
+        <div class="fundadores_texto">
+          <span class="etiqueta" data-revelar>Los hosts</span>
+          <h2 class="titulo-seccion" data-revelar>Roberto <span class="acento-serif">&</span> Rogelio</h2>
+          <p class="parrafo" data-revelar>Años en la industria trabajando con marcas globales y turismo de estados, generando cientos de miles de dólares en revenue con Two Waves. No es teoría: es lo que hacemos todos los días.</p>
+          <div class="fundadores_nombres mm-hosts_nombres" data-revelar>
+            <div class="fundadores_nombre">
+              <span class="fundadores_nombre_txt">Roberto Arechederra</span>
+              <a class="fundadores_ig" href="https://www.instagram.com/robert.arre/" target="_blank" rel="noopener">@robert.arre</a>
+              <p class="mm-host_bio">Director / Filmmaker. Dirección creativa y relación con marcas.</p>
+            </div>
+            <div class="fundadores_nombre">
+              <span class="fundadores_nombre_txt">Rogelio Pérez</span>
+              <a class="fundadores_ig" href="https://www.instagram.com/roger.rpgfpv/" target="_blank" rel="noopener">@roger.rpgfpv</a>
+              <p class="mm-host_bio">FPV Pilot / Producer. Producción, dron y ejecución en set.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EL DÍA ================= -->
+    <section class="seccion" id="el-dia" data-tema="base">
+      <div class="bloque">
+        <span class="etiqueta" data-revelar>El día · programa tentativo</span>
+        <h2 class="titulo-seccion" data-revelar style="margin-top: 0.6rem;">Un día intensivo, <span class="acento-serif">en un estudio.</span></h2>
+        <div class="mm-agenda">
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">01</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Llegada y bienvenida</span>
+              <span class="mm-agenda_d">Café, registro y primeras conexiones con el grupo.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">02</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Masterclass: negocio y escala</span>
+              <span class="mm-agenda_d">Cómo estructurar, cobrar y crecer una casa productora.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">03</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Comida</span>
+              <span class="mm-agenda_d">Incluida. Networking en corto con hosts y asistentes.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">04</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Sesión práctica en estudio</span>
+              <span class="mm-agenda_d">Técnica, cámara y dirección aplicadas en vivo.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">05</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Mentoría y networking</span>
+              <span class="mm-agenda_d">Preguntas abiertas, revisión de portafolio y siguiente paso.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">06</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t">Cena</span>
+              <span class="mm-agenda_d">Cerramos el día juntos, en confianza.</span>
+            </span>
+          </div>
+          <div class="mm-agenda_item" data-revelar>
+            <span class="mm-agenda_n">07</span>
+            <span class="mm-agenda_txt">
+              <span class="mm-agenda_t"><span class="mm-sorpresa">Invitado sorpresa</span></span>
+              <span class="mm-agenda_d">Alguien de la industria que no verás venir.</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRUEBA SOCIAL / LOGOS ================= -->
+    <section class="seccion" data-tema="profundo">
+      <div class="bloque bloque--centrado">
+        <span class="etiqueta" data-revelar>Las marcas detrás de Two Waves</span>
+        <div class="mm-logos" data-revelar>
+          <img src="assets/img/logos/ford.png" alt="Ford">
+          <img src="assets/img/logos/audi.png" alt="Audi">
+          <img src="assets/img/logos/lamborghini.png" alt="Lamborghini">
+          <img src="assets/img/logos/red-bull.png" alt="Red Bull">
+          <img src="assets/img/logos/fifa.png" alt="FIFA">
+          <img src="assets/img/logos/beautiful-destinations.png" alt="Beautiful Destinations">
+          <img src="assets/img/logos/lexus.png" alt="Lexus">
+          <img src="assets/img/logos/alo-yoga.png" alt="Alo Yoga">
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="seccion" id="faq" data-tema="base">
+      <div class="bloque">
+        <span class="etiqueta" data-revelar>Preguntas</span>
+        <h2 class="titulo-seccion" data-revelar style="margin-top: 0.6rem;">Todo lo que <span class="acento-serif">necesitas saber.</span></h2>
+        <div class="mm-faq">
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Para quién es este mastermind?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>Para filmmakers y creadores de contenido que ya producen y quieren llevar su marca o casa productora al siguiente nivel: escalar, profesionalizarse y trabajar con mejores clientes.</p></div>
+          </div>
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Qué incluye?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>Un día completo con nosotros en un estudio: masterclass de negocio, sesión técnica práctica, comida, networking, cena y un invitado sorpresa. Además, acceso directo para mentoría.</p></div>
+          </div>
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Dónde y cuándo?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>En Guadalajara, en un estudio (sede por confirmar). Fecha tentativa: 18 de agosto de 2026. Confirmamos lugar y hora exactos a los seleccionados.</p></div>
+          </div>
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Cuántos lugares hay?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>Limitado a 20 personas. Lo mantenemos chico a propósito para que haya acceso real y conversación de calidad.</p></div>
+          </div>
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Cuál es la inversión?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>Es por aplicación. Compartimos la inversión en la llamada, una vez que confirmamos que hay match. Así nos aseguramos de que sea el lugar correcto para ti.</p></div>
+          </div>
+          <div class="mm-faq_item">
+            <button class="mm-faq_q">¿Cómo aplico?<span class="mm-faq_signo">+</span></button>
+            <div class="mm-faq_a"><p>Toca "Aplica por tu lugar", llena la aplicación de 2 minutos y nos pondremos en contacto con los seleccionados para una breve llamada.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA FINAL ================= -->
+    <section class="seccion" data-tema="luz">
+      <div class="bloque bloque--centrado">
+        <span class="etiqueta" data-revelar>20 lugares · Por aplicación</span>
+        <h2 class="titulo-seccion" data-revelar>¿Listo para dar el <span class="acento-serif">siguiente paso?</span></h2>
+        <a class="cta-boton" href="https://wa.me/523331290485?text=Hola!%20Quiero%20aplicar%20al%20Mastermind%20de%20Two%20Waves." data-aplicar data-revelar>Aplica por tu lugar</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= PIE ================= -->
+  <footer class="pie seccion" data-tema="profundo">
+    <div class="pie_superior">
+      <div class="pie_columna">
+        <span class="pie_titulo">Two Waves</span>
+        <a href="index.html">Inicio</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="pie_columna">
+        <span class="pie_titulo">Social</span>
+        <a href="https://www.instagram.com/twowaves.mx/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://vimeo.com/twowavesfilms" target="_blank" rel="noopener">Vimeo</a>
+      </div>
+      <div class="pie_columna">
+        <span class="pie_titulo">Contacto</span>
+        <a href="mailto:contacto@twowaves.mx">contacto@twowaves.mx</a>
+        <a href="tel:+523331290485">+52 33 3129 0485</a>
+        <span class="pie_nota">Guadalajara, MX</span>
+      </div>
+    </div>
+    <div class="pie_legal">
+      <span>© <span data-anio>2026</span> TWO WAVES. Todos los derechos reservados.</span>
+      <span>Guadalajara, MX · EST. 2021</span>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a class="whatsapp whatsapp--visible" href="https://wa.me/523331290485?text=Hola!%20Me%20interesa%20el%20Mastermind%20de%20Two%20Waves." target="_blank" rel="noopener" aria-label="WhatsApp">
+    <span class="whatsapp_tip">¿Dudas del Mastermind?</span>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16.04 5.33c-5.87 0-10.64 4.77-10.64 10.63 0 1.88.49 3.71 1.42 5.32L5.33 26.9l5.76-1.51a10.6 10.6 0 0 0 4.95 1.26h.01c5.86 0 10.63-4.77 10.63-10.64 0-2.84-1.1-5.51-3.11-7.52a10.57 10.57 0 0 0-7.53-3.16zm0 1.79c2.36 0 4.58.92 6.25 2.59a8.8 8.8 0 0 1 2.59 6.26c0 4.88-3.97 8.84-8.85 8.84a8.8 8.8 0 0 1-4.5-1.23l-.32-.19-3.34.88.89-3.26-.21-.34a8.79 8.79 0 0 1-1.35-4.7c0-4.88 3.97-8.85 8.84-8.85zm-3.9 4.03c-.18 0-.46.07-.7.33-.24.26-.92.9-.92 2.19 0 1.3.94 2.55 1.07 2.72.13.18 1.85 2.95 4.58 4.02 2.27.9 2.73.72 3.22.67.49-.04 1.58-.64 1.8-1.27.22-.62.22-1.16.16-1.27-.07-.11-.24-.18-.51-.31-.26-.13-1.58-.78-1.82-.87-.24-.09-.42-.13-.6.13-.18.27-.69.87-.84 1.05-.16.18-.31.2-.58.07a7.3 7.3 0 0 1-2.14-1.32 8.02 8.02 0 0 1-1.48-1.85c-.16-.26-.02-.41.11-.54.12-.12.27-.31.4-.47.13-.16.18-.27.27-.44.09-.18.04-.34-.02-.47-.07-.13-.59-1.44-.83-1.97-.2-.45-.41-.46-.6-.47l-.57-.01z"/></svg>
+  </a>
+
+  <!-- ================= JS mínimo y autocontenido ================= -->
+  <script>
+    // Año en el pie
+    document.querySelectorAll('[data-anio]').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
+
+    // Menú móvil
+    var hamburguesa = document.querySelector('.nav_hamburguesa');
+    var menuMovil = document.querySelector('.menu-movil');
+    if (hamburguesa && menuMovil) {
+      hamburguesa.addEventListener('click', function () {
+        var abierto = hamburguesa.classList.toggle('abierto');
+        menuMovil.style.clipPath = abierto ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)';
+        menuMovil.style.visibility = abierto ? 'visible' : 'hidden';
+      });
+      menuMovil.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          hamburguesa.classList.remove('abierto');
+          menuMovil.style.clipPath = 'inset(0 0 100% 0)';
+          menuMovil.style.visibility = 'hidden';
+        });
+      });
+    }
+
+    // FAQ acordeón
+    document.querySelectorAll('.mm-faq_q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.mm-faq_item');
+        var ans = item.querySelector('.mm-faq_a');
+        var abierto = item.classList.toggle('abierto');
+        ans.style.maxHeight = abierto ? ans.scrollHeight + 'px' : '0px';
+        btn.querySelector('.mm-faq_signo').textContent = '+';
+      });
+    });
+
+    // Reveal suave al hacer scroll (sin librerías)
+    var reveals = document.querySelectorAll('[data-revelar]');
+    reveals.forEach(function (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+    });
+    function revelarTodo() {
+      reveals.forEach(function (el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+      // Red de seguridad: si algo no se reveló (observer que no dispara,
+      // navegador raro, etc.), mostramos todo tras un momento.
+      setTimeout(revelarTodo, 1200);
+    } else {
+      revelarTodo();
+    }
+  </script>
+</body>
+</html>
