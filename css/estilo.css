@@ -883,6 +883,14 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 .contacto-pie_dato svg { width: 17px; height: 17px; flex: none; opacity: 0.9; }
+/* Variante de solo iconos: 3 logos pequeños, parejos y bien separados */
+.contacto-pie_datos--iconos { gap: clamp(2.6rem, 7vw, 4.2rem); }
+.contacto-pie_datos--iconos .contacto-pie_dato svg { width: 21px; height: 21px; }
+.contacto-pie_datos--iconos .contacto-pie_dato {
+  opacity: 0.8;
+  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.contacto-pie_datos--iconos .contacto-pie_dato:hover { opacity: 1; color: var(--acento); transform: translateY(-2px); }
 .contacto-pie_dato:hover { opacity: 1; color: var(--acento); }
 
 /* --- Botón flotante de WhatsApp --- */

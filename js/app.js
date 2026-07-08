@@ -116,6 +116,14 @@
     }, 1000);
   });
 
+  // Enlaces simples a WhatsApp (sin el temporizador del botón flotante)
+  $$("[data-whatsapp-enlace]").forEach((el) => {
+    const num = (C.contacto.whatsapp || "").replace(/[^\d]/g, "");
+    if (!num) { el.style.display = "none"; return; }
+    const msj = C.contacto.whatsappMensaje || "";
+    el.href = "https://wa.me/" + num + (msj ? "?text=" + encodeURIComponent(msj) : "");
+  });
+
   // Teléfono de contacto: visible solo si está definido en contenido.js
   $$("[data-telefono]").forEach((el) => {
     const tel = (C.contacto.telefono || "").trim();
