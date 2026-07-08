@@ -307,11 +307,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .hero_cta:hover { background: var(--texto); border-color: var(--texto); color: var(--profundo); }
 
 /* Línea inferior del header: ubicación a la izquierda, Scroll a la derecha */
-.hero_base .etiqueta { font-weight: 600; opacity: 0.9; }
+.hero_base .etiqueta { font-weight: 600; opacity: 0.9; font-size: 0.85rem; }
 .hero_base {
   position: absolute;
   left: var(--margen); right: var(--margen);
-  bottom: 1.1rem;
+  bottom: clamp(2rem, 4.5vh, 3.2rem);
   z-index: 2;
   display: flex;
   justify-content: space-between;
@@ -322,7 +322,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 
 .hero_scroll {
   font-family: var(--fuente-mono);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;

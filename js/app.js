@@ -344,25 +344,18 @@
     });
   }
 
-  // Hero de portada: poster inmediato + video después (optimizado)
+  // Hero de portada: NUNCA se muestra poster/thumbnail. El fondo queda en
+  // negro y el video entra con un fundido suave cuando ya está reproduciendo
+  // (también en celular).
   const heroFondo = $("[data-hero-fondo]");
   if (heroFondo) {
-    const img = document.createElement("img");
-    img.src = C.portada.imagenFondo;
-    img.alt = "";
-    img.fetchPriority = "high";
-    heroFondo.prepend(img);
-
     const fondo = C.portada.videoFondo;
-    // En pantallas chicas (celular) no se descarga el video de fondo:
-    // se queda el poster. Ahorra datos y acelera la carga móvil.
-    const pantallaConVideo = window.matchMedia("(min-width: 700px)").matches;
-    if (!(fondo && !reducirMovimiento && pantallaConVideo)) {
+    if (!(fondo && !reducirMovimiento)) {
       // Sin video de fondo: la precarga no espera nada
       estadoHero.listo = true;
       estadoHero.avisar();
     }
-    if (fondo && !reducirMovimiento && pantallaConVideo) {
+    if (fondo && !reducirMovimiento) {
       // Se inyecta DE INMEDIATO para que cargue durante la precarga
       const inyectarVideo = () => {
         if (typeof fondo === "object" && fondo.tipo === "vimeo") {
@@ -382,13 +375,15 @@
             "position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);" +
             "width:max(100vw, calc(100svh * " + ar + "));" +
             "height:max(100svh, calc(100vw / " + ar + "));" +
-            "border:0;pointer-events:none;opacity:0;transition:opacity 1s ease;";
+            "border:0;pointer-events:none;opacity:0;filter:blur(14px);" +
+            "transition:opacity 1.2s ease, filter 1.2s ease;";
           // Aparece (y libera la precarga) cuando YA está reproduciendo
           const alMensajeHero = (ev) => {
             if (ev.source !== iframe.contentWindow) return;
             let dd; try { dd = JSON.parse(ev.data); } catch (_) { return; }
             if (dd.event === "playProgress" || dd.event === "timeupdate") {
               iframe.style.opacity = "1";
+              iframe.style.filter = "blur(0)";
               estadoHero.listo = true;
               estadoHero.avisar();
               window.removeEventListener("message", alMensajeHero);
@@ -399,7 +394,10 @@
             iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
             // Respaldo: si los eventos no llegan, revela a los 4s visibles
             setTimeout(() => {
-              if (document.visibilityState === "visible") iframe.style.opacity = "1";
+              if (document.visibilityState === "visible") {
+                iframe.style.opacity = "1";
+                iframe.style.filter = "blur(0)";
+              }
               estadoHero.listo = true;
               estadoHero.avisar();
             }, 4000);
