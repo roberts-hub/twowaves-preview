@@ -362,6 +362,9 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   50% { transform: scaleY(1); }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
+/* En celular la burbuja de WhatsApp ocupa la esquina: el hint de Scroll
+   sobra en táctil y evitamos que se encimen */
+@media (max-width: 640px) { .hero_scroll { display: none; } }
 
 /* ============================================================
    BANDA DE CLIENTES (logos blancos en grid, como la referencia)
