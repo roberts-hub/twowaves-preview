@@ -216,8 +216,8 @@
     iframe.setAttribute("aria-hidden", "true");
     iframe.style.cssText =
       "position:absolute;top:50%;left:50%;" +
-      "transform:translate(-50%,-50%) scale(1.04);" +
-      "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
+      "transform:translate(-50%,-50%) scale(1.06);" +
+      "aspect-ratio:" + ar + ";min-width:101%;min-height:101%;" +
       "width:auto;height:auto;border:0;pointer-events:none;" +
       "opacity:0;transition:opacity 0.8s ease;";
     const alMsj = (ev) => {
@@ -559,8 +559,8 @@
     const ar = aw && ah ? aw / ah : 16 / 9;
     iframe.style.cssText =
       "position:absolute;top:50%;left:50%;" +
-      "transform:translate(-50%,-50%) scale(1.04);" +
-      "aspect-ratio:" + ar + ";min-width:100.5%;min-height:100.5%;" +
+      "transform:translate(-50%,-50%) scale(1.06);" +
+      "aspect-ratio:" + ar + ";min-width:101%;min-height:101%;" +
       "width:auto;height:auto;border:0;pointer-events:none;";
     const alMensaje = (ev) => {
       if (ev.source !== iframe.contentWindow) return;
