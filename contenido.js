@@ -156,7 +156,7 @@ window.CONTENIDO = {
       anio: "2025",
       tamano: "normal",
       destacado: false,
-      miniatura: "assets/img/unlocking-982.jpg",
+      miniatura: "https://i.vimeocdn.com/video/2007514181-8e731991188557ff3d6c410e80001fee885e56ea280037e5619b5d79da06859b-d_960?region=us",
       videoHover: "",
       video: { tipo: "vimeo", id: "1077478091", aspecto: "426x214" },
     },
