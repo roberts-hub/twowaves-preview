@@ -101,6 +101,13 @@
     }
   });
 
+  // Texto con formato: permite <b> y <span class="resalte"> desde contenido.js
+  // <p data-html="nosotros.intro"></p>
+  $$("[data-html]").forEach((el) => {
+    const valor = el.dataset.html.split(".").reduce((o, k) => (o ? o[k] : ""), C);
+    if (typeof valor === "string" && valor) el.innerHTML = valor;
+  });
+
   // Año dinámico
   $$("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
@@ -206,7 +213,7 @@
     const tarjetas = (r.items || [])
       .map(
         (it) =>
-          '<div class="resena" data-revelar>' +
+          '<div class="resena">' +
           '<span class="resena_estrellas" aria-hidden="true">' +
           "★".repeat(it.estrellas || 5) +
           "</span>" +
@@ -918,6 +925,30 @@
             stagger: 0.12,
             overwrite: "auto",
             onComplete: () => gsap.set(lote, { clearProps: "willChange" }),
+          }),
+      });
+    }
+  }
+
+  /* --- Reseñas (About): reveal limpio, una tarjeta a la vez al bajar --- */
+  const tarjetasResena = $$(".resena");
+  if (tarjetasResena.length) {
+    if (reducirMovimiento) {
+      gsap.set(tarjetasResena, { autoAlpha: 1, y: 0 });
+    } else {
+      gsap.set(tarjetasResena, { autoAlpha: 0, y: 48 });
+      ScrollTrigger.create({
+        trigger: ".resenas_grid",
+        start: "top 82%",
+        once: true,
+        onEnter: () =>
+          gsap.to(tarjetasResena, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.16,
+            ease: "power3.out",
+            overwrite: "auto",
           }),
       });
     }

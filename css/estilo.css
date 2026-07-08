@@ -680,6 +680,18 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 }
 .intro-nosotros .lista-servicios { margin-top: 0; }
 
+/* --- Declaración de intro (About): statement con resaltes en beige --- */
+.intro-declaracion-wrap { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+.intro-declaracion {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1.34;
+  font-weight: 400;
+  max-width: 30ch;
+  letter-spacing: -0.006em;
+}
+.intro-declaracion b { font-weight: 650; }
+.resalte { color: var(--acento); }
+
 /* --- Header secundario con video (About) --- */
 .video-hero {
   position: relative;
@@ -769,7 +781,13 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   width: 100%; height: 100%;
   object-fit: cover;
 }
-.fundadores_texto { display: grid; gap: 1.4rem; justify-items: start; }
+.fundadores_texto { display: grid; gap: 1.5rem; justify-items: start; }
+.fundadores_texto .parrafo {
+  font-size: clamp(1.1rem, 1.55vw, 1.45rem);
+  line-height: 1.5;
+  max-width: 54ch;
+  opacity: 0.9;
+}
 .fundadores_nombres {
   display: flex;
   gap: clamp(1.5rem, 4vw, 3rem);

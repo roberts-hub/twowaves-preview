@@ -306,9 +306,10 @@ window.CONTENIDO = {
   /* ---------- NOSOTROS (about.html) ---------- */
   nosotros: {
     titulo: "Authored with intention.",
-    parrafos: [
-      "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final product.",
-    ],
+    /* Párrafo de intro del About. Puedes resaltar en beige con
+       <span class="resalte">…</span> y poner negritas con <b>…</b>. */
+    intro:
+      'Two Waves is a <b>production company</b> founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with <span class="resalte">clarity, intention and a distinctive creative standard</span>, from idea to final product.',
     /* Las 3 fases de trabajo que se muestran en About */
     proceso: [
       { paso: "01", titulo: "Concept & Direction", texto: "We listen, define the idea and set the creative direction with you." },
@@ -337,8 +338,8 @@ window.CONTENIDO = {
      el autor, o agrega / quita objetos dentro del arreglo "items". */
   resenas: {
     etiqueta: "5.0 ★ · Google reviews",
-    titulo: "Kind",
-    tituloAcento: "words.",
+    titulo: "What clients",
+    tituloAcento: "say.",
     items: [
       {
         estrellas: 5,
