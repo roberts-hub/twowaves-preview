@@ -305,7 +305,7 @@ window.CONTENIDO = {
 
   /* ---------- NOSOTROS (about.html) ---------- */
   nosotros: {
-    titulo: "The result over the noise.",
+    titulo: "Authored with intention.",
     parrafos: [
       "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final product.",
     ],
