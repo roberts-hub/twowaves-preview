@@ -25,9 +25,17 @@
     // SIEMPRE: cubre la carga del video incluso en refresh. En las demás,
     // solo la primera visita de la sesión.
     const paginaConVideo = !!($(".hero_fondo") || $("[data-video-hero]"));
-    if (!paginaConVideo && sessionStorage.getItem("intro-vista")) {
+    const yaVista = !!sessionStorage.getItem("intro-vista");
+    if (!paginaConVideo && yaVista) {
       precarga.remove();
     } else {
+      // Si la intro ya se vio en esta sesión, no repetimos la T: queda un
+      // velo negro sin logo que se suelta apenas el video ya reproduce.
+      const rapida = paginaConVideo && yaVista;
+      if (rapida) precarga.classList.add("precarga--rapida");
+      const MINIMO = rapida ? 0 : 2400;   // tiempo mínimo en pantalla
+      const COLCHON = rapida ? 150 : 700; // margen tras confirmar reproducción
+      const TOPE = rapida ? 2600 : 5600;  // tope duro
       let quitada = false;
       const quitar = () => {
         if (quitada) return;
@@ -38,13 +46,13 @@
       };
       const inicio = performance.now();
       const intentar = () => {
-        // 700ms extra tras confirmar reproducción: el fundido del video
-        // termina detrás de la precarga y el poster nunca se asoma
-        if (estadoHero.listo && performance.now() - inicio >= 2400) setTimeout(quitar, 700);
+        // El margen extra tras confirmar reproducción evita que el
+        // poster del video se asome antes del fundido
+        if (estadoHero.listo && performance.now() - inicio >= MINIMO) setTimeout(quitar, COLCHON);
       };
       estadoHero.avisar = intentar;
-      setTimeout(intentar, 2450);
-      setTimeout(quitar, 5600); // tope duro
+      setTimeout(intentar, MINIMO + 50);
+      setTimeout(quitar, TOPE);
     }
   }
 

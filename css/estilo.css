@@ -108,6 +108,10 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
+/* Modo rápido (la intro ya se vio en esta sesión): sin logo,
+   solo un velo que se funde apenas el video está listo */
+.precarga--rapida .precarga_logo { display: none; }
+.precarga--rapida { transition: opacity 0.7s ease, visibility 0.7s ease; }
 @media (prefers-reduced-motion: reduce) { .precarga { display: none; } }
 
 /* ---------- Temas por sección ---------- */
