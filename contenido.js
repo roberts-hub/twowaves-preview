@@ -109,7 +109,7 @@ window.CONTENIDO = {
       titulo: "Cupra Formentor",
       ordenPortada: 3,
       logoCliente: "assets/img/logos/cupra.png",
-      logoEscala: 1.7,
+      logoEscala: 1.5,
       descripcion: "CUPRA Formentor: performance and design, shot for the road.",
       posicion: "82% 50%",
       cliente: "Cupra",
@@ -124,6 +124,7 @@ window.CONTENIDO = {
     {
       titulo: "Visit Puerto Vallarta",
       logoCliente: "assets/img/logos/beautiful-destinations.png",
+      logoEscala: 1.5,
       posicion: "0% 50%",
       descripcion: "Travel campaign with Beautiful Destinations for Visit Puerto Vallarta: the bay from the air and the streets.",
       cliente: "Beautiful Destinations",
@@ -240,6 +241,7 @@ window.CONTENIDO = {
     {
       titulo: "Pequeña África",
       logoCliente: "assets/img/logos/beautiful-destinations.png",
+      logoEscala: 1.5,
       descripcion: "For Visit Brazil: the story of Rio's Pequeña África, told through its streets and people.",
       cliente: "Visit Brazil",
       categoria: "Travel",
@@ -289,7 +291,6 @@ window.CONTENIDO = {
     },
     {
       titulo: "Lamborghini 60th Anniversary",
-      logoCliente: "assets/img/logos/lamborghini.png",
       descripcion: "Lamborghini's 60th anniversary in Mexico: a fleet in motion, engineering as spectacle.",
       cliente: "Lamborghini",
       categoria: "Automotive",
