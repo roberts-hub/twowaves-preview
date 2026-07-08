@@ -715,6 +715,41 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   color: var(--acento);
 }
 
+/* --- Kind words / reseñas de clientes (About) --- */
+.resenas { display: grid; gap: clamp(2rem, 4vw, 3.5rem); }
+.resenas_encabezado { display: grid; gap: 0.9rem; }
+.resenas_grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+@media (max-width: 820px) { .resenas_grid { grid-template-columns: 1fr; } }
+.resena {
+  border-top: 1px solid var(--linea);
+  padding-top: 1.4rem;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transition: border-color 0.35s ease;
+}
+.resena:hover { border-top-color: var(--acento); }
+.resena_estrellas {
+  color: var(--acento);
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+}
+.resena_texto {
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.55;
+}
+.resena_autor {
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--acento);
+}
+
 /* --- Fundadores (About) --- */
 .fundadores {
   display: grid;

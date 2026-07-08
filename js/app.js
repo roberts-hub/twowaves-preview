@@ -148,17 +148,13 @@
     }
   });
 
-  // Correo (mailto), redes sociales y lista de servicios
+  // Correo (mailto) y redes sociales
   $$("[data-correo]").forEach((el) => (el.href = "mailto:" + C.contacto.correo));
   $$("[data-red]").forEach((el) => {
     const url = C.contacto[el.dataset.red];
     if (url) el.href = url;
     else el.style.display = "none";
   });
-  const listaServicios = $("[data-servicios]");
-  if (listaServicios) {
-    listaServicios.innerHTML = C.nosotros.servicios.map((s) => "<li>" + s + "</li>").join("");
-  }
 
   // Proceso de trabajo (About): 3 fases desde contenido.js
   const contProceso = $("[data-proceso]");
@@ -203,19 +199,29 @@
       "</div>";
   }
 
-  // Why Two Waves (About): 2 columnas + frase destacada
-  const contPorque = $("[data-porque]");
-  if (contPorque && C.porque) {
-    contPorque.innerHTML =
-      '<h2 class="titulo-seccion" data-revelar>' + C.porque.titulo + "</h2>" +
-      '<div class="porque_columnas">' +
-      C.porque.parrafos
-        .map((p) => '<p class="parrafo" data-revelar>' + p + "</p>")
-        .join("") +
-      "</div>" +
-      (C.porque.destacado
-        ? '<p class="porque_destacado" data-revelar>' + C.porque.destacado + "</p>"
-        : "");
+  // Reseñas de clientes (About): calificaciones reales de Google
+  const contResenas = $("[data-resenas]");
+  if (contResenas && C.resenas) {
+    const r = C.resenas;
+    const tarjetas = (r.items || [])
+      .map(
+        (it) =>
+          '<div class="resena" data-revelar>' +
+          '<span class="resena_estrellas" aria-hidden="true">' +
+          "★".repeat(it.estrellas || 5) +
+          "</span>" +
+          '<p class="resena_texto">' + it.texto + "</p>" +
+          '<span class="resena_autor">' + it.autor + "</span>" +
+          "</div>"
+      )
+      .join("");
+    contResenas.innerHTML =
+      '<div class="resenas_encabezado">' +
+      (r.etiqueta ? '<span class="etiqueta" data-revelar>' + r.etiqueta + "</span>" : "") +
+      '<h2 class="titulo-seccion" data-revelar>' + r.titulo +
+      (r.tituloAcento ? ' <span class="acento-serif">' + r.tituloAcento + "</span>" : "") +
+      "</h2></div>" +
+      '<div class="resenas_grid">' + tarjetas + "</div>";
   }
 
   // Headers secundarios con video de fondo (ej. About con Grand Island):

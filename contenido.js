@@ -309,10 +309,6 @@ window.CONTENIDO = {
     parrafos: [
       "Two Waves is a production company founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with clarity, intention and a distinctive creative standard, from idea to final product.",
     ],
-    servicios: [
-      "Direction", "Production", "Cinematography",
-      "Aerials", "Post-production", "Color",
-    ],
     /* Las 3 fases de trabajo que se muestran en About */
     proceso: [
       { paso: "01", titulo: "Concept & Direction", texto: "We listen, define the idea and set the creative direction with you." },
@@ -336,14 +332,30 @@ window.CONTENIDO = {
     ],
   },
 
-  /* ---------- WHY TWO WAVES (about.html) ---------- */
-  porque: {
-    titulo: "Why Two Waves?",
-    parrafos: [
-      "Choosing Two Waves means partnering with a team that treats every project with intention, clarity, and a strong sense of craft: careful planning, clean execution, and an editorial approach that gives each frame purpose.",
-      "Our value comes from how we work. A streamlined structure keeps directors, producers, cinematographers, and editors under one workflow: efficient, consistent, and built to last.",
+  /* ---------- RESEÑAS DE CLIENTES (about.html) ----------
+     Calificaciones reales de Google Maps. Para editar: cambia el texto o
+     el autor, o agrega / quita objetos dentro del arreglo "items". */
+  resenas: {
+    etiqueta: "5.0 ★ · Google reviews",
+    titulo: "Kind",
+    tituloAcento: "words.",
+    items: [
+      {
+        estrellas: 5,
+        texto: "Excellent experience with Two Waves. A very professional and creative team that takes care of every detail of the process, from concept to final delivery. Highly recommended!",
+        autor: "Mayra Rios Bojorquez",
+      },
+      {
+        estrellas: 5,
+        texto: "A very competent team. The project went smoothly and we were very satisfied with the results. I highly recommend them.",
+        autor: "José Pablo Valencia",
+      },
+      {
+        estrellas: 5,
+        texto: "Delighted with their professionalism and excellent service, work and team.",
+        autor: "Brenda Jimenez Gil",
+      },
     ],
-    destacado: "If you're looking for a team that prioritizes the result over the noise, you're in the right place.",
   },
 
   /* ---------- CONTACTO (contact.html) ---------- */
