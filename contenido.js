@@ -150,6 +150,7 @@ window.CONTENIDO = {
     {
       titulo: "Unlocking 982",
       logoCliente: "assets/img/logos/982.png",
+      logoEscala: 0.55,
       descripcion: "Unlocking 982: supercars in black and white, engineering as visual language.",
       cliente: "982",
       categoria: "Automotive",
