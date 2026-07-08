@@ -35,19 +35,16 @@
     if (!paginaConVideo && yaVista) {
       precarga.remove();
     } else {
-      // Si la intro ya se vio en esta sesión, en HOME no repetimos la T:
-      // queda un velo negro sin logo que se suelta apenas el video reproduce.
-      // En About (video de encabezado más pesado) SIEMPRE mostramos la T,
-      // así el arranque en negro no se ve como un bug.
-      const esHome = !!$(".hero_fondo");
-      const rapida = esHome && yaVista;   // Home ya visto: velo negro sin T
-      const breve = !esHome && yaVista;   // About ya visto: T rápida, no la larga
-      if (rapida) precarga.classList.add("precarga--rapida");
+      // Si la intro ya se vio en esta sesión, mostramos una T breve (rápida)
+      // TANTO en Home como en About, para que el arranque en negro nunca se
+      // vea como un bug. Solo la primera visita de la sesión muestra la T
+      // larga con respiración.
+      const breve = yaVista;   // ya visto: T corta (Home y About)
       if (breve) precarga.classList.add("precarga--breve");
-      // Tiempos: rápida (velo) < breve (T corta) < completa (T con respiración)
-      const MINIMO = rapida ? 0 : breve ? 650 : 2400;   // tiempo mínimo en pantalla
-      const COLCHON = rapida ? 150 : breve ? 400 : 700; // margen tras confirmar reproducción
-      const TOPE = rapida ? 2600 : breve ? 4200 : 5600; // tope duro
+      // Tiempos: breve (T corta) < completa (T con respiración)
+      const MINIMO = breve ? 650 : 2400;   // tiempo mínimo en pantalla
+      const COLCHON = breve ? 400 : 700;   // margen tras confirmar reproducción
+      const TOPE = breve ? 4200 : 5600;    // tope duro
       let quitada = false;
       const quitar = () => {
         if (quitada) return;

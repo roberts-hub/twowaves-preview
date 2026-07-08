@@ -108,12 +108,9 @@ button { font: inherit; background: none; border: none; cursor: pointer; color: 
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
-/* Modo rápido (la intro ya se vio en esta sesión): sin logo,
-   solo un velo que se funde apenas el video está listo */
-.precarga--rapida .precarga_logo { display: none; }
-.precarga--rapida { transition: opacity 0.7s ease, visibility 0.7s ease; }
-/* Modo breve (About ya visto): la T aparece rápido y clara, sin la
-   revelación lenta ni la respiración; cubre el arranque del video */
+/* Modo breve (la intro ya se vio en esta sesión, Home o About): la T
+   aparece rápido y clara, sin la revelación lenta ni la respiración;
+   cubre el arranque del video para que el negro no se vea como un bug */
 .precarga--breve .precarga_t {
   animation: precarga-breve-entra 0.4s ease 0s forwards;
   filter: none;
