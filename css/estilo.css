@@ -312,7 +312,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .hero_ubicacion { display: inline-flex; align-items: center; gap: 0.9rem; white-space: nowrap; }
 .hero_ubicacion_linea {
   display: inline-block;
-  width: clamp(2.5rem, 9vw, 8rem);
+  width: clamp(1.8rem, 5vw, 4rem);
   height: 1px;
   background: currentColor;
   opacity: 0.65;
