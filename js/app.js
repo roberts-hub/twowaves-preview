@@ -256,28 +256,50 @@
     });
   }
   if (formulario) {
-    if (new URLSearchParams(location.search).get("enviado") === "1") mostrarGracias();
-    const enNetlify = /\.netlify\.app$|\.netlify\.com$/.test(location.hostname);
-    if (enNetlify) {
-      formulario.action = "/contact.html?enviado=1";
-    } else {
-      formulario.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (!formulario.reportValidity()) return;
-        const d = new FormData(formulario);
+    // Los mensajes llegan directo al correo (contacto.correoFormulario)
+    // vía FormSubmit, con formato de tabla. El visitante nunca sale del sitio.
+    formulario.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!formulario.reportValidity()) return;
+      const boton = formulario.querySelector("[type=submit]");
+      const d = new FormData(formulario);
+      const destino = C.contacto.correoFormulario || C.contacto.correo;
+      boton.disabled = true;
+      boton.textContent = "Sending…";
+      try {
+        const resp = await fetch("https://formsubmit.co/ajax/" + destino, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            Name: d.get("nombre"),
+            Email: d.get("correo"),
+            Phone: d.get("telefono"),
+            Message: d.get("mensaje"),
+            _subject: "Project inquiry — " + d.get("nombre"),
+            _template: "table",
+            _captcha: "false",
+            _replyto: d.get("correo"),
+          }),
+        });
+        if (!resp.ok) throw new Error("respuesta " + resp.status);
+        formulario.reset();
+        mostrarGracias();
+      } catch (err) {
+        // Respaldo: si el servicio falla, se abre la app de correo
         const cuerpo =
           "Name: " + d.get("nombre") +
           "\nEmail: " + d.get("correo") +
           "\nPhone: " + d.get("telefono") +
           "\n\n" + d.get("mensaje");
         location.href =
-          "mailto:" + C.contacto.correo +
+          "mailto:" + destino +
           "?subject=" + encodeURIComponent("Project inquiry — " + d.get("nombre")) +
           "&body=" + encodeURIComponent(cuerpo);
-        formulario.reset();
-        mostrarGracias();
-      });
-    }
+      } finally {
+        boton.disabled = false;
+        boton.textContent = "Send";
+      }
+    });
   }
 
   // Hero de portada: poster inmediato + video después (optimizado)

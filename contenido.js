@@ -348,6 +348,7 @@ window.CONTENIDO = {
     titulo: "Let's create something\nremarkable.",
     // ⚠️ Escribe aquí tu correo real de contacto:
     correo: "contacto@twowaves.mx",
+    correoFormulario: "info@twowaves.mx", // aquí llegan los mensajes del formulario
     whatsapp: "523331290485", // botón flotante de WhatsApp
     whatsappMensaje: "Hola! Me gustaría cotizar un proyecto.", // mensaje prellenado al abrir el chat
     telefono: "+52 33 3129 0485",
