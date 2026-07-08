@@ -678,7 +678,15 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .intro-nosotros .lista-servicios { margin-top: 0; }
 
 /* --- Declaración de intro (About): statement con resaltes en beige --- */
-.intro-declaracion-wrap { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+/* Mismo grid que .fundadores (0.85fr 1.15fr) para que el statement quede
+   alineado con el texto de founders; el label + statement van en la
+   columna 2 y la 1 queda como sangría. En móvil se apila. */
+.intro-declaracion-wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); }
+.intro-declaracion-col { grid-column: 2; display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+@media (max-width: 820px) {
+  .intro-declaracion-wrap { grid-template-columns: 1fr; }
+  .intro-declaracion-col { grid-column: 1; }
+}
 .intro-declaracion {
   font-size: clamp(1.5rem, 2.6vw, 2.25rem);
   line-height: 1.34;

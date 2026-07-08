@@ -328,8 +328,8 @@ window.CONTENIDO = {
     ],
     foto: "assets/img/founders.jpg",
     nombres: [
-      { nombre: "Roberto", rol: "Director / Filmmaker", usuario: "@robert.arre", instagram: "https://www.instagram.com/robert.arre/" },
-      { nombre: "Rogelio", rol: "FPV Pilot / Producer", usuario: "@roger.rpgfpv", instagram: "https://www.instagram.com/roger.rpgfpv/" },
+      { nombre: "Roberto Arechederra", rol: "Director / Filmmaker", usuario: "@robert.arre", instagram: "https://www.instagram.com/robert.arre/" },
+      { nombre: "Rogelio Pérez", rol: "FPV Pilot / Producer", usuario: "@roger.rpgfpv", instagram: "https://www.instagram.com/roger.rpgfpv/" },
     ],
   },
 
