@@ -761,9 +761,15 @@
   const navBorde = $(".nav_borde");
   const navWrap = $(".nav_links");
   if (navBorde && navWrap && navLinks.length) {
-    const ruta = location.pathname.split("/").pop() || "index.html";
+    // Normaliza rutas para que funcione con URLs limpias (/, /work) y con .html
+    const norm = (p) => {
+      p = (p || "/").replace(/index\.html$/, "").replace(/\.html$/, "");
+      if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+      return p || "/";
+    };
+    const actual = norm(location.pathname);
     navLinks.forEach((l) => {
-      if (l.getAttribute("href") === ruta) l.classList.add("activo");
+      if (norm(l.getAttribute("href")) === actual) l.classList.add("activo");
     });
     gsap.set(navBorde, { opacity: 0 });
     navLinks.forEach((link) => {
