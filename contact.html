@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link rel="preconnect" href="https://f.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=83">
+  <link rel="stylesheet" href="css/estilo.css?v=84">
 </head>
 <body>
 
@@ -53,37 +53,67 @@
 
   <main id="contenido">
     <section class="seccion" data-tema="profundo" style="min-height: 100svh; display: grid; align-content: center;">
-      <div class="bloque bloque--centrado">
-        <h1 class="titulo-seccion" data-texto="contacto.titulo"></h1>
+      <div class="bloque contacto-flujo">
+        <h1 class="contacto-flujo-titulo" data-texto="contacto.titulo"></h1>
 
-        <!-- Formulario: en Netlify llega solo; en local abre tu correo -->
-        <form class="formulario" name="contacto" method="POST" data-netlify="true" data-formulario>
+        <!-- Formulario multi-paso (una pregunta a la vez, estilo Typeform).
+             Mismos campos de siempre; envía a correo (FormSubmit) + Google
+             Sheet vía js/app.js. La navegación entre pasos también en app.js. -->
+        <form class="flujo" name="contacto" data-formulario novalidate>
           <input type="hidden" name="form-name" value="contacto">
-          <div class="formulario_fila">
-            <label class="formulario_campo">
-              <span class="etiqueta">Name *</span>
-              <input type="text" name="nombre" required autocomplete="name">
-            </label>
-            <label class="formulario_campo">
-              <span class="etiqueta">Email *</span>
-              <input type="email" name="correo" required autocomplete="email">
-            </label>
-          </div>
-          <div class="formulario_campo">
-            <span class="etiqueta" id="etiqueta-telefono">Phone *</span>
+          <div class="flujo-barra" aria-hidden="true"><span class="flujo-fill"></span></div>
+
+          <!-- 01 · Name -->
+          <section class="paso activa" data-paso>
+            <p class="paso-num"><span class="paso-i">01</span> / <span class="paso-total">04</span></p>
+            <label class="paso-preg" for="f-nombre">What&#39;s your name?</label>
+            <input type="text" id="f-nombre" name="nombre" required autocomplete="name" placeholder="First and last name">
+            <div class="paso-nav">
+              <button type="button" class="btn-atras" data-atras hidden>← Back</button>
+              <button type="button" class="btn-linea" data-siguiente>Next <span class="flecha">→</span></button>
+            </div>
+          </section>
+
+          <!-- 02 · Email -->
+          <section class="paso" data-paso>
+            <p class="paso-num"><span class="paso-i">02</span> / <span class="paso-total">04</span></p>
+            <label class="paso-preg" for="f-correo">What&#39;s your email?</label>
+            <input type="email" id="f-correo" name="correo" required autocomplete="email" placeholder="you@email.com">
+            <div class="paso-nav">
+              <button type="button" class="btn-atras" data-atras>← Back</button>
+              <button type="button" class="btn-linea" data-siguiente>Next <span class="flecha">→</span></button>
+            </div>
+          </section>
+
+          <!-- 03 · Phone -->
+          <section class="paso" data-paso>
+            <p class="paso-num"><span class="paso-i">03</span> / <span class="paso-total">04</span></p>
+            <label class="paso-preg" for="f-telefono">What&#39;s your phone number?</label>
             <div class="telefono_grupo">
               <div class="telefono_lada_caja">
                 <span class="telefono_lada_visor" aria-hidden="true"></span>
                 <select class="telefono_lada" name="lada" aria-label="Country code" data-lada></select>
               </div>
-              <input type="tel" name="telefono" required autocomplete="tel" inputmode="numeric" pattern="[0-9]{7,15}" maxlength="15" aria-labelledby="etiqueta-telefono" data-solo-numeros>
+              <input type="tel" id="f-telefono" name="telefono" required autocomplete="tel" inputmode="numeric" pattern="[0-9]{7,15}" maxlength="15" placeholder="10 digits" data-solo-numeros>
             </div>
-          </div>
-          <label class="formulario_campo">
-            <span class="etiqueta">Tell us about your project *</span>
-            <textarea name="mensaje" rows="4" required></textarea>
-          </label>
-          <button class="boton formulario_enviar" type="submit">Send</button>
+            <div class="paso-nav">
+              <button type="button" class="btn-atras" data-atras>← Back</button>
+              <button type="button" class="btn-linea" data-siguiente>Next <span class="flecha">→</span></button>
+            </div>
+          </section>
+
+          <!-- 04 · Message -->
+          <section class="paso" data-paso>
+            <p class="paso-num"><span class="paso-i">04</span> / <span class="paso-total">04</span></p>
+            <label class="paso-preg" for="f-mensaje">Tell us about your project</label>
+            <textarea id="f-mensaje" name="mensaje" rows="4" required placeholder="What are you looking to create?"></textarea>
+            <div class="paso-nav">
+              <button type="button" class="btn-atras" data-atras>← Back</button>
+              <button type="submit" class="btn-linea grande formulario_enviar">Send <span class="flecha">→</span></button>
+            </div>
+          </section>
+
+          <p class="nota" data-form-estado role="status"></p>
         </form>
 
         <!-- Firma: isotipo + datos de contacto con iconos -->
@@ -175,7 +205,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="contenido.js?v=83"></script>
-  <script src="js/app.js?v=83"></script>
+  <script src="contenido.js?v=84"></script>
+  <script src="js/app.js?v=84"></script>
 </body>
 </html>

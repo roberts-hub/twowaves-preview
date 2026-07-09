@@ -343,6 +343,7 @@
       e.preventDefault();
       if (!formulario.reportValidity()) return;
       const boton = formulario.querySelector("[type=submit]");
+      const botonHTML = boton.innerHTML;
       const d = new FormData(formulario);
       const destino = C.contacto.correoFormulario || C.contacto.correo;
       const telCompleto = ((d.get("lada") || "") + " " + d.get("telefono")).trim();
@@ -394,9 +395,45 @@
           "&body=" + encodeURIComponent(cuerpo);
       } finally {
         boton.disabled = false;
-        boton.textContent = "Send";
+        boton.innerHTML = botonHTML;
       }
     });
+
+    // ── Navegación multi-paso (una pregunta a la vez, estilo Typeform) ──
+    // Solo controla mostrar/ocultar pasos y validar; el envío lo maneja el
+    // handler de submit de arriba (correo + Google Sheet + modal de gracias).
+    const pasos = $$("[data-paso]", formulario);
+    if (pasos.length) {
+      const fill = $(".flujo-fill", formulario);
+      let actual = 0;
+      const mostrar = (i) => {
+        actual = Math.max(0, Math.min(i, pasos.length - 1));
+        pasos.forEach((p, n) => p.classList.toggle("activa", n === actual));
+        if (fill) fill.style.width = ((actual + 1) / pasos.length) * 100 + "%";
+        const campo = pasos[actual].querySelector("input, textarea, select");
+        if (campo) setTimeout(() => { try { campo.focus({ preventScroll: true }); } catch (_) {} }, 90);
+      };
+      const pasoValido = (i) => {
+        for (const c of pasos[i].querySelectorAll("input, textarea, select")) {
+          if (!c.checkValidity()) { c.reportValidity(); c.classList.add("invalido"); return false; }
+          c.classList.remove("invalido");
+        }
+        return true;
+      };
+      const siguiente = () => { if (pasoValido(actual) && actual < pasos.length - 1) mostrar(actual + 1); };
+      const atras = () => { if (actual > 0) mostrar(actual - 1); };
+      $$("[data-siguiente]", formulario).forEach((b) => b.addEventListener("click", siguiente));
+      $$("[data-atras]", formulario).forEach((b) => b.addEventListener("click", atras));
+      formulario.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter" || e.target.tagName === "TEXTAREA") return;
+        e.preventDefault();
+        if (actual === pasos.length - 1) formulario.requestSubmit();
+        else siguiente();
+      });
+      // Tras enviar (form.reset), regresa al primer paso
+      formulario.addEventListener("reset", () => setTimeout(() => mostrar(0), 0));
+      mostrar(0);
+    }
   }
 
   // Hero de portada: NUNCA se muestra poster/thumbnail. El fondo queda en

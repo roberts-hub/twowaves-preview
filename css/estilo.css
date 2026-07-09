@@ -903,6 +903,91 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 .formulario_enviar { justify-self: start; }
 .formulario_gracias { color: var(--acento); opacity: 1; }
 
+/* ── FORMULARIO MULTI-PASO (una pregunta a la vez, estilo Typeform) ── */
+.contacto-flujo {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+  display: grid;
+  gap: clamp(2rem, 5vw, 3rem);
+  text-align: left;
+}
+.contacto-flujo-titulo {
+  font-size: clamp(1.7rem, 3.8vw, 2.7rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.flujo { width: 100%; position: relative; text-align: left; }
+.flujo-barra {
+  width: 100%; height: 1px; background: var(--linea);
+  margin-bottom: clamp(2.25rem, 6vw, 3.75rem); overflow: hidden;
+}
+.flujo-fill {
+  display: block; height: 100%; width: 25%;
+  background: var(--texto);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.paso { display: none; flex-direction: column; gap: 1.05rem; }
+.paso.activa { display: flex; animation: pasoEntra 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes pasoEntra {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.paso-num {
+  font-family: var(--fuente-mono); font-size: 0.68rem;
+  letter-spacing: 0.3em; color: var(--acento); opacity: 0.65;
+}
+.paso-num .paso-i { color: var(--texto); opacity: 1; }
+.paso-preg {
+  font-size: clamp(1.4rem, 3.4vw, 2.05rem); font-weight: 550;
+  line-height: 1.25; letter-spacing: -0.01em; color: var(--texto);
+}
+.paso input, .paso textarea {
+  background: transparent; border: none;
+  border-bottom: 1px solid var(--linea);
+  padding: 0.7rem 0.15rem; font-family: inherit; font-size: 1.1rem;
+  font-weight: 300; letter-spacing: 0.01em; color: var(--texto);
+  border-radius: 0; resize: none; width: 100%;
+  transition: border-color 0.4s ease;
+}
+.paso input::placeholder, .paso textarea::placeholder { color: rgba(176, 165, 149, 0.45); }
+.paso input:focus, .paso textarea:focus { outline: none; border-bottom-color: var(--texto); }
+.paso .invalido { border-bottom-color: #c25b52; }
+/* Teléfono dentro del paso: reutiliza el visor + select ya existentes */
+.paso .telefono_grupo { gap: 0.9rem; }
+.paso .telefono_lada_visor { padding: 0.7rem 0.1rem; font-size: 1rem; }
+.paso-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.25rem; margin-top: clamp(1.75rem, 4vw, 2.5rem);
+}
+.btn-atras {
+  border: none; background: transparent; font-family: var(--fuente-mono);
+  font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--acento); cursor: pointer; padding: 0.3rem 0;
+  transition: color 0.3s ease;
+}
+.btn-atras:hover { color: var(--texto); }
+.btn-atras[hidden] { display: none; }
+.btn-linea {
+  margin-left: auto; border: none; background: transparent;
+  font-family: var(--fuente-mono); font-size: 0.72rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--texto); cursor: pointer;
+  padding: 0.4rem 0; border-bottom: 1px solid var(--linea);
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  transition: border-color 0.35s ease, color 0.35s ease;
+}
+.btn-linea .flecha { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.btn-linea:hover { border-bottom-color: var(--acento); }
+.btn-linea:hover .flecha { transform: translateX(5px); }
+.btn-linea:disabled { opacity: 0.45; pointer-events: none; }
+.btn-linea.grande { font-size: 0.8rem; }
+.flujo .nota {
+  margin-top: 1.5rem; text-align: center; min-height: 1em;
+  font-family: var(--fuente-mono); font-size: 0.7rem;
+  letter-spacing: 0.12em; color: var(--acento);
+}
+
 /* Botón grande del CTA (pill sólida sobre lino) */
 .cta-boton {
   display: inline-flex;
