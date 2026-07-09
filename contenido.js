@@ -309,10 +309,7 @@ window.CONTENIDO = {
     /* Párrafo de intro del About. Puedes resaltar en beige con
        <span class="resalte">…</span> y poner negritas con <b>…</b>. */
     intro:
-      '<span class="grado g1"><b>Two Waves</b> is a <b>production company</b></span>' +
-      '<span class="grado g2">founded in 2021 in Guadalajara, México.</span>' +
-      '<span class="grado g3">We create commercial content for global brands, built with <span class="resalte">clarity, intention and a distinctive creative standard</span>,</span>' +
-      '<span class="grado g4">from idea to final product.</span>',
+      '<b>Two Waves</b> is a <b>production company</b> founded in 2021 in Guadalajara, México. We create commercial content for global brands, built with <span class="resalte">clarity, intention and a distinctive creative standard</span>, from idea to final product.',
     /* Las 3 fases de trabajo que se muestran en About */
     proceso: [
       { paso: "01", titulo: "Concept & Direction", texto: "We listen, define the idea and set the creative direction with you." },
