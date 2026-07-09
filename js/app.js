@@ -350,8 +350,8 @@
       boton.disabled = true;
       boton.textContent = "Sending…";
 
-      // Además del correo, guardamos cada envío en una Google Sheet (base de
-      // datos de prospectos). Fire-and-forget: si falla, no afecta el correo.
+      // 1) Base de datos de prospectos (Google Sheet): captura confiable de
+      //    cada lead. Fire-and-forget (no-cors); es la fuente de verdad.
       if (C.contacto.hojaCalculo) {
         fetch(C.contacto.hojaCalculo, {
           method: "POST",
@@ -364,14 +364,20 @@
           }),
         }).catch(() => {});
       }
+      // 2) Notificación por correo (FormSubmit): best-effort, con timeout de
+      //    12s para que un corte del servicio no deje esperando al visitante.
+      let correoOk = false;
       try {
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), 12000);
         const resp = await fetch("https://formsubmit.co/ajax/" + destino, {
           method: "POST",
+          signal: ctrl.signal,
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
             Name: d.get("nombre"),
             Email: d.get("correo"),
-            Phone: ((d.get("lada") || "") + " " + d.get("telefono")).trim(),
+            Phone: telCompleto,
             Message: d.get("mensaje"),
             _subject: "Project inquiry — " + d.get("nombre"),
             _template: "table",
@@ -379,24 +385,30 @@
             _replyto: d.get("correo"),
           }),
         });
-        if (!resp.ok) throw new Error("respuesta " + resp.status);
-        formulario.reset();
-        mostrarGracias();
-      } catch (err) {
-        // Respaldo: si el servicio falla, se abre la app de correo
+        clearTimeout(t);
+        correoOk = resp.ok;
+      } catch (_) {
+        /* FormSubmit caído o lento: no pasa nada, el lead ya quedó en la Sheet */
+      }
+
+      // El lead queda guardado en la Google Sheet aunque el correo falle, así
+      // que SIEMPRE confirmamos al visitante. Solo si no hay Sheet configurada
+      // y además el correo falló, abrimos su app de correo como último respaldo.
+      if (!correoOk && !C.contacto.hojaCalculo) {
         const cuerpo =
           "Name: " + d.get("nombre") +
           "\nEmail: " + d.get("correo") +
-          "\nPhone: " + ((d.get("lada") || "") + " " + d.get("telefono")).trim() +
+          "\nPhone: " + telCompleto +
           "\n\n" + d.get("mensaje");
         location.href =
           "mailto:" + destino +
           "?subject=" + encodeURIComponent("Project inquiry — " + d.get("nombre")) +
           "&body=" + encodeURIComponent(cuerpo);
-      } finally {
-        boton.disabled = false;
-        boton.innerHTML = botonHTML;
       }
+      formulario.reset();
+      mostrarGracias();
+      boton.disabled = false;
+      boton.innerHTML = botonHTML;
     });
 
     // ── Navegación multi-paso (una pregunta a la vez, estilo Typeform) ──
