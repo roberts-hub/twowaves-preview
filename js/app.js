@@ -196,7 +196,7 @@
       '<figure class="fundadores_foto" data-revelar><img src="' + f.foto +
       '" alt="' + (f.etiqueta || "Founders") + '" loading="lazy" decoding="async"></figure>' +
       '<div class="fundadores_texto">' +
-      '<span class="etiqueta" data-revelar>' + f.etiqueta + "</span>" +
+      (f.etiqueta ? '<span class="etiqueta" data-revelar>' + f.etiqueta + "</span>" : "") +
       '<h2 class="titulo-seccion" data-revelar>' + f.titulo + "</h2>" +
       parrafosF +
       (nombres ? '<div class="fundadores_nombres" data-revelar>' + nombres + "</div>" : "") +

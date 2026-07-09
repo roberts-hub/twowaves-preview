@@ -681,20 +681,42 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 /* Mismo grid que .fundadores (0.85fr 1.15fr) para que el statement quede
    alineado con el texto de founders; el label + statement van en la
    columna 2 y la 1 queda como sangría. En móvil se apila. */
-.intro-declaracion-wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); }
-.intro-declaracion-col { grid-column: 2; display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
-@media (max-width: 820px) {
-  .intro-declaracion-wrap { grid-template-columns: 1fr; }
-  .intro-declaracion-col { grid-column: 1; }
-}
+.intro-declaracion-wrap { display: grid; justify-items: center; text-align: center; }
+.intro-declaracion-col { display: grid; gap: clamp(1rem, 2vw, 1.5rem); justify-items: center; }
 .intro-declaracion {
-  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-  line-height: 1.34;
   font-weight: 400;
-  max-width: 30ch;
-  letter-spacing: -0.006em;
+  max-width: min(64ch, 94vw);
+  margin-inline: auto;
+  letter-spacing: -0.01em;
 }
-.intro-declaracion b { font-weight: 650; }
+/* statement graduado: cada línea baja de tamaño para que se vea distribuido */
+.intro-declaracion .grado {
+  display: block;
+  text-wrap: balance;
+}
+.intro-declaracion .g1 {
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.intro-declaracion .g2 {
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.12;
+  margin-top: 0.2em;
+}
+.intro-declaracion .g3 {
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  line-height: 1.32;
+  margin-top: 0.6em;
+}
+.intro-declaracion .g4 {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  line-height: 1.4;
+  margin-top: 0.45em;
+  color: var(--tenue, inherit);
+}
+.intro-declaracion b { font-weight: 700; }
 .resalte { color: var(--acento); }
 
 /* --- Header secundario con video (About) --- */
@@ -772,7 +794,7 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
   gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
+  align-items: start;
   padding: clamp(4rem, 9vw, 8rem) var(--margen);
 }
 @media (max-width: 820px) { .fundadores { grid-template-columns: 1fr; } }
