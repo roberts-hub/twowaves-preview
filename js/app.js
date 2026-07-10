@@ -350,51 +350,31 @@
       boton.disabled = true;
       boton.textContent = "Sending…";
 
-      // 1) Base de datos de prospectos (Google Sheet): captura confiable de
-      //    cada lead. Fire-and-forget (no-cors); es la fuente de verdad.
+      // Backend único: Apps Script (Google Sheet + correo de aviso a info@).
+      // Confiable (infra de Google, sin depender de FormSubmit). El doPost
+      // guarda la fila Y manda la notificación de cada lead. no-cors: no
+      // leemos la respuesta, pero el POST llega y se procesa.
       if (C.contacto.hojaCalculo) {
-        fetch(C.contacto.hojaCalculo, {
-          method: "POST",
-          mode: "no-cors",
-          body: new URLSearchParams({
-            nombre: d.get("nombre") || "",
-            correo: d.get("correo") || "",
-            telefono: telCompleto,
-            mensaje: d.get("mensaje") || "",
-          }),
-        }).catch(() => {});
-      }
-      // 2) Notificación por correo (FormSubmit): best-effort, con timeout de
-      //    12s para que un corte del servicio no deje esperando al visitante.
-      let correoOk = false;
-      try {
-        const ctrl = new AbortController();
-        const t = setTimeout(() => ctrl.abort(), 12000);
-        const resp = await fetch("https://formsubmit.co/ajax/" + destino, {
-          method: "POST",
-          signal: ctrl.signal,
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            Name: d.get("nombre"),
-            Email: d.get("correo"),
-            Phone: telCompleto,
-            Message: d.get("mensaje"),
-            _subject: "Project inquiry — " + d.get("nombre"),
-            _template: "table",
-            _captcha: "false",
-            _replyto: d.get("correo"),
-          }),
-        });
-        clearTimeout(t);
-        correoOk = resp.ok;
-      } catch (_) {
-        /* FormSubmit caído o lento: no pasa nada, el lead ya quedó en la Sheet */
-      }
-
-      // El lead queda guardado en la Google Sheet aunque el correo falle, así
-      // que SIEMPRE confirmamos al visitante. Solo si no hay Sheet configurada
-      // y además el correo falló, abrimos su app de correo como último respaldo.
-      if (!correoOk && !C.contacto.hojaCalculo) {
+        try {
+          const ctrl = new AbortController();
+          const t = setTimeout(() => ctrl.abort(), 10000);
+          await fetch(C.contacto.hojaCalculo, {
+            method: "POST",
+            mode: "no-cors",
+            signal: ctrl.signal,
+            body: new URLSearchParams({
+              nombre: d.get("nombre") || "",
+              correo: d.get("correo") || "",
+              telefono: telCompleto,
+              mensaje: d.get("mensaje") || "",
+            }),
+          });
+          clearTimeout(t);
+        } catch (_) {
+          /* red lenta/caída: el POST pudo haber llegado igual; seguimos */
+        }
+      } else {
+        // Sin hoja configurada: respaldo abriendo el correo del visitante
         const cuerpo =
           "Name: " + d.get("nombre") +
           "\nEmail: " + d.get("correo") +
