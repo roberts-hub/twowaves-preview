@@ -73,10 +73,44 @@
       if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
     });
   }
-  window.addEventListener("pageshow", (e) => { if (e.persisted) reanudarPlayers(); });
+  window.addEventListener("pageshow", (e) => {
+    if (!e.persisted) return;
+    reanudarPlayers();
+    // La página vuelve del caché de retroceso: si quedó congelada a media
+    // interacción (precarga visible, reproductor abierto, scroll bloqueado),
+    // se restaura a un estado usable.
+    const pre = document.querySelector(".precarga");
+    if (pre) pre.remove();
+    const dlgVideo = document.querySelector(".modal-video");
+    if (dlgVideo && dlgVideo.open) {
+      const marcoV = document.querySelector(".modal-video_marco");
+      if (marcoV) marcoV.innerHTML = "";
+      dlgVideo.close();
+    }
+    document.body.style.overflow = "";
+    if (window.lenis) window.lenis.start();
+    if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+  });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") reanudarPlayers();
   });
+
+  // Los videos de fondo (hero) se pausan al salir de pantalla y se reanudan
+  // al volver: menos trabajo de GPU/decodificación = scroll más fluido.
+  function observarHero(contenedor, iframe) {
+    if (!("IntersectionObserver" in window)) return;
+    iframe.dataset.enVista = "1";
+    new IntersectionObserver((entradas) => {
+      entradas.forEach((en) => {
+        iframe.dataset.enVista = en.isIntersecting ? "1" : "0";
+        if (iframe.contentWindow) {
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ method: en.isIntersecting ? "play" : "pause" }), "*"
+          );
+        }
+      });
+    }, { rootMargin: "120px" }).observe(contenedor);
+  }
 
   // Marca (logo, título de pestaña, pie)
   $$("[data-marca]").forEach((el) => (el.textContent = C.marca.nombre));
@@ -254,11 +288,16 @@
       "aspect-ratio:" + ar + ";min-width:101%;min-height:101%;" +
       "width:auto;height:auto;border:0;pointer-events:none;" +
       "opacity:0;transition:opacity 0.8s ease;";
+    // Tras el fundido se quita la transition (repintados más baratos al scrollear)
+    const revelarVH = () => {
+      iframe.style.opacity = "1";
+      setTimeout(() => { iframe.style.transition = "none"; }, 900);
+    };
     const alMsj = (ev) => {
       if (ev.source !== iframe.contentWindow) return;
       let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
       if (d.event === "playProgress" || d.event === "timeupdate") {
-        iframe.style.opacity = "1";
+        revelarVH();
         estadoHero.listo = true; estadoHero.avisar();
         window.removeEventListener("message", alMsj);
       }
@@ -268,11 +307,13 @@
       iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
       // Respaldo: si los eventos no llegan, revela y libera la precarga a los 3.5s
       setTimeout(() => {
-        if (document.visibilityState === "visible") iframe.style.opacity = "1";
+        if (document.visibilityState === "visible") revelarVH();
         estadoHero.listo = true; estadoHero.avisar();
       }, 3500);
     });
-    $(".video-hero_fondo", sec).appendChild(iframe);
+    const fondoVH = $(".video-hero_fondo", sec);
+    fondoVH.appendChild(iframe);
+    observarHero(sec, iframe);
   });
 
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
@@ -341,8 +382,9 @@
     // vía FormSubmit, con formato de tabla. El visitante nunca sale del sitio.
     formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
-      if (!formulario.reportValidity()) return;
       const boton = formulario.querySelector("[type=submit]");
+      if (boton.disabled) return; // ya hay un envío en curso (doble Enter)
+      if (!formulario.reportValidity()) return;
       const botonHTML = boton.innerHTML;
       const d = new FormData(formulario);
       const destino = C.contacto.correoFormulario || C.contacto.correo;
@@ -461,13 +503,26 @@
             "height:max(100svh, calc(100vw / " + ar + "));" +
             "border:0;pointer-events:none;opacity:0;filter:blur(14px);" +
             "transition:opacity 1.2s ease, filter 1.2s ease;";
-          // Aparece (y libera la precarga) cuando YA está reproduciendo
+          // Aparece (y libera la precarga) cuando YA está reproduciendo.
+          // Al terminar el fundido se QUITAN filter y transition: un filtro
+          // permanente sobre un iframe de pantalla completa encarece cada
+          // repintado y hace que el scroll se trabe.
+          let reveladoHero = false;
+          const revelarHero = () => {
+            if (reveladoHero) return;
+            reveladoHero = true;
+            iframe.style.opacity = "1";
+            iframe.style.filter = "blur(0)";
+            setTimeout(() => {
+              iframe.style.filter = "none";
+              iframe.style.transition = "none";
+            }, 1400);
+          };
           const alMensajeHero = (ev) => {
             if (ev.source !== iframe.contentWindow) return;
             let dd; try { dd = JSON.parse(ev.data); } catch (_) { return; }
             if (dd.event === "playProgress" || dd.event === "timeupdate") {
-              iframe.style.opacity = "1";
-              iframe.style.filter = "blur(0)";
+              revelarHero();
               estadoHero.listo = true;
               estadoHero.avisar();
               window.removeEventListener("message", alMensajeHero);
@@ -478,15 +533,13 @@
             iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
             // Respaldo: si los eventos no llegan, revela a los 4s visibles
             setTimeout(() => {
-              if (document.visibilityState === "visible") {
-                iframe.style.opacity = "1";
-                iframe.style.filter = "blur(0)";
-              }
+              if (document.visibilityState === "visible") revelarHero();
               estadoHero.listo = true;
               estadoHero.avisar();
             }, 4000);
           });
           heroFondo.append(iframe);
+          observarHero(heroFondo, iframe);
         } else if (typeof fondo === "string" && fondo) {
           const vid = document.createElement("video");
           Object.assign(vid, { src: fondo, muted: true, loop: true, playsInline: true, autoplay: true });
@@ -651,6 +704,12 @@
       let d; try { d = JSON.parse(ev.data); } catch (_) { return; }
       if (d.event === "playProgress" || d.event === "timeupdate") {
         iframe.classList.add("cargado");
+        // Tarjeta chica sin hover (el mouse ya se fue cuando el player quedó
+        // listo): se pausa para que no siga reproduciendo de fondo.
+        if (!tarjeta.classList.contains("tarjeta--grande") && !tarjeta.classList.contains("hover-activo")) {
+          iframe.contentWindow.postMessage(JSON.stringify({ method: "pause" }), "*");
+          return;
+        }
         // Con "inicio" definido, cada vuelta del loop salta el arranque
         // negro; sin él, el listener ya no hace falta.
         const seg = d.data && d.data.seconds;
@@ -736,10 +795,14 @@
     return null;
   }
 
-  // Pausa/reanuda los players de las tarjetas grandes (evita que sigan
-  // reproduciendo detrás del reproductor abierto)
+  // Pausa/reanuda los players de las tarjetas (evita que sigan
+  // reproduciendo detrás del reproductor abierto). Al reanudar, SOLO las
+  // grandes: las chicas se controlan por hover y no deben quedar andando.
   function playersTarjetas(metodo) {
-    $$(".tarjeta_visual iframe").forEach((f) => {
+    const sel = metodo === "play"
+      ? ".tarjeta--grande .tarjeta_visual iframe"
+      : ".tarjeta_visual iframe";
+    $$(sel).forEach((f) => {
       if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: metodo }), "*");
     });
   }
@@ -939,7 +1002,9 @@
     if (reducirMovimiento) {
       gsap.set(revelables, { autoAlpha: 1, y: 0 });
     } else {
-      gsap.set(revelables, { autoAlpha: 0, y: 50 });
+      // will-change vive SOLO durante el tween (el onComplete lo limpia);
+      // dejarlo fijo en CSS crea capas de más y traba el scroll.
+      gsap.set(revelables, { autoAlpha: 0, y: 50, willChange: "transform, opacity" });
       ScrollTrigger.batch(revelables, {
         once: true,
         start: "top 95%",
@@ -962,7 +1027,7 @@
     if (reducirMovimiento) {
       gsap.set(tarjetasResena, { autoAlpha: 1, y: 0 });
     } else {
-      gsap.set(tarjetasResena, { autoAlpha: 0, y: 48 });
+      gsap.set(tarjetasResena, { autoAlpha: 0, y: 48, willChange: "transform, opacity" });
       ScrollTrigger.create({
         trigger: ".resenas_grid",
         start: "top 82%",
@@ -975,6 +1040,7 @@
             stagger: 0.16,
             ease: "power3.out",
             overwrite: "auto",
+            onComplete: () => gsap.set(tarjetasResena, { clearProps: "willChange" }),
           }),
       });
     }

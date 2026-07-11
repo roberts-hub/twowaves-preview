@@ -1312,8 +1312,11 @@ h1 .acento-serif, h2 .acento-serif { color: var(--acento); }
 
 /* ============================================================
    ANIMACIONES DE ENTRADA (estado inicial lo pone JS)
+   ------------------------------------------------------------
+   El will-change lo aplica y limpia GSAP SOLO mientras anima
+   (una regla CSS permanente crearía capas compositadas de más
+   y hace que el scroll se sienta trabado).
    ============================================================ */
-[data-revelar] { will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) {
   .marquesina_pista { animation: none; }
 }
