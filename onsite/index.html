@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0a08">
+  <title>ONSITE — Event Films & Photography by Two Waves</title>
+  <meta name="description" content="Transforming life's biggest moments into timeless stories. Tailored photography and videography for graduations, weddings, corporate events, festivals and celebrations. Guadalajara, MX.">
+  <meta property="og:title" content="ONSITE — Event Films & Photography">
+  <meta property="og:description" content="Transforming life's biggest moments into timeless stories. Graduations, weddings, corporate events, festivals & celebrations.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.twowaves.mx/onsite/">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- El hero abre con video de Vimeo: adelantamos los handshakes para que
+       arranque antes (la precarga lo espera; ver js/main.js). -->
+  <link rel="preconnect" href="https://player.vimeo.com">
+  <link rel="preconnect" href="https://i.vimeocdn.com">
+  <link rel="preconnect" href="https://f.vimeocdn.com">
+  <link rel="dns-prefetch" href="https://player.vimeo.com">
+  <!-- Es lo primero que se ve del hero: que baje antes que fuentes y JS.
+       Cada pantalla adelanta el suyo: horizontal o vertical. -->
+  <link rel="preload" as="image" href="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us"
+        media="(min-width: 861px), (orientation: landscape)" fetchpriority="high">
+  <link rel="preload" as="image" imagesrcset="https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_640?region=us 640w, https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_960?region=us 960w"
+        imagesizes="100vw" media="(max-width: 860px) and (orientation: portrait)" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62.5..125,300..900&family=IBM+Plex+Mono&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css?v=7">
+</head>
+<body class="cargando">
+
+  <!-- ══════════ PRECARGA: el logo original se revela del centro hacia afuera ══════════ -->
+  <div class="precarga" id="precarga" aria-hidden="true">
+    <img class="precarga_logo" src="img/logo-parens-cream.png" alt="">
+  </div>
+
+  <a class="saltar" href="#contenido">Skip to content</a>
+
+  <!-- ══════════ NAVEGACIÓN ══════════ -->
+  <header class="nav" id="nav">
+    <a class="nav_logo" href="#" aria-label="ONSITE — home">
+      <img src="img/wordmark-cream.png" alt="ONSITE">
+      <span class="nav_sello">by Two Waves</span>
+    </a>
+    <nav class="nav_links" aria-label="Main navigation">
+      <a href="#events">Events</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+    </nav>
+    <a class="boton nav_cta" href="quote.html"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
+    <button class="nav_hamburguesa" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
+  </header>
+
+  <div class="menu-movil" id="menu-movil">
+    <a href="#events">Events</a>
+    <a href="#work">Work</a>
+    <a href="#process">Process</a>
+    <a href="quote.html">Get a quote</a>
+  </div>
+
+  <main id="contenido">
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero">
+      <!-- Escritorio: "MAURET & CARLOS" (2:1) desde el segundo 10.
+           Celular vertical: el reel 9:16 de "MITA SOUNDS 2023", porque un film
+           2:1 a pantalla completa en un teléfono deja ver solo el 23% del
+           encuadre. Ver VIDEO_HERO en js/main.js.
+           La imagen es el respaldo mientras el video arranca: cambia junto
+           con el video para que no se vea un film y luego otro. -->
+      <div class="hero_fondo" data-hero-fondo aria-hidden="true">
+        <picture>
+          <source media="(max-width: 860px) and (orientation: portrait)"
+                  srcset="https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_640?region=us 640w, https://i.vimeocdn.com/video/1788258850-eef01b7567a4fc4e8409b9a0d14969a8032a2446ec3d3ae67d80b50827524d7a-d_960?region=us 960w"
+                  sizes="100vw">
+          <img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us" alt="" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
+      <div class="hero_contenido">
+        <h1 class="hero_titulo revelar">
+          Life's biggest<br>moments<span class="coma">,</span>
+        </h1>
+        <p class="hero_rotador revelar" aria-live="off">
+          <span class="serif" data-rotador>your graduation.</span>
+        </p>
+        <p class="hero_sub revelar">
+          Turned into timeless stories. Tailored photo &amp; film
+          coverage for the days you'll want to live twice.
+        </p>
+        <div class="hero_acciones revelar">
+          <a class="boton grande" href="quote.html"><span class="paren">(</span> Get a quote <span class="paren">)</span></a>
+        </div>
+      </div>
+      <div class="hero_base">
+        <span class="etiqueta">Guadalajara, MX — available worldwide</span>
+        <span class="etiqueta hero_scroll">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ══════════ MARQUEE ══════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee_pista">
+        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
+        <span>( Graduations )</span><span>( Weddings )</span><span>( Corporate )</span><span>( Festivals )</span><span>( Social )</span><span>( Anything worth remembering )</span>
+      </div>
+    </div>
+
+    <!-- ══════════ TIPOS DE EVENTO ══════════ -->
+    <section class="eventos seccion" id="events">
+      <p class="etiqueta revelar">( What we cover )</p>
+      <h2 class="titulo-seccion revelar">Every kind<br>of <span class="serif">event.</span></h2>
+
+      <ul class="eventos_lista">
+        <!-- Los eventos con clip llevan data-video + data-video-aspecto + data-video-inicio.
+             Los que no tienen (PLACEHOLDER) usan una miniatura del portafolio Two Waves. -->
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
+            data-video="1210598661"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 01 )</span>
+            <span class="evento_nombre">Graduations</span>
+            <span class="evento_frase serif">the day it all paid off</span>
+          </div>
+        </li>
+        <!-- Weddings muestra el clip de "MAURET & CARLOS" al pasar el cursor.
+             Para darle video a otro evento: mismos tres data-video-*. -->
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us"
+            data-video="1210597438"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 02 )</span>
+            <span class="evento_nombre">Weddings</span>
+            <span class="evento_frase serif">one day, every feeling</span>
+          </div>
+        </li>
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us"
+            data-video="1210651474"
+            data-video-aspecto="1280x640"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 03 )</span>
+            <span class="evento_nombre">Corporate</span>
+            <span class="evento_frase serif">launches, summits, brand nights</span>
+          </div>
+        </li>
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
+            data-video="1210601096"
+            data-video-aspecto="1280x641"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 04 )</span>
+            <span class="evento_nombre">Festivals</span>
+            <span class="evento_frase serif">thousands of people, one story</span>
+          </div>
+        </li>
+        <li class="evento"
+            data-img="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us"
+            data-video="1135144526"
+            data-video-aspecto="1280x540"
+            data-video-inicio="10">
+          <div class="evento_fila">
+            <span class="evento_num">( 05 )</span>
+            <span class="evento_nombre">Social &amp; more</span>
+            <span class="evento_frase serif">birthdays, showers, concerts…</span>
+          </div>
+        </li>
+      </ul>
+      <div class="evento_preview" id="evento-preview" aria-hidden="true"><img src="" alt=""></div>
+    </section>
+
+    <!-- ══════════ STATEMENT ══════════ -->
+    <section class="statement seccion">
+      <h2 class="statement_texto" data-palabras>( We don't just cover events. We make them last. )</h2>
+    </section>
+
+    <!-- ══════════ TRABAJOS RECIENTES ══════════ -->
+    <section class="trabajos seccion" id="work">
+      <p class="etiqueta revelar">( Recent events )</p>
+      <h2 class="titulo-seccion revelar">Stories we've<br><span class="serif">told lately.</span></h2>
+
+      <!-- Cada tarjeta abre el reproductor del sitio (ver MODAL en js/main.js).
+           El href a Vimeo queda como respaldo si el JS no carga.
+           Para sumar un film: copia un bloque y cambia id, thumb, aspecto,
+           título y tipo. El thumb y la proporción los da
+           https://vimeo.com/api/oembed.json?url=<link del video> -->
+      <div class="trabajos_grid">
+        <a class="trabajo revelar" href="https://vimeo.com/1210597438" target="_blank" rel="noopener"
+           data-film data-video="1210597438" data-video-aspecto="1280x640"
+           data-titulo="Mauret &amp; Carlos" data-tipo="Wedding" data-desc="Some stories are meant to be lived. Others are meant to be remembered forever.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_640?region=us 640w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_960?region=us 960w, https://i.vimeocdn.com/video/2180555969-d1691d8267af497bc4de1659d9a2716b8a5ce75d702e1b4c2d4fc7a61d8db7b7-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la boda de Mauret y Carlos" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Wedding — Mauret &amp; Carlos )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1210598661" target="_blank" rel="noopener"
+           data-film data-video="1210598661" data-video-aspecto="1280x640"
+           data-titulo="Graduación Med UAG" data-tipo="Graduation">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_640?region=us 640w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_960?region=us 960w, https://i.vimeocdn.com/video/2180556955-6beee52b9fadb29bb6a34e0e80a979771f9bca8ddb5b38bc1e3c62b3fc87af1d-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de la graduación de Medicina UAG" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Graduation — Graduación Med UAG )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1210651474" target="_blank" rel="noopener"
+           data-film data-video="1210651474" data-video-aspecto="1280x640"
+           data-titulo="Aniversario Sheló Nabel 2025" data-tipo="Corporate" data-desc="A celebration years in the making, brought to life in one unforgettable destination. In 2025, Sheló Nabel gathered its community in Playa del Carmen to celebrate another chapter of its story.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_640?region=us 640w, https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_960?region=us 960w, https://i.vimeocdn.com/video/2180629843-2d24c5d8c7baebec0e402907995fccf3a107cd8662c94f1c09065f3cc2c2d982-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still del aniversario de Sheló Nabel 2025" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Corporate — Aniversario Sheló Nabel 2025 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1210601096" target="_blank" rel="noopener"
+           data-film data-video="1210601096" data-video-aspecto="1280x641"
+           data-titulo="Festival Internacional del Globo 2025" data-tipo="Festival" data-desc="For a few days, the sky became the stage. Thousands of people, hundreds of balloons, and a collection of moments that could only exist here.">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_640?region=us 640w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_960?region=us 960w, https://i.vimeocdn.com/video/2180560408-4ab2845709f8171875f6485fab9d0a1d318442756d9fb75f5982b563cefb0e04-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still del Festival Internacional del Globo 2025" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Festival — Festival Internacional del Globo 2025 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/924251635" target="_blank" rel="noopener"
+           data-film data-video="924251635" data-video-aspecto="1280x545"
+           data-titulo="Majahuitas 2023" data-tipo="Festival">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_640?region=us 640w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_960?region=us 960w, https://i.vimeocdn.com/video/1816990174-a5a75d66aa994804ba2319dbd4f95fcd9cb03bb168ca76a77285ab0fef09fcf6-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Majahuitas 2023" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Festival — Majahuitas 2023 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/997132154" target="_blank" rel="noopener"
+           data-film data-video="997132154" data-video-aspecto="1280x649"
+           data-titulo="Mita Sounds 2024" data-tipo="Festival">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_640?region=us 640w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_960?region=us 960w, https://i.vimeocdn.com/video/1913292777-48daef50cd2e8cb680aff6652b7b7f82f61a4415bd0ae654af1ee48de80032e2-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Mita Sounds 2024" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Festival — Mita Sounds 2024 )</p>
+        </a>
+        <a class="trabajo revelar" href="https://vimeo.com/1135144526" target="_blank" rel="noopener"
+           data-film data-video="1135144526" data-video-aspecto="1280x540"
+           data-titulo="Ricardo Salinas, 70 años" data-tipo="Social">
+          <figure>
+            <img src="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us"
+                 srcset="https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_640?region=us 640w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_960?region=us 960w, https://i.vimeocdn.com/video/2080383136-a4d6bf9354ae227ca2fe5f4fb104303033d6dc26b3bbc28994c7f43076506f53-d_1280?region=us 1280w"
+                 sizes="(max-width: 860px) 92vw, 46vw" alt="Still de Ricardo Salinas 70 años" loading="lazy" decoding="async">
+            <span class="trabajo_play" aria-hidden="true">( Play )</span>
+          </figure>
+          <p class="etiqueta">( Social — Ricardo Salinas, 70 años )</p>
+        </a>
+      </div>
+      <p class="nota revelar">More on Instagram — <a href="https://www.instagram.com/onsite.tw/" target="_blank" rel="noopener">@onsite.tw</a></p>
+    </section>
+
+    <!-- ══════════ PROCESO ══════════ -->
+    <section class="proceso seccion" id="process">
+      <p class="etiqueta revelar">( How it works )</p>
+      <h2 class="titulo-seccion revelar">Easy for you.<br><span class="serif">Obsessive for us.</span></h2>
+      <ol class="proceso_pasos">
+        <li class="paso revelar">
+          <span class="paso_num etiqueta">( 01 )</span>
+          <h3>Tell us about your event</h3>
+          <p>Two minutes, a few questions. Date, place, what you're celebrating and how you dream of remembering it.</p>
+        </li>
+        <li class="paso revelar">
+          <span class="paso_num etiqueta">( 02 )</span>
+          <h3>We design the coverage</h3>
+          <p>Crew, cameras and plan tailored to your day — from a single storyteller to a full cinema unit. You approve everything.</p>
+        </li>
+        <li class="paso revelar">
+          <span class="paso_num etiqueta">( 03 )</span>
+          <h3>You relive it forever</h3>
+          <p>A film and gallery delivered fast, edited with intention and ready to share — plus social cuts while the moment is still hot.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ══════════ CIERRE → PÁGINA DE COTIZACIÓN ══════════ -->
+    <section class="cierre seccion" id="quote">
+      <p class="etiqueta revelar">( Get a quote )</p>
+      <h2 class="titulo-seccion revelar">Planning<br><span class="serif">something?</span></h2>
+      <p class="cierre_sub revelar">
+        Tell us about your event in a couple of minutes — we reply within 24 hours.
+      </p>
+      <a class="boton grande revelar" href="quote.html"><span class="paren">(</span> Start your quote <span class="paren">)</span></a>
+    </section>
+  </main>
+
+  <!-- ══════════ REPRODUCTOR ══════════ -->
+  <dialog class="reproductor" id="reproductor">
+    <div class="reproductor_fondo" data-cerrar-repro></div>
+    <div class="reproductor_contenido">
+      <button class="reproductor_cerrar" data-cerrar-repro><span class="paren">(</span> Close ✕ <span class="paren">)</span></button>
+      <div class="reproductor_caja">
+        <div class="reproductor_marco" data-marco></div>
+        <div class="reproductor_info">
+          <h3 class="reproductor_titulo" data-repro-titulo></h3>
+          <div class="reproductor_columnas">
+            <div class="reproductor_meta">
+              <span class="etiqueta">Event</span>
+              <span class="reproductor_tipo" data-repro-tipo></span>
+            </div>
+            <p class="reproductor_desc" data-repro-desc></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ══════════ WHATSAPP FLOTANTE ══════════ -->
+  <a class="whats" href="https://wa.me/523331290485?text=Hi!%20I'd%20like%20a%20quote%20for%20my%20event%20(found%20you%20on%20twowaves.mx/onsite)" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.2 2.2-.2 3.9a12 12 0 0 0 4.6 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.2z"/></svg>
+  </a>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <img class="footer_logo" src="img/logo-parens-cream.png" alt="( ONSITE )">
+    <div class="footer_links">
+      <a href="https://www.instagram.com/onsite.tw/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:contacto@twowaves.mx">contacto@twowaves.mx</a>
+      <a href="https://www.twowaves.mx" target="_blank" rel="noopener">A Two Waves company</a>
+    </div>
+    <p class="footer_firma etiqueta">( ONSITE by Two Waves — Guadalajara, MX )</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
