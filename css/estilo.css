@@ -1332,3 +1332,84 @@ body::after {
   opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
+
+/* ============================================================
+   PÁGINAS DE PROYECTO (SEO): /cupra-formentor-2024, etc.
+   Generadas por herramientas/generar-seo.js
+   ============================================================ */
+.pagina-proyecto_bloque {
+  padding-top: calc(var(--alto-nav) + clamp(2rem, 5vw, 3.5rem));
+  display: grid;
+  gap: clamp(1.1rem, 2.5vw, 1.8rem);
+}
+.pagina-proyecto_migas a {
+  font-family: var(--fuente-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--acento);
+  transition: color 0.3s ease;
+}
+.pagina-proyecto_migas a:hover { color: var(--texto); }
+.pagina-proyecto_titulo {
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  text-transform: uppercase;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.pagina-proyecto_metas { display: flex; gap: clamp(1rem, 3vw, 2rem); flex-wrap: wrap; }
+.pagina-proyecto_player {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+  max-height: 78svh;
+}
+.pagina-proyecto_player img,
+.pagina-proyecto_player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+.pagina-proyecto_play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.7rem;
+  border: 0;
+  background: rgba(5, 5, 4, 0.35);
+  color: var(--texto);
+  cursor: pointer;
+  transition: background 0.35s ease;
+}
+.pagina-proyecto_play:hover { background: rgba(5, 5, 4, 0.15); }
+.pagina-proyecto_play svg {
+  width: clamp(3rem, 6vw, 4.2rem);
+  height: auto;
+  border: 1px solid rgba(231, 226, 214, 0.5);
+  border-radius: 50%;
+  padding: clamp(0.8rem, 1.6vw, 1.2rem);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+}
+.pagina-proyecto_play:hover svg { transform: scale(1.07); border-color: var(--acento); }
+.pagina-proyecto_play span {
+  font-family: var(--fuente-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.pagina-proyecto_descripcion { max-width: 62ch; opacity: 0.9; }
+.pagina-proyecto_cta {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}

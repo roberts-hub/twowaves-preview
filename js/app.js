@@ -636,8 +636,10 @@
 
   // Grid de proyectos (data-grid="todos" | "destacados")
   function crearTarjeta(p, i, uniforme) {
-    const btn = document.createElement("button");
-    btn.type = "button";
+    // Enlace real (no botón): Google sigue el href a la página del proyecto
+    // (SEO); para el visitante el click abre el reproductor como siempre.
+    const btn = document.createElement("a");
+    btn.href = p.slug ? "/" + p.slug : "#";
     btn.className = "tarjeta" + (p.tamano === "grande" && !uniforme ? " tarjeta--grande" : "") + (p.videoHover ? " con-video" : "");
     btn.dataset.proyecto = i;
     btn.dataset.revelar = "";
@@ -846,7 +848,13 @@
   if (modal) {
     document.addEventListener("click", (e) => {
       const tarjeta = e.target.closest("[data-proyecto]");
-      if (tarjeta) abrirModal(C.proyectos[+tarjeta.dataset.proyecto]);
+      if (tarjeta) {
+        // La tarjeta es un <a> (por SEO), pero el click abre el reproductor
+        // aquí mismo. Con Cmd/Ctrl o click medio sí se va a la página propia.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault();
+        abrirModal(C.proyectos[+tarjeta.dataset.proyecto]);
+      }
       if (e.target.closest("[data-cerrar-modal]")) cerrarModal();
     });
     modal.addEventListener("cancel", (e) => {

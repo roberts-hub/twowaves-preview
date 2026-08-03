@@ -211,3 +211,15 @@ El sitio es 100% estático: se puede subir gratis a **Netlify** (recomendado):
 3. Netlify te da una URL al instante. Puedes conectar tu dominio propio en *Domain settings*.
 
 Para actualizar el sitio publicado: repite el arrastre de la carpeta después de editar.
+
+## Páginas de proyecto (SEO)
+
+Cada proyecto tiene su propia página (por ejemplo `twowaves.mx/cupra-formentor-2024`),
+generada desde `contenido.js` (campo `slug` de cada proyecto). Después de agregar,
+quitar o editar proyectos, corre:
+
+```
+node herramientas/generar-seo.js
+```
+
+Eso regenera las páginas y el `sitemap.xml`. Luego commit y push como siempre.

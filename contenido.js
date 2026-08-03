@@ -94,6 +94,7 @@ window.CONTENIDO = {
   proyectos: [
     {
       titulo: "Visit Jalisco",
+      slug: "visit-jalisco",
       ordenPortada: 1,
       descripcion: "Travel campaign produced with Beautiful Destinations, filmed across Jalisco from the coast to the highlands and shot at home.",
       cliente: "Beautiful Destinations",
@@ -107,6 +108,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Cupra Formentor",
+      slug: "cupra-formentor-2024",
       ordenPortada: 3,
       logoCliente: "assets/img/logos/cupra.png",
       logoEscala: 1.5,
@@ -123,6 +125,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Visit Puerto Vallarta",
+      slug: "beautiful-destinations-visit-puerto-vallarta",
       logoCliente: "assets/img/logos/beautiful-destinations.png",
       logoEscala: 1.5,
       descripcion: "Destination campaign produced in collaboration with Beautiful Destinations and Visit Puerto Vallarta, capturing the essence of the city through cinematic storytelling.",
@@ -137,6 +140,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Grand Island",
+      slug: "grandislandbymondrian",
       ordenPortada: 2,
       logoCliente: "assets/img/logos/mondrian.png",
       logoEscala: 0.72,
@@ -152,6 +156,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Unlocking 982",
+      slug: "unlocking-982",
       logoCliente: "assets/img/logos/982.png",
       logoEscala: 0.55,
       descripcion: "Global campaign produced for 982, an exclusive members group, filmed across international locations to showcase luxury travel, lifestyle, and curated experiences.",
@@ -166,6 +171,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Alo Yoga Retreat",
+      slug: "alo-yoga-retreat",
       ordenPortada: 5,
       descripcion: "Wellness campaign produced for ALO Yoga at One&Only Mandarina, capturing an immersive retreat experience through dynamic and intimate content.",
       cliente: "One&Only Mandarina",
@@ -179,6 +185,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Jacob & Co",
+      slug: "jacob-and-co-nunca-rendirse",
       descripcion: "Campaign produced for Jacob & Co's special edition 'Nunca Rendirse' timepiece, filmed across extreme natural environments to reflect resilience and endurance.",
       cliente: "Jacob & Co",
       categoria: "Commercial",
@@ -191,6 +198,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Tito Double P x Cashonly",
+      slug: "tito-double-p-cashonly",
       descripcion: "Launch campaign produced for the collaboration between CashOnly and artist Tito Double P, introducing a limited edition collection through a high energy visual approach.",
       cliente: "Cashonly",
       categoria: "Music video",
@@ -203,6 +211,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "MB Motos",
+      slug: "mbmotosmexico",
       descripcion: "Commercial produced for MB Motos Mexico, capturing the ride, the machines, and the feeling of the open road.",
       cliente: "MB Motos México",
       categoria: "Commercial",
@@ -215,6 +224,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Brand Ambassador",
+      slug: "atletica-brand-ambassador",
       descripcion: "Launch campaign produced for Atletica's new golf line, featuring brand ambassador Gildinho and filmed in Cabo to introduce a fresh chapter for the brand.",
       cliente: "Atlética",
       logoCliente: "assets/img/logos/atletica.png",
@@ -228,6 +238,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Let's Go Brazil",
+      slug: "lets-go-brazil",
       ordenPortada: 4,
       descripcion: "Travel campaign produced with Beautiful Destinations, filmed coast to coast to capture Brazil in motion.",
       cliente: "Beautiful Destinations",
@@ -241,6 +252,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Bear Grylls x AION Drone Show",
+      slug: "bear-grylls-aion-drone-show",
       descripcion: "Not every production is a shoot. Some are an expedition. Seven days off the grid on Calivigny, a private island in Grenada, closing with a 1,000-drone show, the first of its kind in this part of the world.",
       cliente: "AION",
       categoria: "Drone show",
@@ -253,6 +265,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Lençóis Maranhenses",
+      slug: "beautiful-destinations-lencois",
       descripcion: "Destination campaign produced in collaboration with Beautiful Destinations, filmed in Lencois Maranhenses to showcase iconic landscapes and adventure.",
       cliente: "Beautiful Destinations",
       categoria: "Travel",
@@ -265,6 +278,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Lamborghini 60th Anniversary",
+      slug: "lamborghini-60-year-anniversary",
       descripcion: "Automotive campaign produced for Lamborghini's 60th anniversary in Mexico, documenting a landmark drive and the presentation of the Lamborghini Sterrato.",
       cliente: "Lamborghini",
       categoria: "Automotive",
@@ -277,6 +291,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Pequeña África",
+      slug: "visit-brazil-pequena-africa",
       logoCliente: "assets/img/logos/beautiful-destinations.png",
       logoEscala: 1.5,
       descripcion: "Destination campaign produced for Visit Brazil, capturing the cultural richness and identity of Pequena Africa through cinematic visual storytelling.",
@@ -291,6 +306,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Ricardo Salinas: 70 años",
+      slug: "ricardo-salinas-70-anos",
       descripcion: "Event campaign produced for the celebration of Ricardo Salinas' 70th anniversary, capturing key moments and storytelling that honor his legacy and vision.",
       cliente: "Ricardo Salinas",
       categoria: "Event",
