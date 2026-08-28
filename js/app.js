@@ -289,9 +289,26 @@
       "width:auto;height:auto;border:0;pointer-events:none;" +
       "opacity:0;transition:opacity 0.8s ease;";
     // Tras el fundido se quita la transition (repintados más baratos al scrollear)
+    let reveladoVH = false;
     const revelarVH = () => {
+      if (reveladoVH) return;
+      reveladoVH = true;
       iframe.style.opacity = "1";
       setTimeout(() => { iframe.style.transition = "none"; }, 900);
+    };
+    const fondoVH = $(".video-hero_fondo", sec);
+    // Respaldo visual: la miniatura del proyecto dueño de este video
+    const proyectoVH = (C.proyectos || []).find((pp) => pp.video && String(pp.video.id) === String(id));
+    const mostrarPosterVH = () => {
+      if (reveladoVH || !proyectoVH || !proyectoVH.miniatura) return;
+      if (fondoVH.querySelector(".hero_poster")) return;
+      const img = document.createElement("img");
+      img.className = "hero_poster";
+      img.src = proyectoVH.miniatura;
+      img.alt = "";
+      img.decoding = "async";
+      fondoVH.prepend(img);
+      requestAnimationFrame(() => img.classList.add("visible"));
     };
     const alMsj = (ev) => {
       if (ev.source !== iframe.contentWindow) return;
@@ -305,15 +322,18 @@
     window.addEventListener("message", alMsj);
     iframe.addEventListener("load", () => {
       iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
-      // Respaldo: si los eventos no llegan, revela y libera la precarga a los 3.5s
+      // Si en 3.5s no confirma reproducción, entra el respaldo
       setTimeout(() => {
-        if (document.visibilityState === "visible") revelarVH();
+        mostrarPosterVH();
         estadoHero.listo = true; estadoHero.avisar();
       }, 3500);
     });
-    const fondoVH = $(".video-hero_fondo", sec);
     fondoVH.appendChild(iframe);
     observarHero(sec, iframe);
+    setTimeout(() => {
+      mostrarPosterVH();
+      estadoHero.listo = true; estadoHero.avisar();
+    }, 5200);
   });
 
   // Formulario de contacto: en Netlify el POST llega solo; en local o en
@@ -518,6 +538,21 @@
               iframe.style.transition = "none";
             }, 1400);
           };
+          // Red de seguridad: si el video NO confirma reproducción (Vimeo
+          // caído, embed bloqueado, red lenta), entra la imagen de respaldo
+          // con el mismo fundido. El hero nunca se queda en negro. Si el
+          // video llega después, se revela encima y la tapa.
+          const mostrarPoster = () => {
+            if (reveladoHero || !C.portada.imagenFondo) return;
+            if (heroFondo.querySelector(".hero_poster")) return;
+            const img = document.createElement("img");
+            img.className = "hero_poster";
+            img.src = C.portada.imagenFondo;
+            img.alt = "";
+            img.decoding = "async";
+            heroFondo.prepend(img); // detrás del iframe
+            requestAnimationFrame(() => img.classList.add("visible"));
+          };
           const alMensajeHero = (ev) => {
             if (ev.source !== iframe.contentWindow) return;
             let dd; try { dd = JSON.parse(ev.data); } catch (_) { return; }
@@ -531,15 +566,21 @@
           window.addEventListener("message", alMensajeHero);
           iframe.addEventListener("load", () => {
             iframe.contentWindow.postMessage(JSON.stringify({ method: "addEventListener", value: "playProgress" }), "*");
-            // Respaldo: si los eventos no llegan, revela a los 4s visibles
+            // Si en 4s no confirma reproducción, muestra el respaldo
             setTimeout(() => {
-              if (document.visibilityState === "visible") revelarHero();
+              mostrarPoster();
               estadoHero.listo = true;
               estadoHero.avisar();
             }, 4000);
           });
           heroFondo.append(iframe);
           observarHero(heroFondo, iframe);
+          // Respaldo del respaldo: aunque el iframe nunca dispare "load"
+          setTimeout(() => {
+            mostrarPoster();
+            estadoHero.listo = true;
+            estadoHero.avisar();
+          }, 5200);
         } else if (typeof fondo === "string" && fondo) {
           const vid = document.createElement("video");
           Object.assign(vid, { src: fondo, muted: true, loop: true, playsInline: true, autoplay: true });

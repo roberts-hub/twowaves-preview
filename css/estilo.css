@@ -1413,3 +1413,16 @@ body::after {
   flex-wrap: wrap;
   margin-top: 0.4rem;
 }
+
+/* --- Imagen de respaldo del hero: entra solo si el video no pudo
+       reproducir (Vimeo caído o embed bloqueado); nunca pantalla negra --- */
+.hero_poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero_poster.visible { opacity: 1; }
