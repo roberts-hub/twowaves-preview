@@ -95,6 +95,18 @@
     if (document.visibilityState === "visible") reanudarPlayers();
   });
 
+  // Algunos navegadores bloquean TODO autoplay (Ahorro de energía de Chrome
+  // con poca batería, Modo de bajo consumo en iPhone, extensiones). El primer
+  // gesto del visitante levanta ese bloqueo: reintentamos play en los heroes
+  // para que el video entre con su fundido sobre la imagen de respaldo.
+  ["pointerdown", "touchstart", "keydown", "wheel"].forEach((evn) => {
+    window.addEventListener(evn, () => {
+      $$("[data-hero-fondo] iframe, .video-hero_fondo iframe").forEach((f) => {
+        if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
+      });
+    }, { once: true, passive: true });
+  });
+
   // Los videos de fondo (hero) se pausan al salir de pantalla y se reanudan
   // al volver: menos trabajo de GPU/decodificación = scroll más fluido.
   function observarHero(contenedor, iframe) {
