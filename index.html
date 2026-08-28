@@ -42,13 +42,16 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon-96x96.png">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link rel="canonical" href="https://www.twowaves.mx/">
+  <!-- El video del hero empieza a bajar junto con el HTML (antes que el JS) -->
+  <link rel="preload" as="video" type="video/mp4" href="assets/videos/hero-sd.mp4" media="(max-width: 1499px)">
+  <link rel="preload" as="video" type="video/mp4" href="assets/videos/hero-hd.mp4" media="(min-width: 1500px)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link rel="preconnect" href="https://f.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css?v=91">
+  <link rel="stylesheet" href="css/estilo.css?v=92">
 </head>
 <body>
 
@@ -185,7 +188,7 @@
   <!-- Librerías (las mismas que usa el sitio de referencia) -->
   <!-- GSAP + ScrollTrigger + Flip + Lenis en UNA sola peticion (menos viajes de red) -->
   <script src="https://cdn.jsdelivr.net/combine/npm/gsap@3.12.5/dist/gsap.min.js,npm/gsap@3.12.5/dist/ScrollTrigger.min.js,npm/gsap@3.12.5/dist/Flip.min.js,npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="contenido.js?v=91"></script>
-  <script src="js/app.js?v=91"></script>
+  <script src="contenido.js?v=92"></script>
+  <script src="js/app.js?v=92"></script>
 </body>
 </html>

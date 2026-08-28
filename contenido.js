@@ -32,7 +32,10 @@ window.CONTENIDO = {
     tituloAcento: "with intention.",
     tituloLinea2: "",
     subtitulo: "Based in Mexico, available worldwide",
-    videoFondo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" },
+    // Video servido desde el PROPIO dominio (arranca casi instantáneo).
+    // "sd" para pantallas normales, "hd" para pantallas grandes.
+    // Para volver a Vimeo: { tipo: "vimeo", id: "997119368", aspecto: "3840x1920" }
+    videoFondo: { tipo: "archivo", sd: "assets/videos/hero-sd.mp4", hd: "assets/videos/hero-hd.mp4" },
     imagenFondo: "https://i.vimeocdn.com/video/1913280099-d00b614e9dd0bf536793b488e210fe622bf6c0adbf4a344a54b6ac15d7cf0ed8-d_1280?region=us",
   },
 

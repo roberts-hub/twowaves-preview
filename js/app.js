@@ -58,10 +58,12 @@
       // larga con respiración.
       const breve = yaVista;   // ya visto: T corta (Home y About)
       if (breve) precarga.classList.add("precarga--breve");
-      // Tiempos: breve (T corta) < completa (T con respiración)
+      // Tiempos: breve (T corta) < completa (T con respiración). El TOPE es
+      // generoso a propósito: la T espera al video para que el hero aparezca
+      // YA reproduciendo; si el video confirma antes, la T sale de inmediato.
       const MINIMO = breve ? 650 : 2400;   // tiempo mínimo en pantalla
       const COLCHON = breve ? 400 : 700;   // margen tras confirmar reproducción
-      const TOPE = breve ? 4200 : 5600;    // tope duro
+      const TOPE = breve ? 6000 : 8000;    // tope duro
       let quitada = false;
       const quitar = () => {
         if (quitada) return;
@@ -89,6 +91,7 @@
     $$(".hero_fondo iframe, .tarjeta--grande .tarjeta_visual iframe, .video-hero iframe").forEach((f) => {
       if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
     });
+    $$(".hero_fondo video").forEach((v) => v.play().catch(() => {}));
   }
   window.addEventListener("pageshow", (e) => {
     if (!e.persisted) return;
@@ -121,6 +124,7 @@
       $$("[data-hero-fondo] iframe, .video-hero_fondo iframe").forEach((f) => {
         if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
       });
+      $$("[data-hero-fondo] video").forEach((v) => v.play().catch(() => {}));
     }, { once: true, passive: true });
   });
 
@@ -521,10 +525,11 @@
   const heroFondo = $("[data-hero-fondo]");
   if (heroFondo) {
     const fondo = C.portada.videoFondo;
-    const sinVideoHero = !fondo || reducirMovimiento || redLenta;
+    // El video principal SIEMPRE se intenta (en red floja va la versión
+    // ligera). Solo se salta si el visitante activó "ahorro de datos" o
+    // pidió movimiento reducido.
+    const sinVideoHero = !fondo || reducirMovimiento || conx.saveData === true;
     if (sinVideoHero) {
-      // Sin video de fondo (o red lenta): la precarga no espera nada y el
-      // hero muestra la imagen ligera de inmediato
       estadoHero.listo = true;
       estadoHero.avisar();
       if (fondo) ponerPoster(heroFondo, C.portada.imagenFondo);
@@ -601,14 +606,49 @@
             estadoHero.listo = true;
             estadoHero.avisar();
           }, 5200);
-        } else if (typeof fondo === "string" && fondo) {
+        } else if ((typeof fondo === "string" && fondo) || (fondo && fondo.tipo === "archivo")) {
+          // Video nativo servido desde el propio dominio: sin el reproductor
+          // de Vimeo de por medio, arranca casi al instante. "hd" solo en
+          // pantallas grandes para no pedir de más en laptops y celulares.
+          const src = typeof fondo === "string"
+            ? fondo
+            : (window.innerWidth >= 1500 && !redLenta && fondo.hd) ? fondo.hd : (fondo.sd || fondo.hd);
           const vid = document.createElement("video");
-          Object.assign(vid, { src: fondo, muted: true, loop: true, playsInline: true, autoplay: true });
+          Object.assign(vid, { src, muted: true, loop: true, playsInline: true, autoplay: true, preload: "auto" });
           vid.setAttribute("muted", "");
           vid.setAttribute("playsinline", "");
+          vid.style.cssText =
+            "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" +
+            "opacity:0;transition:opacity 1s ease;";
+          let vidRevelado = false;
+          const revelarVid = () => {
+            if (vidRevelado) return;
+            vidRevelado = true;
+            vid.style.opacity = "1";
+            setTimeout(() => { vid.style.transition = "none"; }, 1200);
+          };
+          vid.addEventListener("playing", () => {
+            revelarVid();
+            estadoHero.listo = true;
+            estadoHero.avisar();
+          });
           heroFondo.append(vid);
-          vid.addEventListener("playing", () => { estadoHero.listo = true; estadoHero.avisar(); }, { once: true });
           vid.play().catch(() => {});
+          // Respaldo: si en 4s no reproduce (autoplay bloqueado), imagen
+          setTimeout(() => {
+            if (!vidRevelado) ponerPoster(heroFondo, C.portada.imagenFondo);
+            estadoHero.listo = true;
+            estadoHero.avisar();
+          }, 4000);
+          // Fuera de pantalla se pausa; al volver, sigue
+          if ("IntersectionObserver" in window) {
+            new IntersectionObserver((ens) => {
+              ens.forEach((en) => {
+                if (en.isIntersecting) vid.play().catch(() => {});
+                else vid.pause();
+              });
+            }, { rootMargin: "120px" }).observe(heroFondo);
+          }
         }
       };
       inyectarVideo(); // sin esperar 'load': carga durante la precarga
