@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/estilo.css?v=90">
+  <link rel="stylesheet" href="/css/estilo.css?v=91">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Cupra Formentor — Cupra","description":"Automotive campaign produced for the CUPRA Formentor 2024, filmed in a remote desert environment to showcase performance, power, and handling beyond the asphalt.","thumbnailUrl":["https://www.twowaves.mx/assets/img/cupra-polvo.jpg"],"uploadDate":"2024-01-01","embedUrl":"https://player.vimeo.com/video/924254132","publisher":{"@type":"Organization","name":"Two Waves Films","url":"https://www.twowaves.mx"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.twowaves.mx/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://www.twowaves.mx/work"},{"@type":"ListItem","position":3,"name":"Cupra Formentor","item":"https://www.twowaves.mx/cupra-formentor-2024"}]}</script>
 </head>
@@ -121,11 +121,9 @@
       });
     })();
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="/contenido.js?v=90"></script>
-  <script src="/js/app.js?v=90"></script>
+  <!-- GSAP + ScrollTrigger + Flip + Lenis en UNA sola peticion (menos viajes de red) -->
+  <script src="https://cdn.jsdelivr.net/combine/npm/gsap@3.12.5/dist/gsap.min.js,npm/gsap@3.12.5/dist/ScrollTrigger.min.js,npm/gsap@3.12.5/dist/Flip.min.js,npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="/contenido.js?v=91"></script>
+  <script src="/js/app.js?v=91"></script>
 </body>
 </html>

@@ -17,6 +17,23 @@
   const $ = (sel, ctx) => (ctx || document).querySelector(sel);
   const $$ = (sel, ctx) => Array.from((ctx || document).querySelectorAll(sel));
   const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Conexión lenta o ahorro de datos activado: modo ligero — imágenes en
+  // lugar de videos de fondo (el reproductor completo sigue disponible al
+  // hacer click en cualquier proyecto). Así el sitio vuela aún con mal WiFi.
+  const conx = navigator.connection || {};
+  const redLenta = !!(conx.saveData || /(^|-)2g$|^3g$/.test(conx.effectiveType || ""));
+
+  // Imagen de respaldo/ligera de los heroes (misma para modo lento y fallos)
+  function ponerPoster(contenedor, src) {
+    if (!contenedor || !src || contenedor.querySelector(".hero_poster")) return;
+    const img = document.createElement("img");
+    img.className = "hero_poster";
+    img.src = src;
+    img.alt = "";
+    img.decoding = "async";
+    contenedor.prepend(img);
+    requestAnimationFrame(() => img.classList.add("visible"));
+  }
 
   /* ==========================================================
      1. RENDERIZADO DE CONTENIDO desde contenido.js
@@ -277,12 +294,16 @@
   // Headers secundarios con video de fondo (ej. About con Grand Island):
   // <section data-video-hero="ID|WxH|inicio"> — en play desde que entras
   $$("[data-video-hero]").forEach((sec) => {
-    if (reducirMovimiento || !window.matchMedia("(min-width: 700px)").matches) {
-      // Sin video (móvil / movimiento reducido): no hacemos esperar a la precarga
+    const [id, aspecto, inicioStr] = sec.dataset.videoHero.split("|");
+    if (reducirMovimiento || !window.matchMedia("(min-width: 700px)").matches || redLenta) {
+      // Sin video (móvil / movimiento reducido / red lenta): la precarga no espera
       estadoHero.listo = true; estadoHero.avisar();
+      if (redLenta) {
+        const pLigero = (C.proyectos || []).find((pp) => pp.video && String(pp.video.id) === String(id));
+        if (pLigero) ponerPoster($(".video-hero_fondo", sec), pLigero.miniatura);
+      }
       return;
     }
-    const [id, aspecto, inicioStr] = sec.dataset.videoHero.split("|");
     const inicio = parseFloat(inicioStr) || 1;
     const [aw, ah] = (aspecto || "16x9").split(/[x:]/).map(Number);
     const ar = aw && ah ? aw / ah : 16 / 9;
@@ -312,15 +333,7 @@
     // Respaldo visual: la miniatura del proyecto dueño de este video
     const proyectoVH = (C.proyectos || []).find((pp) => pp.video && String(pp.video.id) === String(id));
     const mostrarPosterVH = () => {
-      if (reveladoVH || !proyectoVH || !proyectoVH.miniatura) return;
-      if (fondoVH.querySelector(".hero_poster")) return;
-      const img = document.createElement("img");
-      img.className = "hero_poster";
-      img.src = proyectoVH.miniatura;
-      img.alt = "";
-      img.decoding = "async";
-      fondoVH.prepend(img);
-      requestAnimationFrame(() => img.classList.add("visible"));
+      if (!reveladoVH && proyectoVH) ponerPoster(fondoVH, proyectoVH.miniatura);
     };
     const alMsj = (ev) => {
       if (ev.source !== iframe.contentWindow) return;
@@ -508,12 +521,15 @@
   const heroFondo = $("[data-hero-fondo]");
   if (heroFondo) {
     const fondo = C.portada.videoFondo;
-    if (!(fondo && !reducirMovimiento)) {
-      // Sin video de fondo: la precarga no espera nada
+    const sinVideoHero = !fondo || reducirMovimiento || redLenta;
+    if (sinVideoHero) {
+      // Sin video de fondo (o red lenta): la precarga no espera nada y el
+      // hero muestra la imagen ligera de inmediato
       estadoHero.listo = true;
       estadoHero.avisar();
+      if (fondo) ponerPoster(heroFondo, C.portada.imagenFondo);
     }
-    if (fondo && !reducirMovimiento) {
+    if (!sinVideoHero) {
       // Se inyecta DE INMEDIATO para que cargue durante la precarga
       const inyectarVideo = () => {
         if (typeof fondo === "object" && fondo.tipo === "vimeo") {
@@ -555,15 +571,7 @@
           // con el mismo fundido. El hero nunca se queda en negro. Si el
           // video llega después, se revela encima y la tapa.
           const mostrarPoster = () => {
-            if (reveladoHero || !C.portada.imagenFondo) return;
-            if (heroFondo.querySelector(".hero_poster")) return;
-            const img = document.createElement("img");
-            img.className = "hero_poster";
-            img.src = C.portada.imagenFondo;
-            img.alt = "";
-            img.decoding = "async";
-            heroFondo.prepend(img); // detrás del iframe
-            requestAnimationFrame(() => img.classList.add("visible"));
+            if (!reveladoHero) ponerPoster(heroFondo, C.portada.imagenFondo);
           };
           const alMensajeHero = (ev) => {
             if (ev.source !== iframe.contentWindow) return;
@@ -798,7 +806,7 @@
 
     // La tarjeta GRANDE reproduce sola en cuanto entra a pantalla;
     // fuera de pantalla se pausa.
-    if (esGrande && esVimeo) {
+    if (esGrande && esVimeo && !redLenta) {
       new IntersectionObserver(
         (entradas) => {
           entradas.forEach((e) => {
@@ -819,7 +827,7 @@
     tarjeta.addEventListener("mouseenter", () => {
       tarjeta.classList.add("hover-activo");
       if (video) video.play().catch(() => {});
-      else if (esVimeo && !esGrande) {
+      else if (esVimeo && !esGrande && !redLenta) {
         if (!iframe) iframe = montarPlayer(tarjeta, p);
         else orden("play");
       }
