@@ -1,0 +1,71 @@
+# Publica las páginas de propuesta (para/<slug>/) a partir de la pestaña
+# "Propuestas" del Google Sheet "Prospectos TW". Solo escribe dentro de para/.
+# Corre cada 15 minutos y también a mano desde la pestaña Actions.
+name: Propuestas
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: propuestas
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SHEET_ID: ${{ vars.SHEET_ID }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+      RESULTADO: /tmp/propuestas-resultado.json
+    steps:
+      - name: Revisar configuración
+        id: config
+        run: |
+          if [ -z "$SHEET_ID" ] || [ -z "$GOOGLE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "Falta SHEET_ID o GOOGLE_SERVICE_ACCOUNT_JSON; no hay nada que hacer."
+            echo "listo=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "listo=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.config.outputs.listo == 'si'
+
+      - uses: actions/setup-node@v4
+        if: steps.config.outputs.listo == 'si'
+        with:
+          node-version: 20
+
+      - name: Generar páginas desde el Sheet
+        if: steps.config.outputs.listo == 'si'
+        run: node herramientas/generar-propuestas.js
+
+      - name: Commit y push (solo para/)
+        if: steps.config.outputs.listo == 'si'
+        run: |
+          git config user.name "Two Waves Propuestas"
+          git config user.email "propuestas@users.noreply.github.com"
+          git add para
+          if git diff --cached --quiet; then
+            echo "Sin cambios en para/."
+            exit 0
+          fi
+          MSG="$(cat /tmp/propuestas-mensaje.txt)"
+          git commit -m "${MSG:-Propuestas}"
+          for i in 1 2 3; do
+            git pull --no-edit --no-rebase origin main && git push origin main && exit 0
+            sleep 10
+          done
+          exit 1
+
+      - name: Marcar estado en el Sheet
+        if: steps.config.outputs.listo == 'si'
+        run: node herramientas/generar-propuestas.js --marcar
