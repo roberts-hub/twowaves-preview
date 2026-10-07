@@ -58,6 +58,8 @@ const slugify = (t) => String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
 const lineas = (t) => String(t || "").split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
 const partes = (t) => String(t || "").split("|").map((s) => s.trim());
 const absoluta = (r) => /^https?:\/\//.test(r || "") ? r : DOMINIO + "/" + String(r || "").replace(/^\//, "");
+// Rutas de contenido.js ("assets/img/...") son relativas a la raíz; desde para/<slug>/ hay que anteponer "/".
+const desdeRaiz = (r) => !r || /^(https?:)?\/|^data:/.test(r) ? r || "" : "/" + r;
 
 const ESTILO_IA = "Cinematic commercial film still, natural light, shot on a cinema camera with anamorphic lens, " +
   "subtle film grain, realistic, no text, no logos, no watermarks, 16:9 composition.";
@@ -123,7 +125,7 @@ function pagina(d) {
   const casos = d.casos.map((s) => PROYECTOS[s]).filter(Boolean).slice(0, 3);
   const refs = casos.length ? casos : Object.values(PROYECTOS).slice(0, 3);
   const tomas = d.tomas.map((t, i) => ({
-    ...t, img: t.imgLocal || (refs[i % refs.length] && refs[i % refs.length].miniatura) || "",
+    ...t, img: t.imgLocal || desdeRaiz(refs[i % refs.length] && refs[i % refs.length].miniatura),
     etiqueta: t.imgLocal ? `Toma 0${i + 1} · Concepto` : `Toma 0${i + 1} · Ref.`,
   }));
   const hayIA = tomas.some((t) => t.imgLocal);
@@ -227,7 +229,7 @@ ${d.pasos.length ? `
   </div></section>` : ""}
 ${casos.length ? bloque(num(), "Trabajo parecido", "Lo que ya hicimos.", `
     <div class="grid3">${casos.map((c) => `
-      <a class="case" href="${DOMINIO}/${esc(c.slug)}" target="_blank" rel="noopener"><div class="img" style="background-image:url('${esc(c.miniatura)}')"></div><h3>${esc(c.titulo)}</h3><span class="mono">${esc(c.cliente)} · ${esc(c.anio)}</span></a>`).join("")}
+      <a class="case" href="${DOMINIO}/${esc(c.slug)}" target="_blank" rel="noopener"><div class="img" style="background-image:url('${esc(desdeRaiz(c.miniatura))}')"></div><h3>${esc(c.titulo)}</h3><span class="mono">${esc(c.cliente)} · ${esc(c.anio)}</span></a>`).join("")}
     </div>`) : ""}
 
   <section><div class="two">
