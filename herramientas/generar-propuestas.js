@@ -23,7 +23,7 @@
      SHEET_ID                      id del Google Sheet
      GOOGLE_SERVICE_ACCOUNT_JSON   JSON de la cuenta de servicio (secreto)
      OPENAI_API_KEY                opcional; sin ella se usan referencias del portafolio
-     IMAGE_MODEL                   opcional; default gpt-image-1
+     IMAGE_MODEL                   opcional; si no está, usa el gpt-image más reciente de la cuenta
    ============================================================ */
 
 const fs = require("fs");
@@ -100,23 +100,54 @@ async function sheets(token, metodo, ruta, cuerpo) {
 
 /* ---------- Imágenes con IA (opcional) ---------- */
 
-async function generarImagen(prompt, destino) {
-  const key = process.env.OPENAI_API_KEY;
-  if (!key || !prompt) return false;
+let MODELO_IMAGEN = null;
+
+// Elige el modelo: IMAGE_MODEL si está definido; si no, el gpt-image más reciente
+// disponible en la cuenta (prefiere los que no son "mini").
+async function modeloImagen(key) {
+  if (MODELO_IMAGEN) return MODELO_IMAGEN;
+  if (process.env.IMAGE_MODEL) return (MODELO_IMAGEN = process.env.IMAGE_MODEL);
+  try {
+    const r = await fetch("https://api.openai.com/v1/models", { headers: { Authorization: "Bearer " + key } });
+    const j = await r.json();
+    const ids = (j.data || []).filter((m) => /^gpt-image/.test(m.id)).sort((a, b) => (b.created || 0) - (a.created || 0));
+    const elegido = ids.find((m) => !/mini/.test(m.id)) || ids[0];
+    MODELO_IMAGEN = elegido ? elegido.id : "gpt-image-1";
+  } catch (e) { MODELO_IMAGEN = "gpt-image-1"; }
+  console.log("Modelo de imagen: " + MODELO_IMAGEN);
+  return MODELO_IMAGEN;
+}
+
+async function pedirImagen(key, cuerpo) {
   const r = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
     headers: { Authorization: "Bearer " + key, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: process.env.IMAGE_MODEL || "gpt-image-1",
-      prompt: prompt + " " + ESTILO_IA, size: "1536x1024", n: 1,
-      output_format: "jpeg", output_compression: 82,
-    }),
+    body: JSON.stringify(cuerpo),
   });
-  const j = await r.json();
-  const b64 = j && j.data && j.data[0] && j.data[0].b64_json;
-  if (!b64) throw new Error("Imagen IA: " + JSON.stringify(j.error || j).slice(0, 300));
-  fs.writeFileSync(destino, Buffer.from(b64, "base64"));
-  return true;
+  return r.json();
+}
+
+async function generarImagen(prompt, destino) {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key || !prompt) return false;
+  const model = await modeloImagen(key);
+  const base = { model, prompt: prompt + " " + ESTILO_IA, n: 1 };
+  // Primer intento con formato horizontal y JPEG; si el modelo no acepta esos
+  // parámetros, segundo intento solo con lo básico.
+  let j = await pedirImagen(key, { ...base, size: "1536x1024", output_format: "jpeg", output_compression: 82 });
+  if (j && j.error) j = await pedirImagen(key, base);
+  const item = j && j.data && j.data[0];
+  if (item && item.b64_json) {
+    fs.writeFileSync(destino, Buffer.from(item.b64_json, "base64"));
+    return true;
+  }
+  if (item && item.url) {
+    const img = await fetch(item.url);
+    if (!img.ok) throw new Error("Imagen IA: no se pudo descargar la imagen");
+    fs.writeFileSync(destino, Buffer.from(await img.arrayBuffer()));
+    return true;
+  }
+  throw new Error("Imagen IA (" + model + "): " + JSON.stringify((j && j.error) || j).slice(0, 300));
 }
 
 /* ---------- Plantilla ---------- */
