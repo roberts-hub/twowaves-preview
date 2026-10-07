@@ -47,6 +47,15 @@ jobs:
         with:
           node-version: 20
 
+      - name: ImageMagick (comprimir imágenes IA)
+        if: steps.config.outputs.listo == 'si'
+        run: |
+          if command -v magick >/dev/null || command -v convert >/dev/null; then
+            echo "ImageMagick ya está instalado."
+          else
+            sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick
+          fi
+
       - name: Generar páginas desde el Sheet
         if: steps.config.outputs.listo == 'si'
         run: node herramientas/generar-propuestas.js

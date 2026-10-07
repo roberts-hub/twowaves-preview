@@ -369,6 +369,22 @@ function validar(d) {
   return faltan;
 }
 
+// Los proveedores entregan PNG pesados (~2-3 MB). Se convierten a JPEG real de 1600 px, calidad 80
+// (~200-320 KB). Requiere ImageMagick (magick o convert); si no está, se deja el original.
+function comprimirImagen(archivo) {
+  const { execFileSync } = require("child_process");
+  const tmp = archivo + ".tmp.jpg";
+  const args = [archivo, "-auto-orient", "-resize", "1600x>", "-strip", "-interlace", "Plane", "-quality", "80", tmp];
+  for (const bin of ["magick", "convert"]) {
+    try {
+      execFileSync(bin, args, { stdio: "ignore" });
+      fs.renameSync(tmp, archivo);
+      return null;
+    } catch (e) { fs.rmSync(tmp, { force: true }); }
+  }
+  return "no se pudo comprimir (falta ImageMagick); se dejó la imagen original";
+}
+
 async function construir(d) {
   const dir = path.join(RAIZ, "para", d.slug);
   fs.mkdirSync(dir, { recursive: true });
@@ -376,7 +392,11 @@ async function construir(d) {
   for (let i = 0; i < d.tomas.length; i++) {
     const archivo = `toma-${i + 1}.jpg`;
     try {
-      if (await generarImagen(d.tomas[i].prompt, path.join(dir, archivo))) d.tomas[i].imgLocal = archivo;
+      if (await generarImagen(d.tomas[i].prompt, path.join(dir, archivo))) {
+        d.tomas[i].imgLocal = archivo;
+        const aviso = comprimirImagen(path.join(dir, archivo));
+        if (aviso) avisos.push(`Toma ${i + 1}: ${aviso}`);
+      }
     } catch (e) { avisos.push(`Toma ${i + 1}: ${e.message}`); }
   }
   fs.writeFileSync(path.join(dir, "index.html"), pagina(d));
