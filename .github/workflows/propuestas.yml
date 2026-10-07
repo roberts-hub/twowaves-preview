@@ -23,6 +23,9 @@ jobs:
       SHEET_ID: ${{ vars.SHEET_ID }}
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      HIGGSFIELD_API_KEY: ${{ secrets.HIGGSFIELD_API_KEY }}
+      HIGGSFIELD_MODEL: ${{ vars.HIGGSFIELD_MODEL }}
+      IMAGE_PROVIDER: ${{ vars.IMAGE_PROVIDER }}
       IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
       RESULTADO: /tmp/propuestas-resultado.json
     steps:

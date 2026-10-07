@@ -22,7 +22,10 @@
    Variables de entorno (en GitHub: Settings › Secrets and variables › Actions):
      SHEET_ID                      id del Google Sheet
      GOOGLE_SERVICE_ACCOUNT_JSON   JSON de la cuenta de servicio (secreto)
-     OPENAI_API_KEY                opcional; sin ella se usan referencias del portafolio
+     HIGGSFIELD_API_KEY            opcional; "KEY_ID:KEY_SECRET" de Higgsfield (Soul Cinema)
+     HIGGSFIELD_MODEL              opcional; default higgsfield-ai/soul/cinema
+     IMAGE_PROVIDER                opcional; higgsfield u openai (default: el que tenga llave)
+     OPENAI_API_KEY                opcional; sin ninguna llave se usan referencias del portafolio
      IMAGE_MODEL                   opcional; si no está, usa el gpt-image más reciente de la cuenta
    ============================================================ */
 
@@ -127,7 +130,7 @@ async function pedirImagen(key, cuerpo) {
   return r.json();
 }
 
-async function generarImagen(prompt, destino) {
+async function generarImagenOpenAI(prompt, destino) {
   const key = process.env.OPENAI_API_KEY;
   if (!key || !prompt) return false;
   const model = await modeloImagen(key);
@@ -148,6 +151,48 @@ async function generarImagen(prompt, destino) {
     return true;
   }
   throw new Error("Imagen IA (" + model + "): " + JSON.stringify((j && j.error) || j).slice(0, 300));
+}
+
+/* ---------- Higgsfield (Soul Cinema por default) ---------- */
+// Secreto HIGGSFIELD_API_KEY con el formato "KEY_ID:KEY_SECRET".
+// Variable opcional HIGGSFIELD_MODEL (default "higgsfield-ai/soul/cinema").
+const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function generarImagenHiggsfield(prompt, destino) {
+  const key = process.env.HIGGSFIELD_API_KEY;
+  if (!key || !prompt) return false;
+  const modelo = (process.env.HIGGSFIELD_MODEL || "higgsfield-ai/soul/cinema").replace(/^\/+/, "");
+  const headers = { Authorization: "Key " + key.trim(), "Content-Type": "application/json" };
+  if (!generarImagenHiggsfield.avisado) { console.log("Proveedor de imagen: Higgsfield · " + modelo); generarImagenHiggsfield.avisado = true; }
+  const r = await fetch("https://api.higgsfield.ai/" + modelo, {
+    method: "POST", headers,
+    body: JSON.stringify({ prompt: prompt + " " + ESTILO_IA, aspect_ratio: "16:9", resolution: "1080p", batch_size: 1 }),
+  });
+  const pedido = await r.json().catch(() => ({}));
+  if (!r.ok || !pedido.request_id) throw new Error("Higgsfield (" + modelo + "): " + JSON.stringify(pedido).slice(0, 300));
+  const statusUrl = pedido.status_url || ("https://api.higgsfield.ai/requests/" + pedido.request_id + "/status");
+  // La llave solo viaja a api.higgsfield.ai, aunque la respuesta sugiera otra URL.
+  if (new URL(statusUrl).origin !== "https://api.higgsfield.ai") throw new Error("Higgsfield: status_url fuera de api.higgsfield.ai");
+  for (let i = 0; i < 60; i++) { // hasta ~4 minutos
+    await esperar(4000);
+    const s = await (await fetch(statusUrl, { headers })).json().catch(() => ({}));
+    if (s.status === "completed") {
+      const url = s.images && s.images[0] && s.images[0].url;
+      if (!url) throw new Error("Higgsfield: completado sin imagen");
+      const img = await fetch(url);
+      if (!img.ok) throw new Error("Higgsfield: no se pudo descargar la imagen");
+      fs.writeFileSync(destino, Buffer.from(await img.arrayBuffer()));
+      return true;
+    }
+    if (["failed", "nsfw", "canceled"].includes(s.status)) throw new Error("Higgsfield: " + s.status + " " + JSON.stringify(s).slice(0, 200));
+  }
+  throw new Error("Higgsfield: tiempo de espera agotado");
+}
+
+// Elige proveedor: IMAGE_PROVIDER (higgsfield | openai) o, si no está, el que tenga llave (Higgsfield primero).
+async function generarImagen(prompt, destino) {
+  const prov = (process.env.IMAGE_PROVIDER || (process.env.HIGGSFIELD_API_KEY ? "higgsfield" : "openai")).toLowerCase();
+  return prov === "higgsfield" ? generarImagenHiggsfield(prompt, destino) : generarImagenOpenAI(prompt, destino);
 }
 
 /* ---------- Plantilla ---------- */
@@ -384,6 +429,7 @@ async function main() {
       const avisos = await construir(d);
       resultado.push({ fila, slug: d.slug, marca: d.marca, estado: "Publicado", url: `${DOMINIO}/para/${d.slug}/`, notas: avisos.join(" · ") });
       console.log(`Generada para/${d.slug}/`);
+      avisos.forEach((a) => console.log("  Aviso · " + a));
     } catch (e) {
       resultado.push({ fila, estado: "Error", notas: e.message.slice(0, 300) });
     }
