@@ -382,7 +382,7 @@ window.CONTENIDO = {
   contacto: {
     titulo: "Let's create something\nremarkable.",
     // ⚠️ Escribe aquí tu correo real de contacto:
-    correo: "contacto@twowaves.mx",
+    correo: "info@twowaves.mx",
     correoFormulario: "info@twowaves.mx", // aquí llegan los mensajes del formulario
     // Base de datos de prospectos: pega aquí la URL del Web App de Google
     // Apps Script (termina en /exec). Si lo dejas en "", solo llega por correo.

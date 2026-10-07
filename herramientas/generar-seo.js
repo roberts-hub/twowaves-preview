@@ -84,7 +84,7 @@ function paginaProyecto(p) {
   <link rel="preconnect" href="https://player.vimeo.com">
   <link rel="preconnect" href="https://i.vimeocdn.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/estilo.css?v=92">
+  <link rel="stylesheet" href="/css/estilo.css?v=93">
   <script type="application/ld+json">${jsonVideo}</script>
   <script type="application/ld+json">${jsonMigas}</script>
 </head>
@@ -185,8 +185,8 @@ function paginaProyecto(p) {
   </script>
   <!-- GSAP + ScrollTrigger + Flip + Lenis en UNA sola peticion (menos viajes de red) -->
   <script src="https://cdn.jsdelivr.net/combine/npm/gsap@3.12.5/dist/gsap.min.js,npm/gsap@3.12.5/dist/ScrollTrigger.min.js,npm/gsap@3.12.5/dist/Flip.min.js,npm/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="/contenido.js?v=92"></script>
-  <script src="/js/app.js?v=92"></script>
+  <script src="/contenido.js?v=93"></script>
+  <script src="/js/app.js?v=93"></script>
 </body>
 </html>
 `;
