@@ -13,7 +13,7 @@ Sitio estático en GitHub Pages, sin paso de build. Publicar es `git push origin
 
 - Contenido (textos, proyectos, clientes, contacto, reseñas): `contenido.js`. Guía paso a paso en `GUIA-DE-EDICION.md`.
 - Estilos: `css/estilo.css`. Lógica y animaciones: `js/app.js`.
-- Páginas: `index.html`, `work.html`, `about.html`, `contact.html`, `mastermind.html`. La carpeta `onsite/` es otra landing (ONSITE) con sus propios css y js.
+- Páginas: `index.html`, `work.html`, `about.html`, `contact.html`. Las carpetas `onsite/` (landing ONSITE) y `mastermind/` (landing "JOIN THE WAITLIST" / lista de espera del Mastermind) son landings autocontenidas, cada una con sus propios css, js e img. Se sirven en `twowaves.mx/onsite/` y `twowaves.mx/mastermind/`.
 
 ## Reglas que no se rompen
 

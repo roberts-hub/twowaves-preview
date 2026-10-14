@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JOIN THE WAITLIST — Two Waves Films</title>
+  <meta name="description" content="Curso intensivo de 3 días para filmmakers. Locación privada. Solo 10 lugares. Únete a la lista de espera." />
+  <meta property="og:title" content="Join the waitlist — Two Waves Films" />
+  <meta property="og:description" content="3 días · Locación privada · Solo 10 lugares. Déjanos tus datos y entra antes que nadie." />
+  <meta property="og:url" content="https://www.twowaves.mx/mastermind/" />
+  <link rel="canonical" href="https://www.twowaves.mx/mastermind/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilo.css" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230e0e0d"/><path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="%23eae0c5"/><circle cx="69.5" cy="37" r="4" fill="%23eae0c5"/></svg>' />
+
+  <style>
+    body.wl {
+      min-height: 100svh; display: flex; align-items: center; justify-content: center;
+      padding: 44px 24px;
+    }
+    body.wl::before {
+      content: ""; position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 75% 50% at 50% -8%, rgba(234, 224, 197, 0.06), transparent 60%),
+        var(--fondo);
+    }
+    .wl {
+      width: 100%; max-width: 440px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .wl-iso { width: 44px; height: 44px; color: var(--hueso); margin-bottom: 32px; }
+    .wl-kicker {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em;
+      color: var(--greige); margin-bottom: 18px;
+    }
+    .wl-title {
+      font-family: var(--sans); font-size: clamp(32px, 8vw, 48px);
+      font-weight: 600; letter-spacing: 0.03em; line-height: 1.04; margin-bottom: 20px;
+    }
+    .wl-datos {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      line-height: 1.95; color: var(--greige); margin-bottom: 42px;
+    }
+    .wl-datos b { color: var(--hueso); font-weight: 500; }
+
+    /* ── formulario (protagonista) ── */
+    .wl-form { width: 100%; display: flex; flex-direction: column; gap: 22px; text-align: left; }
+    .wl-form input {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 1px solid rgba(234, 224, 197, 0.22);
+      padding: 11px 2px; font-family: var(--sans); font-size: 17px; font-weight: 300;
+      letter-spacing: 0.02em; color: var(--hueso); border-radius: 0;
+      transition: border-color 0.4s ease;
+    }
+    .wl-form input::placeholder { color: rgba(176, 165, 149, 0.4); }
+    .wl-form input:focus { outline: none; border-bottom-color: var(--hueso); }
+    .wl-form input.invalido { border-bottom-color: var(--rojo); }
+    .wl-form .btn-linea { margin-top: 16px; align-self: center; }
+    .wl-nota {
+      margin-top: 2px; text-align: center; font-family: var(--mono); font-size: 9px;
+      letter-spacing: 0.2em; color: var(--greige); min-height: 1em;
+    }
+
+    /* ── fotos de los fundadores (secundario, abajo) ── */
+    .wl-founders {
+      margin-top: 46px; padding-top: 32px; width: 100%;
+      border-top: 1px solid rgba(234, 224, 197, 0.12);
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .wl-founders-fotos { display: flex; gap: 12px; }
+    .wl-founders-foto { width: 78px; height: 96px; overflow: hidden; background: #000; }
+    .wl-founders-foto img {
+      width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06);
+    }
+    .wl-founders-foto img.pushin { transform: scale(2.05); transform-origin: 50% 30%; }
+    .wl-founders-cap {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+      line-height: 1.9; color: var(--greige);
+    }
+    .wl-founders-cap b { color: var(--hueso); font-weight: 500; }
+  </style>
+</head>
+<body class="wl">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="wl">
+    <svg class="wl-iso" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
+      <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
+      <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
+    </svg>
+
+    <p class="wl-kicker">( ACCESO ANTICIPADO )</p>
+    <h1 class="wl-title">JOIN THE<br />WAITLIST.</h1>
+    <p class="wl-datos">
+      CURSO INTENSIVO DE <b>3 DÍAS</b> · MÉXICO<br />
+      LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b>
+    </p>
+
+    <form id="form-lista" class="wl-form" novalidate>
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre" autocomplete="name" required />
+      <input type="email" id="correo" name="correo" placeholder="Correo" autocomplete="email" required />
+      <input type="tel" id="whatsapp" name="whatsapp" placeholder="WhatsApp (opcional)" autocomplete="tel" />
+      <input type="hidden" name="origen" value="waitlist" />
+
+      <button type="submit" class="btn-linea grande">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></button>
+      <p class="wl-nota" id="form-estado">ÚNETE AL WAITLIST — SÉ DE LOS PRIMEROS EN ENTRAR</p>
+    </form>
+
+    <!-- Fundadores: pequeño, secundario -->
+    <div class="wl-founders">
+      <div class="wl-founders-fotos">
+        <div class="wl-founders-foto"><img src="img/roberto.jpg" alt="Roberto Arechederra" class="pushin" /></div>
+        <div class="wl-founders-foto"><img src="img/rogelio.jpg" alt="Rogelio Pérez" /></div>
+      </div>
+      <p class="wl-founders-cap">IMPARTIDO POR <b>ROBERTO & ROGELIO</b> — FUNDADORES, TWO WAVES FILMS</p>
+    </div>
+  </main>
+
+  <!-- ── Pop-up de gracias ── -->
+  <div class="modal-gracias" id="modal-gracias" hidden>
+    <div class="modal-inner">
+      <div class="modal-glyphs">
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
+          <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="36" r="22" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="50" cy="64" r="22" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50 8 C51.5 34 52 42 66 50 C52 58 51.5 66 50 92 C48.5 66 48 58 34 50 C48 42 48.5 34 50 8 Z"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <path d="M40 32 a24 24 0 0 0 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M60 32 a24 24 0 0 1 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="50" cy="24" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <h2 class="titulo">YA ESTÁS<br />EN LA LISTA.</h2>
+      <p class="aplicar-intro">
+        Gracias. Te avisaremos directo en cuanto abramos el cupo
+        —tendrás acceso prioritario antes que nadie.
+      </p>
+      <a class="volver-final" href="https://www.instagram.com/twowaves.mx/" target="_blank" rel="noopener">SÍGUENOS EN INSTAGRAM →</a>
+    </div>
+  </div>
+
+  <script src="js/lista.js"></script>
+</body>
+</html>
