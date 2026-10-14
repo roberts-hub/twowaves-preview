@@ -11,7 +11,7 @@ const glyphs = loader.querySelectorAll(".glyph");
 const PASO = 210;
 
 function revelarHero() {
-  document.querySelectorAll(".hero .reveal").forEach((el) => el.classList.add("visto"));
+  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visto"));
 }
 
 // La intro se muestra solo una vez por sesión (menos fricción al volver).
@@ -73,17 +73,4 @@ if (introVista) {
   introBtn.addEventListener("click", entrar, { once: true });
 }
 
-// ── REVEALS AL HACER SCROLL ──
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visto");
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-);
-
-document.querySelectorAll("body > :not(.hero) .reveal").forEach((el) => observer.observe(el));
+// (Página de una sola pantalla: el contenido se revela al entrar, sin scroll.)

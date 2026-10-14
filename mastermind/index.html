@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MASTERMIND — Two Waves Films</title>
-  <meta name="description" content="Mastermind presencial para filmmakers que quieren escalar su casa productora. 3 días. Locación privada. Solo 10 lugares. Únete a la lista de espera." />
+  <meta name="description" content="Mastermind presencial para filmmakers. 3 días. México. Solo 10 lugares. Masterclass by Roberto Arechederra y Rogelio Pérez. Únete a la lista de espera." />
   <meta property="og:title" content="MASTERMIND — Two Waves Films" />
-  <meta property="og:description" content="3 días. Locación privada. Solo 10 lugares. Únete a la lista de espera." />
+  <meta property="og:description" content="3 días. México. Solo 10 lugares. Únete a la lista de espera." />
   <meta property="og:url" content="https://www.twowaves.mx/mastermind/" />
   <link rel="canonical" href="https://www.twowaves.mx/mastermind/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,18 +16,69 @@
   <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230e0e0d"/><path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="%23eae0c5"/><circle cx="69.5" cy="37" r="4" fill="%23eae0c5"/></svg>' />
 
   <style>
-    /* el punto del isotipo parpadea como luz de grabación */
-    .hero-top .isotipo circle, .footer .isotipo circle { animation: mm-dot 2.6s ease-in-out infinite; }
+    /* ── Una sola pantalla, bien distribuida ── */
+    body.mm-pre {
+      min-height: 100svh; display: flex; align-items: center; justify-content: center;
+      padding: 32px 22px;
+    }
+    body.mm-pre::before {
+      content: ""; position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% -10%, rgba(234, 224, 197, 0.07), transparent 60%),
+        radial-gradient(ellipse 65% 45% at 50% 110%, rgba(234, 224, 197, 0.04), transparent 62%),
+        var(--fondo);
+    }
+    .mm {
+      width: 100%; max-width: 560px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: clamp(16px, 2.6vh, 30px);
+    }
+    .mm-iso { width: 40px; height: 40px; color: var(--hueso); }
+    .mm-iso circle { animation: mm-dot 2.6s ease-in-out infinite; }
     @keyframes mm-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    /* botón grande con brillo sutil para guiar a la acción */
+
+    .mm-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; color: var(--greige); }
+    .mm-title {
+      font-family: var(--sans); font-size: clamp(34px, 9vw, 58px); font-weight: 600;
+      letter-spacing: 0.06em; line-height: 1; text-transform: uppercase;
+    }
+    .mm-datos { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; line-height: 1.9; color: var(--greige); }
+    .mm-datos b { color: var(--hueso); font-weight: 500; }
+
+    /* ── Ponentes (visibles sin scroll) ── */
+    .mm-crew { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .mm-crew-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.34em; color: var(--greige); }
+    .mm-crew-row { display: flex; gap: clamp(14px, 4vw, 26px); }
+    .mm-crew-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: clamp(96px, 30vw, 120px); }
+    .mm-foto {
+      width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: #000;
+    }
+    .mm-foto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.6s ease; }
+    .mm-foto img.pushin { transform: scale(2.05); transform-origin: 50% 30%; }
+    .mm-crew-item:hover .mm-foto img { transform: scale(1.06); filter: grayscale(0.35) contrast(1.06); }
+    .mm-crew-item:hover .mm-foto img.pushin { transform: scale(2.18); }
+    .mm-foto-x { display: flex; align-items: center; justify-content: center; color: var(--hueso); border: 1px solid rgba(234,224,197,0.14); }
+    .mm-foto-x svg { width: 30px; height: 30px; opacity: 0.8; }
+    .mm-crew-name { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; line-height: 1.5; color: var(--hueso); }
+    .mm-crew-name.muted { color: var(--greige); }
+
+    /* ── CTA ── */
+    .mm .btn-linea { margin-top: 6px; }
     @keyframes mm-cta { 0%, 100% { text-shadow: 0 0 0 rgba(234, 224, 197, 0); } 50% { text-shadow: 0 0 16px rgba(234, 224, 197, 0.4); } }
     .cta-brillo { animation: mm-cta 2.8s ease-in-out infinite; }
+
     @media (prefers-reduced-motion: reduce) {
-      .hero-top .isotipo circle, .footer .isotipo circle, .cta-brillo { animation: none; }
+      .mm-iso circle, .cta-brillo { animation: none; }
+    }
+    /* pantallas muy bajas: aún más compacto */
+    @media (max-height: 680px) {
+      .mm { gap: 14px; }
+      .mm-title { font-size: clamp(30px, 8vw, 44px); }
+      .mm-crew-item { width: 72px; }
     }
   </style>
 </head>
-<body>
+<body class="mm-pre">
 
   <!-- ══════════ INTRO (pantalla de carga) ══════════ -->
   <div id="loader">
@@ -61,135 +112,32 @@
 
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- ══════════ HERO ══════════ -->
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-
-    <nav class="hero-top reveal" data-delay="1">
-      <svg class="isotipo" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
-        <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
-        <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
-      </svg>
-    </nav>
-
-    <div class="hero-center">
-      <p class="hero-kicker reveal" data-delay="2">
-        MASTERMIND PRESENCIAL PARA FILMMAKERS<br />
-        QUE QUIEREN ESCALAR SU CASA PRODUCTORA<br />
-        Y TRABAJAR CON MARCAS GLOBALES
-      </p>
-
-      <div class="hero-est reveal" data-delay="3">
-        <span>MX.</span>
-        <span>.26</span>
-      </div>
-
-      <p class="hero-cupo reveal" data-delay="4">3 DÍAS — LOCACIÓN PRIVADA — SOLO 10 LUGARES</p>
-
-      <a class="btn-linea cta-brillo reveal" data-delay="5" href="unirse.html">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></a>
-    </div>
-
-    <div class="hero-bottom reveal" data-delay="6">
-      <span class="scroll-dot" aria-hidden="true"></span>
-      <span>DESLIZA PARA CONOCER MÁS</span>
-    </div>
-  </header>
-
-  <!-- ══════════ INFO · EL CURSO ══════════ -->
-  <section class="seccion">
-    <p class="etiqueta reveal">( 01 — EL CURSO )</p>
-    <h2 class="titulo reveal">TRES DÍAS.<br />PUERTA CERRADA.</h2>
-    <p class="parrafo reveal">
-      Un curso intensivo para la siguiente generación de
-      filmmakers que construyen, crean y ganan juntos. Tres
-      días para salir con un sistema, no con apuntes.
-    </p>
-    <ul class="lista-mono">
-      <li class="reveal"><span>/01</span>MASTERCLASS DE NEGOCIO</li>
-      <li class="reveal"><span>/02</span>SESIÓN PRÁCTICA EN ESTUDIO</li>
-      <li class="reveal"><span>/03</span>DIRECCIÓN, CÁMARA Y POST</li>
-      <li class="reveal"><span>/04</span>COMIDA + NETWORKING</li>
-      <li class="reveal"><span>/05</span>CENA PRIVADA</li>
-      <li class="reveal"><span>/06</span>INVITADO SORPRESA</li>
-    </ul>
-    <p class="nota reveal">MÉXICO — LOCACIÓN PRIVADA — 3 DÍAS — SOLO 10 LUGARES</p>
-  </section>
-
-  <!-- ══════════ INFO · HOSTS ══════════ -->
-  <section class="seccion seccion-lino">
-    <p class="etiqueta reveal">( 02 — HOSTS )</p>
-    <div class="hosts">
-      <div class="host reveal">
-        <div class="host-foto">
-          <img src="img/roberto.jpg" alt="Roberto Arechederra" class="pushin" />
-        </div>
-        <h3>ROBERTO<br />ARECHEDERRA</h3>
-        <p class="host-rol">DIRECTOR / FILMMAKER</p>
-        <p class="host-ig">@ROBERT.ARRE</p>
-      </div>
-      <div class="host reveal">
-        <div class="host-foto">
-          <img src="img/rogelio.jpg" alt="Rogelio Pérez" />
-        </div>
-        <h3>ROGELIO<br />PÉREZ</h3>
-        <p class="host-rol">FPV PILOT / PRODUCER</p>
-        <p class="host-ig">@ROGER.RPGFPV</p>
-      </div>
-      <div class="host reveal">
-        <div class="host-foto host-foto-misterio">
-          <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-            <path d="M50 8 C51.5 34 52 42 66 50 C52 58 51.5 66 50 92 C48.5 66 48 58 34 50 C48 42 48.5 34 50 8 Z"/>
-          </svg>
-        </div>
-        <h3>INVITADO<br />SORPRESA</h3>
-        <p class="host-rol">SE ANUNCIA PRONTO</p>
-        <p class="host-ig">—</p>
-      </div>
-    </div>
-    <p class="parrafo reveal">
-      Fundadores de Two Waves Films. Más de siete años en la
-      industria, miles de piezas audiovisuales para todo tipo
-      de mercados, y producciones para marcas globales como
-      Beautiful Destinations, Alo y Cupra, y hoteles de talla
-      internacional como St.&nbsp;Regis y Mondrian.
-    </p>
-    <p class="parrafo reveal">
-      En estos tres días lo abrimos todo: nuestros sistemas,
-      recursos, power grades, templates y elementos que no
-      están a la venta al público — y los secretos que nos
-      llevaron de ser solo filmmakers a una empresa que
-      factura cientos de miles de dólares al año trabajando
-      con marcas internacionales.
-    </p>
-  </section>
-
-  <!-- ══════════ JOIN WAITLIST ══════════ -->
-  <section class="seccion seccion-final" id="unirse">
-    <svg class="destello reveal" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
-      <path d="M50 8 C51.5 34 52 42 66 50 C52 58 51.5 66 50 92 C48.5 66 48 58 34 50 C48 42 48.5 34 50 8 Z"/>
-    </svg>
-    <h2 class="titulo reveal">SOLO 10 LUGARES.<br />ÚNETE A LA LISTA.</h2>
-    <p class="parrafo centrado reveal">
-      Estamos por abrir el cupo. Déjanos tus datos y serás de
-      los primeros en recibir la invitación, con acceso
-      prioritario antes que nadie.
-    </p>
-    <a class="btn-linea grande cta-brillo reveal" href="unirse.html">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></a>
-    <p class="nota reveal">2 MINUTOS — SÉ DE LOS PRIMEROS EN ENTRAR</p>
-  </section>
-
-  <!-- ══════════ FOOTER ══════════ -->
-  <footer class="footer">
-    <svg class="isotipo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+  <main class="mm">
+    <svg class="mm-iso reveal" data-delay="1" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
       <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
       <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
     </svg>
-    <div class="footer-links">
-      <a href="mailto:info@twowaves.mx">INFO@TWOWAVES.MX</a>
-      <a href="https://www.instagram.com/twowaves.mx/" target="_blank" rel="noopener">INSTAGRAM</a>
+
+    <p class="mm-kicker reveal" data-delay="2">( ACCESO ANTICIPADO · PRE-LAUNCH )</p>
+    <h1 class="mm-title reveal" data-delay="2">MASTERMIND</h1>
+    <p class="mm-datos reveal" data-delay="3">3 DÍAS · MÉXICO · LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b></p>
+
+    <div class="mm-crew reveal" data-delay="4">
+      <p class="mm-crew-label">MASTERCLASS BY</p>
+      <div class="mm-crew-row">
+        <div class="mm-crew-item">
+          <div class="mm-foto"><img src="img/roberto.jpg" alt="Roberto Arechederra" class="pushin" /></div>
+          <p class="mm-crew-name">ROBERTO<br />ARECHEDERRA</p>
+        </div>
+        <div class="mm-crew-item">
+          <div class="mm-foto"><img src="img/rogelio.jpg" alt="Rogelio Pérez" /></div>
+          <p class="mm-crew-name">ROGELIO<br />PÉREZ</p>
+        </div>
+      </div>
     </div>
-    <p class="footer-firma">TWO WAVES FILMS — GUADALAJARA, MX — EST. 2021</p>
-  </footer>
+
+    <a class="btn-linea grande cta-brillo reveal" data-delay="5" href="unirse.html">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></a>
+  </main>
 
   <script src="js/main.js"></script>
 </body>
