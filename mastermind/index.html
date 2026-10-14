@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MASTERMIND — Two Waves Films</title>
-  <meta name="description" content="Mastermind presencial para filmmakers. 3 días. México. Solo 10 lugares. Masterclass by Roberto Arechederra y Rogelio Pérez. Únete a la lista de espera." />
-  <meta property="og:title" content="MASTERMIND — Two Waves Films" />
+  <title>The Creator Masterclass — Two Waves Films</title>
+  <meta name="description" content="The Creator Masterclass: 3 días presenciales para filmmakers. México. Solo 10 lugares. Impartida por Roberto Arechederra y Rogelio Pérez. Únete a la lista de espera." />
+  <meta property="og:title" content="The Creator Masterclass — Two Waves Films" />
   <meta property="og:description" content="3 días. México. Solo 10 lugares. Únete a la lista de espera." />
   <meta property="og:url" content="https://www.twowaves.mx/mastermind/" />
   <link rel="canonical" href="https://www.twowaves.mx/mastermind/" />
@@ -39,8 +39,8 @@
 
     .mm-kicker { font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; color: var(--greige); }
     .mm-title {
-      font-family: var(--sans); font-size: clamp(34px, 9vw, 58px); font-weight: 600;
-      letter-spacing: 0.06em; line-height: 1; text-transform: uppercase;
+      font-family: var(--sans); font-size: clamp(30px, 7.4vw, 50px); font-weight: 600;
+      letter-spacing: 0.03em; line-height: 1.02; text-transform: uppercase;
     }
     .mm-datos { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; line-height: 1.9; color: var(--greige); }
     .mm-datos b { color: var(--hueso); font-weight: 500; }
@@ -60,7 +60,9 @@
     .mm-foto-x { display: flex; align-items: center; justify-content: center; color: var(--hueso); border: 1px solid rgba(234,224,197,0.14); }
     .mm-foto-x svg { width: 30px; height: 30px; opacity: 0.8; }
     .mm-crew-name { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; line-height: 1.5; color: var(--hueso); }
-    .mm-crew-name.muted { color: var(--greige); }
+    .mm-crew-item { text-decoration: none; color: inherit; cursor: pointer; }
+    .mm-crew-ig { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--greige); transition: color 0.3s ease; }
+    .mm-crew-item:hover .mm-crew-ig { color: var(--hueso); }
 
     /* ── CTA ── */
     .mm .btn-linea { margin-top: 6px; }
@@ -119,20 +121,22 @@
     </svg>
 
     <p class="mm-kicker reveal" data-delay="2">( ACCESO ANTICIPADO · PRE-LAUNCH )</p>
-    <h1 class="mm-title reveal" data-delay="2">MASTERMIND</h1>
+    <h1 class="mm-title reveal" data-delay="2">THE CREATOR<br />MASTERCLASS</h1>
     <p class="mm-datos reveal" data-delay="3">3 DÍAS · MÉXICO · LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b></p>
 
     <div class="mm-crew reveal" data-delay="4">
-      <p class="mm-crew-label">MASTERCLASS BY</p>
+      <p class="mm-crew-label">IMPARTIDA POR</p>
       <div class="mm-crew-row">
-        <div class="mm-crew-item">
+        <a class="mm-crew-item" href="https://www.instagram.com/robert.arre/" target="_blank" rel="noopener" aria-label="Instagram de Roberto Arechederra">
           <div class="mm-foto"><img src="img/roberto.jpg" alt="Roberto Arechederra" class="pushin" /></div>
           <p class="mm-crew-name">ROBERTO<br />ARECHEDERRA</p>
-        </div>
-        <div class="mm-crew-item">
+          <span class="mm-crew-ig">@ROBERT.ARRE</span>
+        </a>
+        <a class="mm-crew-item" href="https://www.instagram.com/roger.rpgfpv/" target="_blank" rel="noopener" aria-label="Instagram de Rogelio Pérez">
           <div class="mm-foto"><img src="img/rogelio.jpg" alt="Rogelio Pérez" /></div>
           <p class="mm-crew-name">ROGELIO<br />PÉREZ</p>
-        </div>
+          <span class="mm-crew-ig">@ROGER.RPGFPV</span>
+        </a>
       </div>
     </div>
 
