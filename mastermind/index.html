@@ -80,26 +80,72 @@
       line-height: 1.9; color: var(--greige);
     }
     .wl-founders-cap b { color: var(--hueso); font-weight: 500; }
+
+    /* ── micro-animaciones sutiles ── */
+    /* el punto del isotipo parpadea como luz de grabación */
+    .wl-iso circle { animation: wl-dot 2.6s ease-in-out infinite; }
+    @keyframes wl-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* leve zoom + color al pasar el mouse por las fotos */
+    .wl-founders-foto img {
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+    }
+    .wl-founders-foto:hover img { transform: scale(1.06); filter: grayscale(0.35) contrast(1.06); }
+    .wl-founders-foto:hover img.pushin { transform: scale(2.18); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wl-iso circle { animation: none; }
+    }
   </style>
 </head>
 <body class="wl">
 
+  <!-- ══════════ PANTALLA DE CARGA (intro) ══════════ -->
+  <div id="loader">
+    <div class="loader-intro">
+      <div class="intro-lineas">
+        <p class="intro-linea">TRES DÍAS DE ALTO VALOR</p>
+        <p class="intro-linea">RODEADO POR LAS PERSONAS CORRECTAS</p>
+        <p class="intro-linea">TIENE EL POTENCIAL DE CAMBIAR TU VIDA.</p>
+      </div>
+      <button type="button" class="intro-btn" id="intro-btn">ENTRAR <span class="flecha">→</span></button>
+    </div>
+    <div class="loader-glyphs">
+      <svg class="glyph" viewBox="0 0 100 100" fill="none">
+        <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
+        <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
+      </svg>
+      <svg class="glyph" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="36" r="22" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="50" cy="64" r="22" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <svg class="glyph" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M50 8 C51.5 34 52 42 66 50 C52 58 51.5 66 50 92 C48.5 66 48 58 34 50 C48 42 48.5 34 50 8 Z"/>
+      </svg>
+      <svg class="glyph" viewBox="0 0 100 100" fill="none">
+        <path d="M40 32 a24 24 0 0 0 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M60 32 a24 24 0 0 1 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="50" cy="24" r="3" fill="currentColor"/>
+      </svg>
+    </div>
+  </div>
+
   <div class="grain" aria-hidden="true"></div>
 
   <main class="wl">
-    <svg class="wl-iso" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
+    <svg class="wl-iso reveal" data-delay="1" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
       <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
       <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
     </svg>
 
-    <p class="wl-kicker">( ACCESO ANTICIPADO )</p>
-    <h1 class="wl-title">JOIN THE<br />WAITLIST.</h1>
-    <p class="wl-datos">
+    <p class="wl-kicker reveal" data-delay="2">( ACCESO ANTICIPADO )</p>
+    <h1 class="wl-title reveal" data-delay="3">JOIN THE<br />WAITLIST.</h1>
+    <p class="wl-datos reveal" data-delay="4">
       CURSO INTENSIVO DE <b>3 DÍAS</b> · MÉXICO<br />
       LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b>
     </p>
 
-    <form id="form-lista" class="wl-form" novalidate>
+    <form id="form-lista" class="wl-form reveal" data-delay="5" novalidate>
       <input type="text" id="nombre" name="nombre" placeholder="Nombre" autocomplete="name" required />
       <input type="email" id="correo" name="correo" placeholder="Correo" autocomplete="email" required />
       <input type="tel" id="whatsapp" name="whatsapp" placeholder="WhatsApp (opcional)" autocomplete="tel" />
@@ -110,7 +156,7 @@
     </form>
 
     <!-- Fundadores: pequeño, secundario -->
-    <div class="wl-founders">
+    <div class="wl-founders reveal" data-delay="6">
       <div class="wl-founders-fotos">
         <div class="wl-founders-foto"><img src="img/roberto.jpg" alt="Roberto Arechederra" class="pushin" /></div>
         <div class="wl-founders-foto"><img src="img/rogelio.jpg" alt="Rogelio Pérez" /></div>
