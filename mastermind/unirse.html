@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unirse a la lista — Mastermind Two Waves Films</title>
+  <meta name="description" content="Únete a la lista de espera del Mastermind de Two Waves Films. 3 días. Solo 10 lugares." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilo.css" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230e0e0d"/><path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="%23eae0c5"/><circle cx="69.5" cy="37" r="4" fill="%23eae0c5"/></svg>' />
+</head>
+<body class="pagina-aplicar">
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="aplicar">
+    <a class="volver reveal visto" href="index.html">← VOLVER</a>
+
+    <svg class="isotipo reveal visto" viewBox="0 0 100 100" fill="none" aria-label="Two Waves">
+      <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
+      <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
+    </svg>
+
+    <p class="etiqueta centrada reveal visto">( LISTA DE ESPERA — MASTERMIND )</p>
+
+    <form id="form-unirse" class="flujo reveal visto" novalidate>
+      <div class="flujo-barra" aria-hidden="true"><span class="flujo-fill"></span></div>
+
+      <!-- ── 01 · NOMBRE ── -->
+      <section class="paso activa" data-paso>
+        <p class="paso-num"><span class="paso-i">01</span> / <span class="paso-total">03</span></p>
+        <label class="paso-preg" for="nombre">¿Cuál es tu nombre?</label>
+        <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Nombre y apellido" />
+        <div class="paso-nav">
+          <button type="button" class="btn-atras" data-atras hidden>← ATRÁS</button>
+          <button type="button" class="btn-linea" data-siguiente>SIGUIENTE <span class="flecha">→</span></button>
+        </div>
+      </section>
+
+      <!-- ── 02 · CORREO ── -->
+      <section class="paso" data-paso>
+        <p class="paso-num"><span class="paso-i">02</span> / <span class="paso-total">03</span></p>
+        <label class="paso-preg" for="correo">¿A qué correo te avisamos?</label>
+        <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="tu@correo.com" />
+        <div class="paso-nav">
+          <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
+          <button type="button" class="btn-linea" data-siguiente>SIGUIENTE <span class="flecha">→</span></button>
+        </div>
+      </section>
+
+      <!-- ── 03 · WHATSAPP ── -->
+      <section class="paso" data-paso>
+        <p class="paso-num"><span class="paso-i">03</span> / <span class="paso-total">03</span></p>
+        <label class="paso-preg" for="celular">¿Tu WhatsApp?</label>
+        <div class="campo-tel">
+          <select id="lada" name="lada" class="lada" aria-label="Código de país">
+            <option value="+52" selected>🇲🇽 +52</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+54">🇦🇷 +54</option>
+            <option value="+55">🇧🇷 +55</option>
+            <option value="+56">🇨🇱 +56</option>
+            <option value="+57">🇨🇴 +57</option>
+            <option value="+51">🇵🇪 +51</option>
+            <option value="+593">🇪🇨 +593</option>
+            <option value="+58">🇻🇪 +58</option>
+            <option value="+591">🇧🇴 +591</option>
+            <option value="+598">🇺🇾 +598</option>
+            <option value="+595">🇵🇾 +595</option>
+            <option value="+502">🇬🇹 +502</option>
+            <option value="+503">🇸🇻 +503</option>
+            <option value="+504">🇭🇳 +504</option>
+            <option value="+505">🇳🇮 +505</option>
+            <option value="+506">🇨🇷 +506</option>
+            <option value="+507">🇵🇦 +507</option>
+            <option value="+53">🇨🇺 +53</option>
+          </select>
+          <input type="tel" id="celular" name="celular" required inputmode="numeric" autocomplete="tel-national" placeholder="10 dígitos" />
+        </div>
+        <p class="paso-ayuda">Elige tu lada primero para que el número quede correcto.</p>
+        <div class="paso-nav">
+          <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
+          <button type="submit" class="btn-linea grande">UNIRME A LA LISTA <span class="flecha">→</span></button>
+        </div>
+      </section>
+
+      <input type="hidden" name="origen" value="waitlist" />
+      <p class="nota" id="form-estado" role="status"></p>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-firma">TWO WAVES FILMS — GUADALAJARA, MX — EST. 2021</p>
+  </footer>
+
+  <!-- ══════════ POP-UP DE GRACIAS ══════════ -->
+  <div id="modal-gracias" class="modal-gracias" role="dialog" aria-modal="true" aria-labelledby="gracias-titulo" hidden>
+    <div class="modal-inner">
+      <div class="loader-glyphs modal-glyphs" aria-hidden="true">
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="currentColor"/>
+          <circle cx="69.5" cy="37" r="4" fill="currentColor"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="36" r="22" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="50" cy="64" r="22" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M50 8 C51.5 34 52 42 66 50 C52 58 51.5 66 50 92 C48.5 66 48 58 34 50 C48 42 48.5 34 50 8 Z"/>
+        </svg>
+        <svg class="glyph" viewBox="0 0 100 100" fill="none">
+          <path d="M40 32 a24 24 0 0 0 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M60 32 a24 24 0 0 1 0 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="50" cy="24" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <h2 class="titulo centrado" id="gracias-titulo">YA ESTÁS EN LA LISTA</h2>
+      <p class="aplicar-intro">Te avisaremos directo por WhatsApp y correo en cuanto abramos el cupo. Tendrás acceso prioritario.</p>
+      <a class="volver-final" href="https://www.instagram.com/twowaves.mx/" target="_blank" rel="noopener">SÍGUENOS EN INSTAGRAM →</a>
+    </div>
+  </div>
+
+  <script src="js/unirse.js"></script>
+</body>
+</html>
