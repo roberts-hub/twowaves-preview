@@ -24,14 +24,14 @@
     body.mm-pre::before {
       content: ""; position: fixed; inset: 0; z-index: -1;
       background:
-        radial-gradient(ellipse 68% 46% at 50% -14%, rgba(234, 224, 197, 0.035), transparent 58%),
-        radial-gradient(ellipse 130% 95% at 50% 42%, transparent 32%, rgba(0, 0, 0, 0.62) 100%),
-        var(--fondo);
+        radial-gradient(ellipse 58% 40% at 50% -18%, rgba(234, 224, 197, 0.02), transparent 55%),
+        radial-gradient(ellipse 135% 100% at 50% 40%, transparent 20%, rgba(0, 0, 0, 0.82) 100%),
+        #090908;
     }
     .mm {
-      width: 100%; max-width: 560px; margin: 0 auto;
+      width: 100%; max-width: 680px; margin: 0 auto;
       display: flex; flex-direction: column; align-items: center; text-align: center;
-      gap: clamp(16px, 2.6vh, 30px);
+      gap: clamp(15px, 2.4vh, 28px);
     }
     .mm-iso { width: 40px; height: 40px; color: var(--hueso); }
     .mm-iso circle { animation: mm-dot 2.6s ease-in-out infinite; }
@@ -44,6 +44,17 @@
     }
     .mm-datos { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; line-height: 1.9; color: var(--greige); }
     .mm-datos b { color: var(--hueso); font-weight: 500; }
+
+    /* ── Temas que veremos (info) ── */
+    .mm-temas { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .mm-temas-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.34em; color: var(--greige); }
+    .mm-temas-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 560px; }
+    .mm-tema {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--hueso);
+      border: 1px solid rgba(234, 224, 197, 0.16); border-radius: 99px; padding: 7px 14px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .mm-tema:hover { border-color: rgba(234, 224, 197, 0.45); }
 
     /* ── Ponentes (visibles sin scroll) ── */
     .mm-crew { display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -124,7 +135,19 @@
     <h1 class="mm-title reveal" data-delay="2">THE CREATOR<br />MASTERCLASS</h1>
     <p class="mm-datos reveal" data-delay="3">3 DÍAS · MÉXICO · LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b></p>
 
-    <div class="mm-crew reveal" data-delay="4">
+    <div class="mm-temas reveal" data-delay="4">
+      <p class="mm-temas-label">LO QUE VAMOS A VER</p>
+      <div class="mm-temas-row">
+        <span class="mm-tema">NEGOCIO Y ESCALA</span>
+        <span class="mm-tema">DIRECCIÓN</span>
+        <span class="mm-tema">CÁMARA</span>
+        <span class="mm-tema">POST Y COLOR</span>
+        <span class="mm-tema">MARCAS GLOBALES</span>
+        <span class="mm-tema">SISTEMAS Y RECURSOS</span>
+      </div>
+    </div>
+
+    <div class="mm-crew reveal" data-delay="5">
       <p class="mm-crew-label">IMPARTIDA POR</p>
       <div class="mm-crew-row">
         <a class="mm-crew-item" href="https://www.instagram.com/robert.arre/" target="_blank" rel="noopener" aria-label="Instagram de Roberto Arechederra">
@@ -140,7 +163,7 @@
       </div>
     </div>
 
-    <a class="btn-linea grande cta-brillo reveal" data-delay="5" href="unirse.html">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></a>
+    <a class="btn-linea grande cta-brillo reveal" data-delay="6" href="unirse.html">UNIRSE A LA LISTA DE ESPERA <span class="flecha">→</span></a>
   </main>
 
   <script src="js/main.js"></script>
