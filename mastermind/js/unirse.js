@@ -7,7 +7,7 @@
 
 (function () {
   // Destino de los datos
-  const SHEETS_ENDPOINT = ""; // Apps Script (/exec) — prioritario si se define
+  const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxijC2mPQTwyDzI4JjLDKWn2CMetYRhndukj5h07FewL0GWOu-uclxbX-Rf5PUDKr_e/exec"; // Apps Script (/exec)
   const FORMSUBMIT_EMAIL = "roberto@arechederra.com"; // activado (verificable)
   const FORMSUBMIT_CC = "info@twowaves.mx";           // copia al correo del negocio
 
@@ -93,7 +93,7 @@
     // WhatsApp = lada + número, en un solo campo legible
     const lada = (form.querySelector("#lada") || {}).value || "";
     const cel = (form.querySelector("#celular") || {}).value || "";
-    const whatsapp = (lada + " " + cel).trim();
+    const whatsapp = ("(" + lada + ") " + cel).trim();
 
     try {
       // OPCIÓN A: Google Sheets vía Apps Script
