@@ -89,6 +89,18 @@
       .mm-title { font-size: clamp(30px, 8vw, 44px); }
       .mm-crew-item { width: 72px; }
     }
+
+    /* pantallas anchas (horizontal): más abierto, menos central */
+    @media (min-width: 860px) {
+      .mm { max-width: 940px; gap: clamp(20px, 3vh, 34px); }
+      .mm-title { font-size: 66px; letter-spacing: 0.04em; }
+      .mm-datos { font-size: 12px; }
+      .mm-temas-row { max-width: 860px; gap: 10px; }
+      .mm-tema { font-size: 11px; padding: 8px 18px; }
+      .mm-crew-row { gap: 60px; }
+      .mm-crew-item { width: 156px; }
+      .mm-crew-name { font-size: 10px; }
+    }
   </style>
 </head>
 <body class="mm-pre">
