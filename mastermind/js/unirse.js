@@ -114,9 +114,13 @@
       fd.delete("celular");
       fd.set("whatsapp", whatsapp);
       fd.append("fecha", new Date().toISOString());
-      fd.append("_subject", "Nuevo interesado — Lista de espera (Two Waves)");
+      fd.append("_subject", "Nueva solicitud a The Creator Masterclass");
       fd.append("_template", "table");
       fd.append("_captcha", "false");
+      fd.append(
+        "_autoresponse",
+        "Hola, gracias por registrarte en la lista de espera de The Creator Masterclass de Two Waves Films. Recibimos tus datos correctamente. Cuando abramos el cupo te contactaremos con la fecha, la sede y los pasos para reservar tu lugar. Quedamos en contacto. Two Waves Films."
+      );
       if (FORMSUBMIT_CC) fd.append("_cc", FORMSUBMIT_CC);
 
       const resp = await fetch("https://formsubmit.co/ajax/" + FORMSUBMIT_EMAIL, {

@@ -31,7 +31,7 @@
 
       <!-- ── 01 · NOMBRE ── -->
       <section class="paso activa" data-paso>
-        <p class="paso-num"><span class="paso-i">01</span> / <span class="paso-total">03</span></p>
+        <p class="paso-num"><span class="paso-i">01</span> / <span class="paso-total">05</span></p>
         <label class="paso-preg" for="nombre">¿Cuál es tu nombre?</label>
         <input type="text" id="nombre" name="nombre" required autocomplete="name" placeholder="Nombre y apellido" />
         <div class="paso-nav">
@@ -42,8 +42,8 @@
 
       <!-- ── 02 · CORREO ── -->
       <section class="paso" data-paso>
-        <p class="paso-num"><span class="paso-i">02</span> / <span class="paso-total">03</span></p>
-        <label class="paso-preg" for="correo">¿A qué correo te avisamos?</label>
+        <p class="paso-num"><span class="paso-i">02</span> / <span class="paso-total">05</span></p>
+        <label class="paso-preg" for="correo">¿Cuál es tu correo?</label>
         <input type="email" id="correo" name="correo" required autocomplete="email" placeholder="tu@correo.com" />
         <div class="paso-nav">
           <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
@@ -51,10 +51,10 @@
         </div>
       </section>
 
-      <!-- ── 03 · WHATSAPP ── -->
+      <!-- ── 03 · CELULAR ── -->
       <section class="paso" data-paso>
-        <p class="paso-num"><span class="paso-i">03</span> / <span class="paso-total">03</span></p>
-        <label class="paso-preg" for="celular">¿Tu WhatsApp?</label>
+        <p class="paso-num"><span class="paso-i">03</span> / <span class="paso-total">05</span></p>
+        <label class="paso-preg" for="celular">¿Cuál es tu número de celular?</label>
         <div class="campo-tel">
           <select id="lada" name="lada" class="lada" aria-label="Código de país">
             <option value="+52" selected>🇲🇽 +52</option>
@@ -78,9 +78,31 @@
             <option value="+507">🇵🇦 +507</option>
             <option value="+53">🇨🇺 +53</option>
           </select>
-          <input type="tel" id="celular" name="celular" required inputmode="numeric" autocomplete="tel-national" placeholder="10 dígitos" />
+          <input type="tel" id="celular" name="celular" required inputmode="numeric" autocomplete="tel-national" placeholder="WhatsApp — 10 dígitos" />
         </div>
-        <p class="paso-ayuda">Elige tu lada primero para que el número quede correcto.</p>
+        <p class="paso-ayuda">Usaremos este número por WhatsApp. Elige tu lada primero.</p>
+        <div class="paso-nav">
+          <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
+          <button type="button" class="btn-linea" data-siguiente>SIGUIENTE <span class="flecha">→</span></button>
+        </div>
+      </section>
+
+      <!-- ── 04 · INSTAGRAM ── -->
+      <section class="paso" data-paso>
+        <p class="paso-num"><span class="paso-i">04</span> / <span class="paso-total">05</span></p>
+        <label class="paso-preg" for="instagram">¿Cuál es tu Instagram?</label>
+        <input type="text" id="instagram" name="instagram" required placeholder="@tuusuario" />
+        <div class="paso-nav">
+          <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
+          <button type="button" class="btn-linea" data-siguiente>SIGUIENTE <span class="flecha">→</span></button>
+        </div>
+      </section>
+
+      <!-- ── 05 · SOBRE TI ── -->
+      <section class="paso" data-paso>
+        <p class="paso-num"><span class="paso-i">05</span> / <span class="paso-total">05</span></p>
+        <label class="paso-preg" for="sobre">Cuéntanos un poco sobre ti y tus intereses</label>
+        <textarea id="sobre" name="sobre" rows="4" required placeholder="A qué te dedicas, qué te gustaría lograr y qué temas te interesan."></textarea>
         <div class="paso-nav">
           <button type="button" class="btn-atras" data-atras>← ATRÁS</button>
           <button type="submit" class="btn-linea grande">UNIRME A LA LISTA <span class="flecha">→</span></button>
@@ -117,8 +139,8 @@
           <circle cx="50" cy="24" r="3" fill="currentColor"/>
         </svg>
       </div>
-      <h2 class="titulo centrado" id="gracias-titulo">YA ESTÁS EN LA LISTA</h2>
-      <p class="aplicar-intro">Te avisaremos directo por WhatsApp y correo en cuanto abramos el cupo. Tendrás acceso prioritario.</p>
+      <h2 class="titulo centrado" id="gracias-titulo">REGISTRO CONFIRMADO</h2>
+      <p class="aplicar-intro">Gracias por tu interés en The Creator Masterclass. Recibimos tu registro en la lista de espera y te contactaremos con los detalles en cuanto abramos el cupo. Tendrás prioridad para reservar tu lugar.</p>
       <a class="volver-final" href="https://www.instagram.com/twowaves.mx/" target="_blank" rel="noopener">SÍGUENOS EN INSTAGRAM →</a>
     </div>
   </div>
