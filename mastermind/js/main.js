@@ -57,6 +57,7 @@ if (introVista) {
       linea.appendChild(span);
     });
   });
+  intro.classList.add("listo");
 
   let t = 300;
   lineas.forEach((linea, idx) => {

@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Creator Masterclass — Two Waves Films</title>
-  <meta name="description" content="The Creator Masterclass: 3 días presenciales para filmmakers. México. Solo 10 lugares. Impartida por Roberto Arechederra y Rogelio Pérez. Únete a la lista de espera." />
+  <meta name="description" content="The Creator Masterclass: 2 días presenciales para filmmakers. México. Solo 10 lugares. Impartida por Roberto Arechederra y Rogelio Pérez. Únete a la lista de espera." />
   <meta property="og:title" content="The Creator Masterclass — Two Waves Films" />
-  <meta property="og:description" content="3 días. México. Solo 10 lugares. Únete a la lista de espera." />
+  <meta property="og:description" content="2 días. México. Solo 10 lugares. Únete a la lista de espera." />
   <meta property="og:url" content="https://www.twowaves.mx/mastermind/" />
   <link rel="canonical" href="https://www.twowaves.mx/mastermind/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +16,10 @@
   <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230e0e0d"/><path d="M31 34h28.5v6.2H49v26.5h-7.7V40.2H31z" fill="%23eae0c5"/><circle cx="69.5" cy="37" r="4" fill="%23eae0c5"/></svg>' />
 
   <style>
+    /* Evita el flash de la intro antes de que el JS la prepare */
+    #loader .loader-intro { opacity: 0; }
+    #loader .loader-intro.listo { opacity: 1; transition: opacity 0.25s ease; }
+
     /* ── Una sola pantalla, bien distribuida ── */
     body.mm-pre {
       min-height: 100svh; display: flex; align-items: center; justify-content: center;
@@ -109,7 +113,7 @@
   <div id="loader">
     <div class="loader-intro">
       <div class="intro-lineas">
-        <p class="intro-linea">TRES DÍAS DE ALTO VALOR</p>
+        <p class="intro-linea">DOS DÍAS DE ALTO VALOR</p>
         <p class="intro-linea">RODEADO POR LAS PERSONAS CORRECTAS</p>
         <p class="intro-linea">TIENE EL POTENCIAL DE CAMBIAR TU VIDA.</p>
       </div>
@@ -145,7 +149,7 @@
 
     <h1 class="mm-title reveal" data-delay="2">THE CREATOR<br />MASTERCLASS</h1>
     <p class="mm-kicker reveal" data-delay="3">( ACCESO ANTICIPADO · PRE-LAUNCH )</p>
-    <p class="mm-datos reveal" data-delay="4">3 DÍAS · MÉXICO · LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b></p>
+    <p class="mm-datos reveal" data-delay="4">2 DÍAS · MÉXICO · LOCACIÓN PRIVADA · <b>SOLO 10 LUGARES</b></p>
 
     <div class="mm-temas reveal" data-delay="5">
       <p class="mm-temas-label">LO QUE VERÁS</p>
